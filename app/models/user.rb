@@ -3,8 +3,13 @@ class User < ApplicationRecord
   include SoftDeletable
 
   ROLES = {
-    admin: "ADMIN"
+    admin: "ADMIN",
+    admin_staff: "ADMIN_STAFF",
+    warehouse: "WAREHOUSE",
+    delivery_man: "DELIVERY_MAN"
   }
+
+  has_one_attached :avatar
 
   before_save { self.email = email.downcase }
   has_secure_password
@@ -24,7 +29,38 @@ class User < ApplicationRecord
   validates :email, confirmation: true
 
   scope :non_admin, -> { where.not(roles: User::ROLES[:admin]) }
+  scope :not, -> (ids) { where.not(id: ids) }
   scope :recent, -> { order(created_at: :desc) }
   scope :order_by_name, -> (way = :asc) { order(name: way) }
   scope :by_warehouse, -> (wid) { where(warehouse_id: wid) }
+
+  def to_s
+    name
+  end
+
+  def to_param
+    "#{id}-#{name}"
+  end
+
+  def self.available_roles
+    ROLES.select {|key, value| key != :admin}
+  end
+
+  def self.roles_for_select
+    available_roles = self.available_roles
+    available_roles.map{|key, value| [I18n.t("roles.#{key}"), value] }
+  end
+
+  def rol
+    self.roles.downcase
+  end
+
+  def is_a?(role)
+    self.roles == role
+  end
+
+  def is_not_a?(role)
+    self.roles != role
+  end
+  
 end

@@ -3,4 +3,13 @@ class Warehouse < ApplicationRecord
 
   validates :address, presence: true, length: { in: 6..100 }
   validates :telephone, presence: true, length: { in: 6..20 }
+
+  def to_s
+    address
+  end
+  
+  def self.for_select
+    self.all.map{ |w| [w.address, w.id] }
+  end
+  
 end

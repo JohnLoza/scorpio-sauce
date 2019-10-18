@@ -23,7 +23,7 @@ class ApiController < ActionController::API
     return true
   end
 
-  def deny_access!
+  def deny_access
     response = { status: "error", message: "ACCESS_DENIED", code: 2010 }
     render status: 401, json: JSON.pretty_generate(response)
     return true
@@ -39,19 +39,14 @@ class ApiController < ActionController::API
 
   private
     def authorize_user(headers = {})
-      @headers = headers
-      render_missing_token_error and return unless @headers["Authorization"].present?
-      render_auth_token_expired and return if auth_token_expired?
+      render_missing_token_error and return unless headers["Authorization"].present?
+      render_auth_token_expired and return unless decoded_auth_token(headers)
 
-      User.find(decoded_auth_token[:user_id])
+      User.find(decoded_auth_token(headers)[:user_id])
     end
 
-    def decoded_auth_token
-      @auth_token ||= JsonWebToken.decode(@headers["Authorization"])
-    end
-
-    def auth_token_expired?
-      decoded_auth_token["exp"] < Time.now.to_i
+    def decoded_auth_token(headers = {})
+      JsonWebToken.decode(headers["Authorization"])
     end
 
     def render_missing_token_error

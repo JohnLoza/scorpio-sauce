@@ -1,15 +1,54 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="es">
   <head>
-    <title>ScorpioSauce</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <title><%= yield :title %> | Admin Salsa Scorpio</title>
   </head>
-
   <body>
-    <%= yield %>
+    <!-- ============================================================== -->
+    <!-- main wrapper -->
+    <!-- ============================================================== -->
+    <div class="dashboard-main-wrapper">
+      <%= render "/shared/admin/top_navbar.html.erb" %>
+      <%= render "/shared/admin/left_navbar.html.erb" %>
+
+      <!-- ============================================================== -->
+      <!-- wrapper  -->
+      <!-- ============================================================== -->
+      <div class="dashboard-wrapper">
+        <div class="dashboard-ecommerce">
+          <div class="container-fluid dashboard-content ">
+            <%= render "/shared/admin/page_header.html.erb" %>
+            
+            <div class="ecommerce-widget">
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+        <%= render "/shared/admin/footer.html.erb" %>
+      </div>
+      <!-- ============================================================== -->
+      <!-- end wrapper  -->
+      <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- end main wrapper  -->
+    <!-- ============================================================== -->
+    
+    <%= javascript_include_tag 'application' %>
+    <script>
+      $(document).ready(function(){
+        $(".<%= params[:controller].sub "admin/", "" %>-controller").addClass("active");
+        $("form").parsley();
+      });
+    </script>
+    <%= render "/shared/alerts.html.erb" %>
   </body>
 </html>

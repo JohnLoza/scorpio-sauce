@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root controller: 'application', action: 'home'
+  root controller: 'static_pages', action: 'index'
+  resources :sessions, only: [:new, :create, :destroy]
 
   namespace :admin do
-
+    get '/', controller: 'home', action: 'index', as: :home
+    resources :users do
+      post 'restore', on: :member
+    end
   end
 
   namespace :api do
-    post 'log_in', controller: 'sessions', action: 'create'
+    post 'sessions', controller: 'sessions', action: 'create'
     resources :users
   end
 

@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
+  include SessionsHelper
+  before_action :require_active_session
+  
   rescue_from ActiveRecord::RecordNotFound do |e|
     render_404
   end
@@ -18,7 +22,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def home
-    render json: { status: "completed", data: nil }
+  def deny_access
+    redirect_to admin_home_path, flash: { info: t("labels.access_denied") }
+    return true
+  end
+
+  def require_active_session
+    unless logged_in?
+      store_location
+      redirect_to new_session_path
+    end
   end
 end

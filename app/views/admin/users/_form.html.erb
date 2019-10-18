@@ -1,0 +1,60 @@
+<div class="card">
+  <h5 class="card-header"><%= yield :page_header %></h5>
+  <div class="card-body">
+    <%= form_for [:admin, @user] do |f| %>
+      <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @user} %>
+
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :cellphone %>
+        <%= f.text_field :cellphone, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email_confirmation %>
+        <%= f.email_field :email_confirmation, class: "form-control", 
+          required: true, "data-parsley-equalto" => "#user_email" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: "form-control",
+          required: true, minlength: 6, maxlength: 20 %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: "form-control", 
+          required: true, "data-parsley-equalto" => "#user_password" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :roles %>
+        <%= f.select :roles, User.roles_for_select,
+          {prompt: t("labels.select")}, {class: "form-control", required: true} %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :warehouse_id %>
+        <%= f.select :warehouse_id, Warehouse.for_select,
+          {}, {class: "form-control", required: true} %>
+      </div>
+
+      <div class="custom-file mb-3">
+        <%= f.label :avatar, class: "custom-file-label" %>
+        <%= f.file_field :avatar, class: "custom-file-input", required: true %>
+      </div>
+
+      <%= f.submit :Guardar, class: "btn btn-primary btn-lg" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<!--Alerts-->
+<% flash.each do |message_type, message| %>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $.notify({
+        icon: "fas faw fa-info-circle",
+        message: '<%= message.html_safe %>'
+      },{
+        type: "<%= message_type %>",
+        timer: 20000,
+        placement: {
+          from: "top",
+          align: "center"
+        }
+      });
+    });
+  </script>
+<% end %>
+<!--End Alerts-->

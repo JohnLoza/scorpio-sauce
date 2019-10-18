@@ -24,4 +24,12 @@ class Product < ApplicationRecord
   scope :order_by_price, -> (way = :asc) {
     order(retail_price: way)
   }
+
+  def to_s
+    name
+  end
+
+  def to_param
+    "#{id}-#{name}"
+  end
 end

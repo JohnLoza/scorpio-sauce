@@ -27,7 +27,7 @@ module SoftDeletable
     end
   end
 
-  def restore
+  def restore!
     update_attributes(deleted_at: nil)
   end
 

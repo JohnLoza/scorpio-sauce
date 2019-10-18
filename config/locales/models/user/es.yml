@@ -1,0 +1,24 @@
+es:
+  activerecord:
+    models:
+      user:
+        one: Usuario
+        other: Usuarios
+    attributes:
+      user:
+        id: Clave
+        avatar: Imagen de Perfil
+        name: Nombre
+        cellphone: Teléfono celular
+        email: Correo electrónico
+        email_confirmation: Confirmación de correo electrónico
+        password: Contraseña
+        password_confirmation: Confirmación de contraseña
+        roles: Roles
+        rol: Rol
+        warehouse_id: Almacén
+  roles:
+    admin: administrador
+    admin_staff: personal administrativo
+    warehouse: bodega
+    delivery_man: repartidor

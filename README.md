@@ -1,4 +1,4 @@
-# Black Brocket's ecommerce app
+# Scorpio Sauce web service and administration
 
 How to set it up:
 

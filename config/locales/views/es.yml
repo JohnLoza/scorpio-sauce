@@ -1,0 +1,10 @@
+es:
+  labels:
+    access_denied: Acceso denegado (1010)
+    account: Cuenta
+    actions: Acciones
+    active_session: Sesión activa
+    are_you_sure: Estás seguro(a) de hacerlo?
+    form_has_errors: El formulario contiene algunos errores.
+    optional: Opcional
+    select: Selecciona

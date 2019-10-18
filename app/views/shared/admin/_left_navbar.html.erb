@@ -1,0 +1,41 @@
+<!-- ============================================================== -->
+<!-- left sidebar -->
+<!-- ============================================================== -->
+<div class="nav-left-sidebar sidebar-dark">
+  <div class="menu-list">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav flex-column">
+          <li class="nav-divider">
+            Menu
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_home_path, class: "nav-link home-controller" do %>
+              <i class="fas fa-fw fa-th"></i>
+              Inicio
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_users_path, class: "nav-link users-controller" do %>
+              <i class="fas fa-fw fa-user-circle"></i>
+              <%= User.model_name.human(count: 2) %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "#", class: "nav-link products-controller" do %>
+              <i class="fas fa-fw fa-box"></i>
+              Productos
+            <% end %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+<!-- ============================================================== -->
+<!-- end left sidebar -->
+<!-- ============================================================== -->

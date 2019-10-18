@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'sessions', media: 'all' %>
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        background-image: url("<%= image_url("login-bg.png") %>");
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+      
+      body {
+        display: -ms-flexbox;
+          display: flex;
+          -ms-flex-align: center;
+          align-items: center;
+          padding-top: 40px;
+          padding-bottom: 40px;
+      }
+
+      .card-footer-item{ width: 100% !important; }
+      .navbar-brand{ margin-right: 0 !important; }
+    </style>
+    <title>Iniciar sesión</title>
+  </head>
+  <body>
+    <!-- ============================================================== -->
+    <!-- login page  -->
+    <!-- ============================================================== -->
+    <div class="splash-container">
+      <div class="card ">
+        <div class="card-header text-center">
+          <h1 class="navbar-brand">Salsa Scorpio</h1>
+          <span class="splash-description">Porfavor ingresa tu información de usuario.</span>
+        </div>
+        <div class="card-body">
+          <%= form_for :session, url: sessions_path do |f| %>
+            <div class="form-group">
+              <%= f.label :email, "Correo electrónico" %>
+              <%= f.email_field :email, class: "form-control form-control-lg",
+                placeholder: "Correo electrónico", required: true %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password, "Contraseña" %>
+              <%= f.password_field :password, class: "form-control form-control-lg",
+                autocomplete: :off, placeholder: "********", required: :true %>
+            </div>
+
+            <div class="form-group">
+              <label class="custom-control custom-checkbox">
+                <%= f.check_box :remember_me, class: "custom-control-input" %>
+                <span class="custom-control-label">Recuérdame</span>
+              </label>
+            </div>
+            
+            <%= f.submit "Iniciar Sesión", class: "btn btn-primary btn-lg btn-block" %>
+          <% end %>
+        </div>
+        <div class="card-footer bg-white p-0  ">
+          <div class="card-footer-item card-footer-item-bordered">
+            <a href="#" class="footer-link">Olvidé mi contraseña</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end login page  -->
+    <!-- ============================================================== -->
+    
+    <%= javascript_include_tag 'sessions' %>
+    <%= render "/shared/alerts.html.erb" %>
+    <script>
+      $(document).ready(function(){
+        $("form").parsley();
+      });
+    </script>
+  </body>
+</html>

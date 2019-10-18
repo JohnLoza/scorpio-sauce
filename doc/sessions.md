@@ -1,7 +1,12 @@
 # Sessions
 
-## /api/log_in **GET Request**
-  requires the parameters **email** and **password**
+## /api/sessions **POST Request**
+  requires the parameters **email** and **password** encapsulated by **session**
+
+    session: {
+      email: "sample-email",
+      password: "********"
+    }
 
 ### Responses
   when authentication is successful

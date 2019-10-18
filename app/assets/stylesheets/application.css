@@ -10,6 +10,12 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
+ *= require bootstrap.min.css
+ *= require concept.css
+ *= require circular-std.css
+ *= require fontawesome-all.css
  *= require_self
  */
+
+.alert ul{ margin-bottom: 0; }
+.table-img { width: 45px; }

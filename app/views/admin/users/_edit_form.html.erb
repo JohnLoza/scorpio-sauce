@@ -1,0 +1,67 @@
+<div class="card">
+  <h5 class="card-header"><%= yield :page_header %></h5>
+  <div class="card-body">
+    <%= form_for [:admin, @user] do |f| %>
+      <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @user} %>
+
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :cellphone %>
+        <%= f.text_field :cellphone, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email_confirmation %>
+        <%= f.email_field :email_confirmation, class: "form-control", 
+          required: true, "data-parsley-equalto" => "#user_email" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= content_tag :span, t("labels.optional"), class: "badge badge-secondary badge-pill" %>
+        <%= f.password_field :password, class: "form-control",
+          minlength: 6, maxlength: 20 %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= content_tag :span, t("labels.optional"), class: "badge badge-secondary badge-pill" %>
+        <%= f.password_field :password_confirmation, class: "form-control", 
+          "data-parsley-equalto" => "#user_password" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :roles %>
+        <% if current_user.is_a?(User::ROLES[:admin]) and current_user?(@user) # admin editing himself %>
+          <%= content_tag :span, t("roles.#{current_user.rol}"), class: "badge badge-secondary badge-pill" %>
+        <% else %>
+          <%= f.select :roles, User.roles_for_select,
+            {prompt: t("labels.select")}, {class: "form-control", required: true} %>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :warehouse_id %>
+        <%= f.select :warehouse_id, Warehouse.for_select,
+          {}, {class: "form-control", required: true} %>
+      </div>
+
+      <%= content_tag :span, t("labels.optional"), class: "badge badge-secondary badge-pill" %>
+      <div class="custom-file mb-3">
+        <%= f.label :avatar, class: "custom-file-label" %>
+        <%= f.file_field :avatar, class: "custom-file-input" %>
+      </div>
+
+      <%= f.submit :Guardar, class: "btn btn-primary btn-lg" %>
+    <% end %>
+  </div>
+</div>
