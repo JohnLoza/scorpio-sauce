@@ -6,10 +6,14 @@ es:
     actions: Acciones
     active_session: Sesión activa
     city: Ciudad/Población
+    do_filter: Filtrar
+    filters: Filtros
     form_has_errors: El formulario contiene algunos errores.
+    home: Inicio
     name: Nombre
     optional: Opcional
     save: Guardar
+    search: Buscar
     select: Selecciona
     state: Estado
     units: Unidades

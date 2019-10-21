@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_180034) do
     t.bigint "warehouse_id"
     t.integer "units"
     t.string "batch"
-    t.date "expiration_date"
+    t.date "expires_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_stocks_on_product_id"

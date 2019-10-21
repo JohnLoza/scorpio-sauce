@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :warehouses do
       post 'restore', on: :member
     end
+
+    resources :stocks, only: :index
   end
 
   namespace :api do

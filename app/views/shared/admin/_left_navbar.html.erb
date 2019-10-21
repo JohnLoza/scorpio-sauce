@@ -16,25 +16,31 @@
           <li class="nav-item">
             <%= link_to admin_home_path, class: "nav-link home-controller" do %>
               <i class="fas fa-fw fa-th"></i>
-              Inicio
+              <%= t("labels.home") %>
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to admin_users_path, class: "nav-link users-controller" do %>
-              <i class="fas fa-fw fa-user-circle"></i>
+              <i class="fas fa-fw fa-users"></i>
               <%= User.model_name.human(count: 2) %>
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to admin_products_path, class: "nav-link products-controller" do %>
               <i class="fas fa-fw fa-box"></i>
-              Productos
+              <%= Product.model_name.human(count: 2) %>
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to admin_warehouses_path, class: "nav-link warehouses-controller" do %>
               <i class="fas fa-fw fa-truck"></i>
-              Almacenes
+              <%= Warehouse.model_name.human(count: 2) %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_stocks_path, class: "nav-link stocks-controller" do %>
+              <i class="fas fa-fw fa-truck-loading"></i>
+              <%= Stock.model_name.human(count: 2) %>
             <% end %>
           </li>
         </ul>

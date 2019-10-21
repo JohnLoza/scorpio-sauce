@@ -16,7 +16,7 @@ class Warehouse < ApplicationRecord
   end
   
   def self.for_select
-    self.all.map{ |w| [w.address, w.id] }
+    self.active.map{ |w| [w.address, w.id] }
   end
 
   def location

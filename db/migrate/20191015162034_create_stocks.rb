@@ -5,7 +5,7 @@ class CreateStocks < ActiveRecord::Migration[5.2]
       t.belongs_to :warehouse
       t.integer :units
       t.string :batch
-      t.date :expiration_date
+      t.date :expires_at
 
       t.timestamps
     end

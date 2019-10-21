@@ -33,6 +33,10 @@ class Product < ApplicationRecord
     "#{id}-#{name}"
   end
 
+  def self.for_select
+    self.active.map{ |p| [p.name, p.id] }
+  end
+
   def build_boxes_json(box_names, box_units)
     return unless box_names and box_units
     boxes_array = Array.new

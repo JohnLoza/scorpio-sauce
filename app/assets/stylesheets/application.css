@@ -18,4 +18,14 @@
  */
 
 .alert ul{ margin-bottom: 0; }
+
 .table-img { width: 45px; }
+
+.card-header .btn { margin-left: 10px; }
+.card .row { padding: .75rem 1.25rem; }
+
+.fifty-ch-width { 
+  width: 50ch;
+  overflow: hidden;
+  white-space: nowrap; 
+}
