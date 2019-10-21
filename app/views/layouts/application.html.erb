@@ -9,6 +9,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
     <title><%= yield :title %> | Admin Salsa Scorpio</title>
   </head>
   <body>
@@ -42,11 +43,15 @@
     <!-- end main wrapper  -->
     <!-- ============================================================== -->
     
-    <%= javascript_include_tag 'application' %>
     <script>
       $(document).ready(function(){
         $(".<%= params[:controller].sub "admin/", "" %>-controller").addClass("active");
         $("form").parsley();
+
+        let action = "<%= params[:action] %>";
+        if(action == "edit"){
+          $(".not-required-edit").removeAttr("required");
+        }
       });
     </script>
     <%= render "/shared/alerts.html.erb" %>

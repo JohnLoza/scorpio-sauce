@@ -1,5 +1,7 @@
 module Serializable
-  extend ActiveSupport::Concern  def initialize(json)
+  extend ActiveSupport::Concern
+  
+  def initialize(json)
     unless json.blank?
       if json.is_a?(String)
         json = JSON.parse(json)
@@ -8,16 +10,20 @@ module Serializable
       # such as those provided to an attr_accessor call.
       json.to_hash.each { |k, v| self.public_send("#{k}=", v) }
     end
-  end  class_methods do
+  end  
+  
+  class_methods do
     def load(json)
       return nil if json.blank?
       self.new(json)
-    end    def dump(obj)
+    end
+    
+    def dump(obj)
       # Make sure the type is right.
       if obj.is_a?(self)
-        obj.to_json      
+        obj.to_json
       else
-       raise StandardException, "Expected #{self}, got #{obj.class}" 
+       raise StandardError, "Expected #{self}, got #{obj.class}" 
       end
     end
   end

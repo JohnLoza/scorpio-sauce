@@ -11,8 +11,8 @@
  * It is generally better to create a new file per style scope.
  *
  *= require bootstrap.min.css
- *= require concept.css
  *= require circular-std.css
+ *= require concept.css
  *= require fontawesome-all.css
  *= require_self
  */

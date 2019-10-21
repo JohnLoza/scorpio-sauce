@@ -2,16 +2,12 @@
 <%= provide :page_header, User.model_name.human(count: 2) %>
 
 <div class="row">
-  <!-- ============================================================== -->
-  <!-- ============================================================== -->
-  <!-- recent orders  -->
-  <!-- ============================================================== -->
   <div class="col-md-12">
     <div class="card">
       <h5 class="card-header">
-        Lista de usuarios
+        <%= t(".card_title") %>
         <%= link_to new_admin_user_path do %>
-          <i class="fas faw fa-plus-circle fa-2x float-right"></i>
+          <i class="fas fa-fw fa-plus-circle fa-2x float-right"></i>
         <% end %>
       </h5>
       <div class="card-body p-0">
@@ -35,7 +31,4 @@
       </div>
     </div>
   </div>
-  <!-- ============================================================== -->
-  <!-- end recent orders  -->
-  <!-- ============================================================== -->
 </div>

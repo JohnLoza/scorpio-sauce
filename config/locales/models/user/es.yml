@@ -17,6 +17,7 @@ es:
         roles: Roles
         rol: Rol
         warehouse_id: Almacén
+        deleted_at: Dado de baja
   roles:
     admin: administrador
     admin_staff: personal administrativo

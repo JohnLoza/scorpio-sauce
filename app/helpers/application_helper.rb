@@ -22,6 +22,17 @@ module ApplicationHelper
     }
   end
 
+  def small_variant
+    {
+      combine_options: {
+        auto_orient: true,
+        gravity: "center",
+        resize: "240x240^",
+        crop: "240x240+0+0",
+      }
+    }
+  end
+
   def thumbnail_variant
     {
       combine_options: {

@@ -26,9 +26,15 @@
             <% end %>
           </li>
           <li class="nav-item">
-            <%= link_to "#", class: "nav-link products-controller" do %>
+            <%= link_to admin_products_path, class: "nav-link products-controller" do %>
               <i class="fas fa-fw fa-box"></i>
               Productos
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "#", class: "nav-link warehouses-controller" do %>
+              <i class="fas fa-fw fa-truck"></i>
+              Almacenes
             <% end %>
           </li>
         </ul>

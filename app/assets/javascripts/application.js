@@ -19,4 +19,6 @@
 //= require bootstrap-notify.min.js
 //= require parsley.js
 //= require parsley-es.js
+//= require parsley-custom-validators.js
+//= require tools.js
 //
