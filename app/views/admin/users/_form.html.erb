@@ -11,7 +11,8 @@
 
       <div class="form-group">
         <%= f.label :cellphone %>
-        <%= f.text_field :cellphone, class: "form-control", required: true %>
+        <%= f.text_field :cellphone, class: "form-control", 
+          required: true, maxlength: 20 %>
       </div>
 
       <div class="form-group">

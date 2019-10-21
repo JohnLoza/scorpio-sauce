@@ -5,10 +5,12 @@ es:
     account: Cuenta
     actions: Acciones
     active_session: Sesión activa
+    city: Ciudad/Población
     form_has_errors: El formulario contiene algunos errores.
     name: Nombre
     optional: Opcional
     save: Guardar
     select: Selecciona
+    state: Estado
     units: Unidades
     units_per_box: Unidades por caja

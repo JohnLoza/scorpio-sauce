@@ -1,0 +1,7 @@
+<div class="form-group">
+  <%= content_tag :label, t("labels.city") %>
+  <%= select_tag "#{model}[city_id]", options_from_collection_for_select(
+    cities, "id", "name", selected: params[model][:city_id]),
+    prompt: t("labels.select"), class: "input form-control", 
+    required: true, autocomplete: :off %>
+</div>

@@ -1,0 +1,27 @@
+<div class="card">
+  <h5 class="card-header"><%= yield :page_header %></h5>
+  <div class="card-body">
+    <%= form_for [:admin, @warehouse] do |f| %>
+      <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @warehouse} %>
+      
+      <div class="form-group">
+        <%= f.label :address %>
+        <%= f.text_field :address, class: "form-control", 
+          required: true, maxlength: 200 %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :telephone %>
+        <%= f.text_field :telephone, class: "form-control", 
+          required: true, maxlength: 20 %>
+      </div>
+
+      <%= render partial: "/shared/state_select", 
+        locals: { model: @warehouse.class.to_s.downcase, states: @states } %>
+      <%= render partial: "/shared/city_select", 
+        locals: { model: @warehouse.class.to_s.downcase, cities: @cities } %>
+
+      <%= f.submit t("labels.save"), class: "btn btn-primary btn-lg" %>
+    <% end %>
+  </div>
+</div>

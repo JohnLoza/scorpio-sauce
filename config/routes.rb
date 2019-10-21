@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root controller: 'static_pages', action: 'index'
+  get 'cities', controller: 'static_pages'
   resources :sessions, only: [:new, :create, :destroy]
 
   namespace :admin do
@@ -11,6 +12,10 @@ Rails.application.routes.draw do
     end
 
     resources :products do
+      post 'restore', on: :member
+    end
+
+    resources :warehouses do
       post 'restore', on: :member
     end
   end

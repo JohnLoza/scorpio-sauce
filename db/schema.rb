@@ -157,8 +157,10 @@ ActiveRecord::Schema.define(version: 2019_10_15_180034) do
     t.string "address"
     t.string "telephone"
     t.bigint "city_id"
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["deleted_at"], name: "index_warehouses_on_deleted_at"
     t.index ["city_id"], name: "index_warehouses_on_city_id"
   end
 

@@ -1,0 +1,13 @@
+es:
+  activerecord:
+    models:
+      warehouse:
+        one: Almacén
+        other: Almacenes
+    attributes:
+      warehouse:
+        id: Clave
+        address: Dirección
+        telephone: Teléfono
+        city_id: Ubicación
+        deleted_at: Dado de baja

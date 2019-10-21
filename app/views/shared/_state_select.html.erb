@@ -1,0 +1,35 @@
+<div class="form-group">
+  <%= content_tag :label, t("labels.state") %>
+  <%= select_tag "#{model}[state_id]", options_from_collection_for_select(
+    states, "id", "name", selected: params[model][:state_id]), prompt: t("labels.select"),
+    onchange: "fetchCities(this.value);", autocomplete: :off,
+    class: "form-control m-b", required: true %>
+</div>
+
+<script type="text/javascript">
+function fetchCities(state){
+  original_target = "<%= cities_path(state_id: '0x0', format: :json) %>";
+  new_target = original_target.replace("0x0", state);
+  $.ajax({
+    url: new_target,
+    context: document.body
+  }).done(function(body) {
+    updateCities(body);
+  });
+}
+
+function updateCities(cities){
+  select = $("#<%= model %>_city_id");
+  select.html("");
+  select.append(selectOption("<%= t("labels.select") %>", ""));
+  for (var i = 0; i < cities.length; i++) {
+    obj = cities[i];
+    select.append(selectOption(obj.name, obj.id))
+  }
+}
+
+function selectOption(label, value){
+  option = "<option value=\""+value+"\">"+label+"</option>"
+  return option;
+}
+</script>
