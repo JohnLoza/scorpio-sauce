@@ -1,0 +1,13 @@
+es:
+  activerecord:
+    models:
+      stock:
+        other: Existencias
+    attributes:
+      stock:
+        id: Clave
+        product_id: Producto
+        warehouse_id: Almacén
+        units: Unidades
+        batch: No Lote
+        expiration_date: Fecha de expiración

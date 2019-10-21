@@ -1,0 +1,53 @@
+<%= provide :title, Stock.model_name.human(count: 2) %>
+<%= provide :page_header, Stock.model_name.human(count: 2) %>
+
+<%= render "filters" %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <h5 class="card-header">
+        <%= yield :title %>
+
+        <div class="btn-group dropleft float-right">
+          <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-ellipsis-v fa-1x"></i>
+          </button>
+          <div class="dropdown-menu">
+            <%= link_to "#", class: "dropdown-item icon" do %>
+              <i class="fas fa-fw fa-truck"></i> large large oh jush link_1
+            <% end %>
+
+            <%= link_to "#", class: "dropdown-item icon" do %>
+              <i class="fas fa-fw fa-cogs"></i> work in progress
+            <% end %>
+
+            <!-- Link to cancel the order -->
+            <div class="dropdown-divider"></div>
+            <%= link_to "#", class: "dropdown-item icon" do %>
+              <i class="fas fa-fw fa-cogs"></i> work in progress
+            <% end %>
+          </div>
+        </div>
+      </h5>
+
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="bg-light">
+              <tr class="border-0">
+                <%= content_tag :th, Stock.human_attribute_name(:product_id), class: "border-0" %>
+                <%= content_tag :th, Stock.human_attribute_name(:units), class: "border-0" %>
+                <%= content_tag :th, Stock.human_attribute_name(:batch), class: "border-0" %>
+                <%= content_tag :th, Stock.human_attribute_name(:expiration_date), class: "border-0" %>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render @stocks %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

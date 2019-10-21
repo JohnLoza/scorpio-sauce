@@ -1,0 +1,8 @@
+<tr>
+  <td>
+    <%= link_to stock.product, admin_product_path(stock.product) %>
+  </td>
+  <%= content_tag :td, stock.units %>
+  <%= content_tag :td, stock.batch %>
+  <%= content_tag :td, l(stock.expires_at, format: :long) %>
+</tr>
