@@ -1,0 +1,62 @@
+<%= provide :title, @product %>
+<%= provide :page_header, @product %>
+
+<div class="row">
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="card card-figure">
+      <figure class="figure">
+        <%= image_tag @product.main_image.variant(thumbnail_variant).processed, class: "img-fluid" %>
+
+        <figcaption class="figure-caption">
+          <%= content_tag :h6, @product, class: "figure-title" %>
+          <%#= content_tag :span, t("roles.#{@product.rol}"), class: "badge badge-secondary badge-pill" %>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="col-xl-6 col-lg-8 col-md-6 col-sm-12 col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><%= yield :title %></h3>
+        <p class="card-text">
+          <%= content_tag :span, Product.human_attribute_name(:name), 
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @product %>
+        </p>
+        <p class="card-text">
+          <%= content_tag :span, Product.human_attribute_name(:retail_price), 
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= t(:product_price, price: @product.retail_price) %>
+        </p>
+        <p class="card-text">
+          <%= content_tag :span, Product.human_attribute_name(:half_wholesale_price), 
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= t(:product_price, price: @product.half_wholesale_price) %>
+        </p>
+        <p class="card-text">
+          <%= content_tag :span, Product.human_attribute_name(:required_units_half_wholesale), 
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @product.required_units_half_wholesale %>
+        </p>
+        <p class="card-text">
+          <%= content_tag :span, Product.human_attribute_name(:wholesale_price), 
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= t(:product_price, price: @product.wholesale_price) %>
+        </p>
+        <p class="card-text">
+          <%= content_tag :span, Product.human_attribute_name(:required_units_wholesale), 
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @product.required_units_wholesale %>
+        </p>
+
+        <% if @product.boxes.present? %>
+          <%= content_tag :h3, t(".boxes_title"), class: "card-title" %>
+          <% @product.boxes.each do |box| %>
+            <%= render partial: "box", locals: {box: box} %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

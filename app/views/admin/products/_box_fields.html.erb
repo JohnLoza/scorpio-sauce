@@ -1,0 +1,23 @@
+<% box = Hash.new unless box %>
+
+<div class="removable-parent">
+  <h5>
+    <%= t(".title") %>
+    <a href="#" onclick="removeParent(this)">
+      <i class="fas fa-fw fa-times fa-2x float-right"></i>
+    </a>
+  </h5>
+
+  <div class="form-group">
+    <%= label_tag :name, t("labels.name") %>
+    <%= text_field_tag "box_names[]", box["name"], class: "form-control", maxlength: 60 %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag :units, t("labels.units_per_box") %>
+    <%= number_field_tag "box_units[]", box["units"], class: "form-control",
+      min: 1, step: 1 %>
+  </div>
+
+  <hr>
+</div>

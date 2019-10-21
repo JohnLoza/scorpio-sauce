@@ -1,0 +1,18 @@
+es:
+  activerecord:
+    models:
+      product:
+        one: Producto
+        other: Productos
+    attributes:
+      product:
+        id: Clave
+        main_image: Imagen principal
+        name: Nombre
+        retail_price: Precio menudeo
+        half_wholesale_price: Precio medio mayoreo
+        wholesale_price: Precio mayoreo
+        required_units_half_wholesale: Unidades al medio mayoreo
+        required_units_wholesale: Unidades al mayoreo
+        boxes: Cajas
+        deleted_at: Dado de baja

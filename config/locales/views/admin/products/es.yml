@@ -1,0 +1,38 @@
+es:
+  admin:
+    products:
+      index:
+        card_title: Lista de Productos
+
+      show:
+        boxes_title: Información de cajas
+
+      new:
+        title: Nuevo producto
+
+      create:
+        success: El producto %{product} se guardo correctamente
+
+      edit:
+        title: Editar producto %{product}
+
+      update:
+        success: El producto %{product} se actualizó correctamente
+
+      destroy:
+        success: El producto %{product} ha sido eliminado, si te equivocaste puedes <a href="%{url}" data-method="post">restaurarlo</a>
+        failure: Ocurrió un error al eliminar el producto %{product}
+
+      restore:
+        success: El producto %{product} ha sido restablecido
+        failure: Ocurrió un error al restablecer el producto %{product}
+
+      # partials
+      product:
+        you_sure: ¿Estás seguro(a) de eliminar el producto %{product}?
+
+      form:
+        add_box: Agregar caja
+        
+      box_fields:
+        title: Información de caja
