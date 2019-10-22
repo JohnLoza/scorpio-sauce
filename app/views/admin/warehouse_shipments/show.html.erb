@@ -1,0 +1,53 @@
+<%= provide :title, t(".title") %>
+<%= provide :page_header, t(".title") %>
+
+<div class="row">
+
+  <div class="col-xl-12 col-lg-12 col-md-12 col-xs-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><%= yield :title %></h3>
+        <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @warehouse_shipment} %>
+
+        <p class="card-text">
+          <%= content_tag :span, WarehouseShipment.human_attribute_name(:user_id), 
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= link_to @warehouse_shipment.user, admin_user_path(@warehouse_shipment.user) %>
+        </p>
+        <p class="card-text">
+          <%= content_tag :span, WarehouseShipment.human_attribute_name(:warehouse_id), 
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= link_to @warehouse_shipment.warehouse, admin_warehouse_path(@warehouse_shipment.warehouse) %>
+        </p>
+        <p class="card-text">
+          <%= content_tag :span, WarehouseShipment.human_attribute_name(:receiver_user_id), 
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= link_to @warehouse_shipment.user, 
+            admin_user_path(@warehouse_shipment.user) if @warehouse_shipment.receiver.present? %>
+        </p>
+        
+        <%= content_tag :h3, WarehouseShipment.human_attribute_name(:products), class: "card-title" %>
+        <%= form_for :report, url: report_admin_warehouse_shipment_path(@warehouse_shipment) do |f| %>
+          <% @warehouse_shipment.products.each do |product| %>
+            <%= render partial: "product", locals: {product: product, product_names: @product_names} %>
+          <% end %>
+
+          <%= f.text_area :message, class: "form-control", maxlength: 200,
+            required: true if @warehouse_shipment.reportable? %>
+          <%= f.submit t(".to_report"), class: "btn btn-brand" if @warehouse_shipment.reportable? %>
+        <% end %>
+
+        <%= content_tag :p, @warehouse_shipment.report["message"] if @warehouse_shipment.report.present? %>
+
+        <%= link_to t(".process_shipment"), process_shipment_admin_warehouse_shipment_path(@warehouse_shipment),
+          method: :post, class: "btn btn-primary btn-lg", style: "margin-top: 1em;",
+          data: { confirm: t(".you_sure_process") } if @warehouse_shipment.processable? %>
+
+        <%= link_to t(".process_report"), process_report_admin_warehouse_shipment_path(@warehouse_shipment),
+          method: :post, class: "btn btn-primary btn-lg", style: "margin-top: 1em;",
+          data: { confirm: t(".you_sure_process_report") } if @warehouse_shipment.reported? %>
+      </div>
+    </div>
+  </div>
+
+</div>

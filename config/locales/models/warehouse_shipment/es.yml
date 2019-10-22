@@ -1,0 +1,15 @@
+es:
+  activerecord:
+    models:
+      warehouse_shipment:
+        one: Envío de almacén
+        other: Envíos de almacén
+    attributes:
+      warehouse_shipment:
+        id: Clave
+        user_id: Envió
+        receiver_user_id: Recibió
+        warehouse_id: Almacén destino
+        status: Estado
+        products: Productos
+        report: Reporte

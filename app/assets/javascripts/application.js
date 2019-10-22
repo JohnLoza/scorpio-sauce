@@ -17,6 +17,7 @@
 //= require jquery.slimscroll.js
 //= require concept.js
 //= require bootstrap-notify.min.js
+//= require bootstrap-datepicker.min.js
 //= require parsley.js
 //= require parsley-es.js
 //= require parsley-custom-validators.js

@@ -20,6 +20,12 @@ Rails.application.routes.draw do
     end
 
     resources :stocks, only: :index
+
+    resources :warehouse_shipments, except: [:edit, :update] do
+      post 'process_shipment', on: :member
+      post 'report', on: :member
+      post 'process_report', on: :member
+    end
   end
 
   namespace :api do

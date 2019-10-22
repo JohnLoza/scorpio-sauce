@@ -57,7 +57,7 @@ class Admin::WarehousesController < ApplicationController
     else
       flash[:info] = t(".failure", warehouse: @warehouse)
     end
-    redirect_to admin_warehouses_url
+    redirect_to admin_warehouses_path
   end
 
   def restore

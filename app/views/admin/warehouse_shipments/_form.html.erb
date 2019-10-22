@@ -1,0 +1,36 @@
+<div class="card">
+  <h5 class="card-header"><%= yield :page_header %></h5>
+  <div class="card-body">
+    <%= form_for [:admin, @warehouse_shipment] do |f| %>
+      <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @warehouse_shipment} %>
+      
+      <div class="form-group">
+        <%= f.label :warehouse_id %>
+        <%= f.select :warehouse_id, Warehouse.for_select,
+          {prompt: t("labels.select")}, {class: "form-control", required: true} %>
+      </div>
+
+      <section class="products-container">
+        
+      </section>
+
+      <%= content_tag :a, t(".add_product"), onclick: "addProductFields()",
+        class: "btn btn-secondary btn-lg" %>
+      <%= f.submit t("labels.save"), class: "btn btn-primary btn-lg" %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+function addProductFields(){
+  let to_append = "<%= j render "product_fields" %>";
+  let token = Math.random().toString(36).substr(2); // remove `0.`
+  to_append = to_append.replace(/replace_me/g, token);
+  $(".products-container").append(to_append);
+
+  $(`#products_${token}_expires_at`).datepicker({
+    format: "dd-mm-yyyy",
+    startDate: "<%= Time.now.strftime("%d-%m-%Y") %>"
+  });
+}
+</script>

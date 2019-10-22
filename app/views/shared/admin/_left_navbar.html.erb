@@ -33,14 +33,20 @@
           </li>
           <li class="nav-item">
             <%= link_to admin_warehouses_path, class: "nav-link warehouses-controller" do %>
-              <i class="fas fa-fw fa-truck"></i>
+              <i class="fas fa-fw fa-cubes"></i>
               <%= Warehouse.model_name.human(count: 2) %>
             <% end %>
           </li>
           <li class="nav-item">
             <%= link_to admin_stocks_path, class: "nav-link stocks-controller" do %>
-              <i class="fas fa-fw fa-truck-loading"></i>
+              <i class="fas fa-fw fa-boxes"></i>
               <%= Stock.model_name.human(count: 2) %>
+            <% end %>
+          </li>
+          <li class="nav-item">
+            <%= link_to admin_warehouse_shipments_path, class: "nav-link warehouse_shipments-controller" do %>
+              <i class="fas fa-fw fa-truck-moving"></i>
+              <%= WarehouseShipment.model_name.human(count: 2) %>
             <% end %>
           </li>
         </ul>

@@ -3,10 +3,10 @@ class User < ApplicationRecord
   include SoftDeletable
 
   ROLES = {
-    admin: "ADMIN",
-    admin_staff: "ADMIN_STAFF",
-    warehouse: "WAREHOUSE",
-    delivery_man: "DELIVERY_MAN"
+    admin: "admin".freeze,
+    admin_staff: "admin_staff".freeze,
+    warehouse: "warehouse".freeze,
+    delivery_man: "delivery_man".freeze
   }
 
   has_one_attached :avatar
@@ -52,7 +52,7 @@ class User < ApplicationRecord
   end
 
   def rol
-    self.roles.downcase
+    self.roles
   end
 
   def is_a?(role)

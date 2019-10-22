@@ -1,0 +1,45 @@
+es:
+  admin:
+    warehouse_shipments:
+      index:
+        card_title: Lista de envíos de almacén
+
+      show:
+        title: Detalles de envío
+        process_shipment: Procesar envío
+        you_sure_process: ¿Estás seguro(a) de que todo está bien? las cantidades y lotes enviados serán agregados al inventario
+        to_report: Reportar
+        process_report: Procesar reporte
+        you_sure_process_report: ¿Estás seguro(a) de procesar el reporte? Se añadirán las cantidades reportadas al inventario
+
+      new:
+        title: Nuevo envío de almacén
+
+      create:
+        success: El envío se guardo correctamente
+
+      destroy:
+        success: El envío ha sido eliminado
+        failure: Ocurrió un error al eliminar el envío
+
+      process_shipment:
+        success: Los productos fueron agregados a existencias
+        failure: Ocurrió un error al procesar el envío
+
+      report:
+        success: El reporte ha sido enviado
+        failure: Ocurrió un error al enviar el reporte
+
+      process_report:
+        success: Los productor reportador fueron agregados a existencias
+        failure: Ocurrió un error al procesar el reporte
+
+      #partials
+      form:
+        add_product: Añadir producto
+
+      product_fields:
+        title: Información de producto
+      
+      warehouse_shipment:
+        you_sure: ¿Estás seguro(a) de eliminar el envío? esto no puede deshacerse
