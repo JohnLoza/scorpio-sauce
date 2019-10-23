@@ -13,40 +13,53 @@
           <li class="nav-divider">
             Menu
           </li>
+
           <li class="nav-item">
             <%= link_to admin_home_path, class: "nav-link home-controller" do %>
               <i class="fas fa-fw fa-th"></i>
               <%= t("labels.home") %>
             <% end %>
           </li>
+
           <li class="nav-item">
             <%= link_to admin_users_path, class: "nav-link users-controller" do %>
               <i class="fas fa-fw fa-users"></i>
               <%= User.model_name.human(count: 2) %>
             <% end %>
           </li>
+
           <li class="nav-item">
             <%= link_to admin_products_path, class: "nav-link products-controller" do %>
               <i class="fas fa-fw fa-box"></i>
               <%= Product.model_name.human(count: 2) %>
             <% end %>
           </li>
+
           <li class="nav-item">
             <%= link_to admin_warehouses_path, class: "nav-link warehouses-controller" do %>
               <i class="fas fa-fw fa-cubes"></i>
               <%= Warehouse.model_name.human(count: 2) %>
             <% end %>
           </li>
+
           <li class="nav-item">
             <%= link_to admin_stocks_path, class: "nav-link stocks-controller" do %>
               <i class="fas fa-fw fa-boxes"></i>
               <%= Stock.model_name.human(count: 2) %>
             <% end %>
           </li>
+
           <li class="nav-item">
             <%= link_to admin_warehouse_shipments_path, class: "nav-link warehouse_shipments-controller" do %>
               <i class="fas fa-fw fa-truck-moving"></i>
               <%= WarehouseShipment.model_name.human(count: 2) %>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
+            <%= link_to admin_supply_orders_path, class: "nav-link supply_orders-controller" do %>
+              <i class="fas fa-fw fa-clipboard-list"></i>
+              <%= SupplyOrder.model_name.human(count: 2) %>
             <% end %>
           </li>
         </ul>

@@ -105,12 +105,14 @@ ActiveRecord::Schema.define(version: 2019_10_15_180034) do
     t.bigint "user_id"
     t.bigint "target_user_id"
     t.bigint "supplier_user_id"
+    t.bigint "warehouse_id"
     t.json "to_supply"
     t.json "supplies"
     t.boolean "processed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_supply_orders_on_user_id"
+    t.index ["warehouse_id"], name: "index_supply_orders_on_warehouse_id"
   end
 
   create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

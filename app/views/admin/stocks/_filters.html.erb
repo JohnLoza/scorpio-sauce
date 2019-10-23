@@ -5,17 +5,17 @@
       <div class="card-body">
         <%= form_for :filters, method: :get, html: {class: "form-inline"} do |f| %>
           <div class="form-group mx-sm-3">
-            <%= f.label :warehouse_id, User.human_attribute_name(:warehouse_id), class: "sr-only"  %>
-            <%= f.select :warehouse_id, Warehouse.for_select,
-              { prompt: User.human_attribute_name(:warehouse_id),
-                selected: params[:filters][:warehouse_id] }, {class: "form-control"} %>
+            <%= label_tag :warehouse_id, Warehouse.model_name.human, class: "sr-only"  %>
+            <%= select_tag :warehouse_id, 
+              options_from_collection_for_select(Warehouse.for_select, :last, :first, params[:warehouse_id]),
+              prompt: Warehouse.model_name.human, class: "form-control" %>
           </div>
           
           <div class="form-group mx-sm-3">
-            <%= f.label :product_id, Product.model_name.human(count: 1), class: "sr-only"  %>
-            <%= f.select :product_id, Product.for_select,
-              { prompt: Product.model_name.human(count: 1),
-                selected: params[:filters][:product_id] }, {class: "form-control"} %>
+            <%= label_tag :product_id, Product.model_name.human(count: 1), class: "sr-only"  %>
+            <%= select_tag :product_id, 
+              options_from_collection_for_select(Product.for_select, :last, :first, params[:product_id]),
+              prompt: Product.model_name.human(count: 1), class: "form-control" %>
           </div>
           <%= f.submit t("labels.do_filter"), class: "btn btn-primary" %>
         <% end %>

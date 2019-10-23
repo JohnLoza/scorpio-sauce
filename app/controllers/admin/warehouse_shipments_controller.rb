@@ -1,6 +1,6 @@
 class Admin::WarehouseShipmentsController < ApplicationController
   def index
-    @warehouse_shipments = WarehouseShipment.all.includes(:user, :receiver, :warehouse)
+    @warehouse_shipments = WarehouseShipment.recent.includes(:user, :receiver, :warehouse)
   end
   
   def show
@@ -63,12 +63,12 @@ class Admin::WarehouseShipmentsController < ApplicationController
 
     if @warehouse_shipment.process_shipment_report(current_user)
       flash[:success] = t(".success")
-      redirect_to admin_warehouse_shipments_path
     else
       flash[:info] = t(".failure")
-      @product_names = @warehouse_shipment.product_names
-      render :show
     end
+    
+    @product_names = @warehouse_shipment.product_names
+    render :show
   end
   
   private

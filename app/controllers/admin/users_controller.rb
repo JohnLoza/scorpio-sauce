@@ -18,9 +18,6 @@ class Admin::UsersController < ApplicationController
     if @user.save
       redirect_to [:admin, @user], flash: {success: t(".success", user: @user)}
     else
-      @user.errors.full_messages.each do |message|
-        logger.info "<<< user error: #{message}"
-      end
       render :new
     end
   end
@@ -71,7 +68,7 @@ class Admin::UsersController < ApplicationController
     end
 
     def can_edit?(user)
-      if user.is_a?(User::ROLES[:admin]) # target is an admin
+      if user.role?(:admin) # target is an admin
         return false unless current_user? user # editing himself? ok!
       elsif current_user? user # non admin editing himself? nope!
         return false

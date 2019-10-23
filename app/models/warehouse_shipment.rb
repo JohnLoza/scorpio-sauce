@@ -13,8 +13,10 @@ class WarehouseShipment < ApplicationRecord
 
   validates :products, presence: true
 
+  scope :recent, -> { order(created_at: :desc) }
+
   def product_names
-    product_ids = self.products.map{ |p| p["product_id"] }
+    product_ids = self.products.map{ |p| p["product_id"] }.uniq
     products = Product.where(id: product_ids).pluck(:id, :name)
     Hash[products]
   end

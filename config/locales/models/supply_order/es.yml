@@ -1,0 +1,15 @@
+es:
+  activerecord:
+    models:
+      supply_order:
+        one: Órden de suministros
+        other: Órdenes de suministros
+    attributes:
+      supply_order:
+        id: Clave
+        user_id: Emisor
+        target_user_id: Usuario objetivo
+        supplier_user_id: Suministró
+        to_supply: Por suministrar
+        supplies: Suministros
+        processed: Procesado

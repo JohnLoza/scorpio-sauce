@@ -1,0 +1,33 @@
+<%= provide :title, SupplyOrder.model_name.human(count: 2) %>
+<%= provide :page_header, SupplyOrder.model_name.human(count: 2) %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <h5 class="card-header">
+        <%= t(".card_title") %>
+        <%= link_to new_admin_supply_order_path do %>
+          <i class="fas fa-fw fa-plus-circle fa-2x float-right"></i>
+        <% end %>
+      </h5>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="bg-light">
+              <tr class="border-0">
+                <%= content_tag :th, SupplyOrder.human_attribute_name(:user_id), class: "border-0" %>
+                <%= content_tag :th, SupplyOrder.human_attribute_name(:target_user_id), class: "border-0" %>
+                <%= content_tag :th, SupplyOrder.human_attribute_name(:supplier_user_id), class: "border-0" %>
+                <%= content_tag :th, SupplyOrder.human_attribute_name(:processed), class: "border-0" %>
+                <%= content_tag :th, t("labels.actions"), class: "border-0" %>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render @supply_orders %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

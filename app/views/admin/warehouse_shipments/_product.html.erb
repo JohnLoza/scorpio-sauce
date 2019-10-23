@@ -37,7 +37,8 @@
   <div class="col-sm-12">
     <div class="form-group">
       <%= number_field_tag "real_units[]", product["units"], 
-        class: "form-control", min: 1, step: 1, required: true if @warehouse_shipment.reportable? %>
+        class: "form-control", min: 1, step: 1, max: product["units"], required: true,
+        onchange: "toggleForm(this)" if @warehouse_shipment.reportable? %>
     </div>
   </div>
 

@@ -41,8 +41,8 @@
 
       <div class="form-group">
         <%= f.label :roles %>
-        <% if current_user.is_a?(User::ROLES[:admin]) and current_user?(@user) # admin editing himself %>
-          <%= content_tag :span, t("roles.#{current_user.rol}"), class: "badge badge-secondary badge-pill" %>
+        <% if current_user.role?(:admin) and current_user?(@user) # admin editing himself %>
+          <%= content_tag :span, t("roles.#{current_user.role}"), class: "badge badge-secondary badge-pill" %>
         <% else %>
           <%= f.select :roles, User.roles_for_select,
             {prompt: t("labels.select")}, {class: "form-control", required: true} %>

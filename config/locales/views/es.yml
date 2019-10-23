@@ -21,6 +21,10 @@ es:
     state: Estado
     units: Unidades
     units_per_box: Unidades por caja
+
+    processed:
+      true: <span class="badge badge-primary badge-pill">procesado</span>
+      false: <span class="badge badge-secondary badge-pill">pendiente</span>
   roles:
     admin: administrador
     admin_staff: personal administrativo
@@ -32,3 +36,6 @@ es:
     processed: Procesado
   errors:
     batch_in_use: Lote en uso '%{batch}'
+    incomplete_supplies: Los suministros están incompletos
+    not_enough_stock: No hay inventario suficiente del producto con lote '%{batch}'
+    product_not_found: No se encontró el producto con lote '%{batch}'

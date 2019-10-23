@@ -1,18 +1,16 @@
 <div class="card">
   <h5 class="card-header"><%= yield :page_header %></h5>
   <div class="card-body">
-    <%= form_for [:admin, @warehouse_shipment] do |f| %>
-      <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @warehouse_shipment} %>
+    <%= form_for [:admin, @supply_order] do |f| %>
+      <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @supply_order} %>
       
       <div class="form-group">
-        <%= f.label :warehouse_id %>
-        <%= f.select :warehouse_id, Warehouse.for_select,
+        <%= f.label :target_user_id %>
+        <%= f.select :target_user_id, User.for_select(warehouse_id: current_user.warehouse_id, role: :delivery_man),
           {prompt: t("labels.select")}, {class: "form-control", required: true} %>
       </div>
 
-      <section class="products-container">
-        
-      </section>
+      <section class="products-container"></section>
 
       <%= content_tag :a, t(".add_product"), onclick: "addProductFields()",
         class: "btn btn-secondary btn-lg add-product-btn" %>
@@ -27,11 +25,6 @@ function addProductFields(){
   let token = Math.random().toString(36).substr(2); // remove `0.`
   to_append = to_append.replace(/replace_me/g, token);
   $(".products-container").append(to_append);
-
-  $(`#products_${token}_expires_at`).datepicker({
-    format: "dd-mm-yyyy",
-    startDate: "<%= Time.now.strftime("%d-%m-%Y") %>"
-  });
 }
 
 $(document).ready(function(){

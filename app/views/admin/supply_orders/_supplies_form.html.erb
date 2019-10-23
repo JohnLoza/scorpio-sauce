@@ -1,0 +1,23 @@
+<%= content_tag :h3, t(".title"), class: "card-title" %>
+<%= form_for :supplies, url: supply_admin_supply_order_path(@supply_order) do |f| %>
+  <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @supply_order} %>
+
+  <div class="supplies-container"></div>
+
+  <%= content_tag :a, t(".add_product"), onclick: "addProductFields()",
+    class: "btn btn-secondary btn-lg add-product-btn" %>
+  <%= f.submit t("labels.save"), class: "btn btn-primary" %>
+<% end %>
+
+<script>
+function addProductFields(){
+  let to_append = "<%= j render "supplies_fields" %>";
+  let token = Math.random().toString(36).substr(2); // remove `0.`
+  to_append = to_append.replace(/replace_me/g, token);
+  $(".supplies-container").append(to_append);
+}
+
+$(document).ready(function(){
+  $(".add-product-btn").click();
+})
+</script>

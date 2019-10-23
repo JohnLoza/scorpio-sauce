@@ -32,15 +32,16 @@
             <%= render partial: "product", locals: {product: product, product_names: @product_names} %>
           <% end %>
 
-          <%= f.text_area :message, class: "form-control", maxlength: 200,
+          <%= f.text_area :message, class: "form-control report hidden", maxlength: 200,
             required: true if @warehouse_shipment.reportable? %>
-          <%= f.submit t(".to_report"), class: "btn btn-brand" if @warehouse_shipment.reportable? %>
+          <%= f.submit t(".to_report"), class: "btn btn-brand report hidden",
+            style: "margin-top: 1em;" if @warehouse_shipment.reportable? %>
         <% end %>
 
         <%= content_tag :p, @warehouse_shipment.report["message"] if @warehouse_shipment.report.present? %>
 
         <%= link_to t(".process_shipment"), process_shipment_admin_warehouse_shipment_path(@warehouse_shipment),
-          method: :post, class: "btn btn-primary btn-lg", style: "margin-top: 1em;",
+          method: :post, class: "btn btn-primary btn-lg process-btn", style: "margin-top: 1em;",
           data: { confirm: t(".you_sure_process") } if @warehouse_shipment.processable? %>
 
         <%= link_to t(".process_report"), process_report_admin_warehouse_shipment_path(@warehouse_shipment),
@@ -51,3 +52,24 @@
   </div>
 
 </div>
+
+<script>
+function toggleForm(trigger) {
+  let form = $(trigger).closest("form");
+  let units_inputs = form.find("input[type=number]");
+
+  let to_report = false;
+  $.each(units_inputs, function( index, input ) {
+    if(input.value != input.getAttribute("max"))
+      to_report = true;
+  });
+
+  if (to_report) {
+    $(".report").removeClass("hidden");
+    $(".process-btn").addClass("hidden");
+  }else{
+    $(".report").addClass("hidden");
+    $(".process-btn").removeClass("hidden");
+  }
+}
+</script>

@@ -2,6 +2,7 @@ es:
   activerecord:
     models:
       stock:
+        one: Existencias
         other: Existencias
     attributes:
       stock:

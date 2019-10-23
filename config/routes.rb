@@ -26,6 +26,10 @@ Rails.application.routes.draw do
       post 'report', on: :member
       post 'process_report', on: :member
     end
+
+    resources :supply_orders, except: [:edit, :update] do
+      post 'supply', on: :member
+    end
   end
 
   namespace :api do

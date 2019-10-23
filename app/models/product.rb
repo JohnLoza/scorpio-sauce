@@ -33,17 +33,27 @@ class Product < ApplicationRecord
     "#{id}-#{name}"
   end
 
-  def self.for_select
-    self.active.map{ |p| [p.name, p.id] }
+  def self.for_select(options = {})
+    products = []
+    if options[:id].present?
+      products = self.where(id: options[:id])
+    else
+      products = self.active
+    end
+
+    products.map{ |p| [p.name, p.id] }
   end
 
   def build_boxes_json(box_names, box_units)
-    return unless box_names and box_units
+    if box_names.nil? or box_units.nil?
+      self.boxes = nil; return
+    end
+
     boxes_array = Array.new
     box_names.each.with_index do |box_name, indx|
       boxes_array << {name: box_names[indx], units: box_units[indx].to_i}
     end
-    Rails.logger.info "<<< boxes_array: #{boxes_array}"
+    
     self.boxes = boxes_array
   end
   

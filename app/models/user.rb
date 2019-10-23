@@ -33,6 +33,7 @@ class User < ApplicationRecord
   scope :recent, -> { order(created_at: :desc) }
   scope :order_by_name, -> (way = :asc) { order(name: way) }
   scope :by_warehouse, -> (wid) { where(warehouse_id: wid) }
+  scope :by_role, -> (role) { where(roles: role )}
 
   def to_s
     name
@@ -51,16 +52,19 @@ class User < ApplicationRecord
     available_roles.map{|key, value| [I18n.t("roles.#{key}"), value] }
   end
 
-  def rol
+  def self.for_select(options = {})
+    raise ArgumentError, "role option is required" unless options[:role].present?
+    raise ArgumentError, "warehouse_id option is required" unless options[:warehouse_id].present?
+
+    User.by_warehouse(options[:warehouse_id]).by_role(ROLES[options[:role]])
+      .map{ |user| [user.name, user.id] }
+  end
+
+  def role
     self.roles
   end
 
-  def is_a?(role)
-    self.roles == role
+  def role?(role)
+    self.role == ROLES[role]
   end
-
-  def is_not_a?(role)
-    self.roles != role
-  end
-  
 end

@@ -47,7 +47,7 @@
       <div class="form-group">
         <%= f.label :warehouse_id %>
         <%= f.select :warehouse_id, Warehouse.for_select,
-          {}, {class: "form-control", required: true} %>
+          { prompt: Warehouse.model_name.human }, {class: "form-control", required: true} %>
       </div>
 
       <div class="custom-file mb-3">

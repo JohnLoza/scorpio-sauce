@@ -18,6 +18,7 @@
       class: "btn btn-outline-light btn-sm" do %>
       <i class="fas fa-fw fa-eye"></i>
     <% end %>
+    
     <%= link_to admin_warehouse_shipment_path(warehouse_shipment), 
       method: :delete, class: "btn btn-danger btn-sm", 
       data: { confirm: t(".you_sure") } do %>

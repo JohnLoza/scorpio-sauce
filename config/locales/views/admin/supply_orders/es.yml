@@ -1,0 +1,35 @@
+es:
+  admin:
+    supply_orders:
+      index:
+        card_title: Lista de Órdenes de suministros
+
+      show:
+        title: Detalles de la órden
+
+      new:
+        title: Nueva órden de suministros
+
+      create:
+        success: Órden guardada correctamente
+
+      destroy:
+        success: Órden eliminada
+        failure: Ocurrió un error al eliminar la órden
+
+      supply:
+        success: Suministros guardados y agregados a inventario en ruta
+
+      # partials
+      supply_order:
+        you_sure: ¿Estás seguro(a) de eliminar la órden?
+
+      form:
+        add_product: Agregar producto
+
+      product_fields:
+        title: Información de producto
+
+      supplies_form:
+        title: Productos a suministrar
+        add_product: Agregar producto
