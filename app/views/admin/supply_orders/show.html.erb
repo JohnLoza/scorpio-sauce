@@ -7,25 +7,55 @@
     <div class="card">
       <div class="card-body">
         <h3 class="card-title"><%= yield :title %></h3>
-        <p class="card-text">
-          <%= content_tag :span, SupplyOrder.human_attribute_name(:user_id), 
-            class: "font-weight-bold text-uppercase" %><br>
-          <%= link_to @supply_order.user, admin_user_path(@supply_order.user) %>
-        </p>
-        <p class="card-text">
-          <%= content_tag :span, SupplyOrder.human_attribute_name(:target_user_id), 
-            class: "font-weight-bold text-uppercase" %><br>
-          <%= link_to @supply_order.target_user, admin_user_path(@supply_order.target_user) %>
-        </p>
-        <p class="card-text">
-          <%= content_tag :span, SupplyOrder.human_attribute_name(:supplier_user_id), 
-            class: "font-weight-bold text-uppercase" %><br>
-          <%= link_to @supply_order.supplier, admin_user_path(@supply_order.supplier) if @supply_order.supplier.present? %>
-        </p>
 
-        <%= content_tag :h3, SupplyOrder.human_attribute_name(:supplies), class: "card-title" %>
+        <div class="row">
+          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            <p class="card-text">
+              <%= content_tag :span, SupplyOrder.human_attribute_name(:user_id), 
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= link_to @supply_order.user, admin_user_path(@supply_order.user) %>
+            </p>
+          </div>
+
+          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            <p class="card-text">
+              <%= content_tag :span, SupplyOrder.human_attribute_name(:target_user_id), 
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= link_to @supply_order.target_user, admin_user_path(@supply_order.target_user) %>
+            </p>
+          </div>
+
+          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            <p class="card-text">
+              <%= content_tag :span, SupplyOrder.human_attribute_name(:supplier_user_id), 
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= link_to @supply_order.supplier, admin_user_path(@supply_order.supplier) if @supply_order.supplier.present? %>
+            </p>
+          </div>
+
+          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+            <p class="card-text">
+              <%= content_tag :span, SupplyOrder.human_attribute_name(:processed), 
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= t("labels.processed.#{@supply_order.processed}").html_safe %>
+            </p>
+          </div>
+        </div>
+
+        <hr>
+
+        <%= content_tag :h3, SupplyOrder.human_attribute_name(:to_supply), class: "card-title" %>
         <% @supply_order.to_supply.each do |product| %>
           <%= render partial: "product", locals: {product: product, product_names: @product_names} %>
+        <% end %>
+
+        <hr>
+
+        <% if @supply_order.supplies.present? %>
+          <%= content_tag :h3, SupplyOrder.human_attribute_name(:supplies), class: "card-title" %>
+          <% @supply_order.supplies.each do |product| %>
+            <%= render partial: "product", locals: {product: product, product_names: @product_names} %>
+          <% end %>
         <% end %>
 
         <%= render 'supplies_form' if @supply_order.processable? %>

@@ -10,6 +10,6 @@ es:
         user_id: Emisor
         target_user_id: Usuario objetivo
         supplier_user_id: Suministró
-        to_supply: Por suministrar
-        supplies: Suministros
+        to_supply: Unidades de producto liberadas
+        supplies: Detalles de suministros
         processed: Procesado

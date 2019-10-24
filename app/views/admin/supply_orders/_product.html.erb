@@ -14,4 +14,12 @@
       <%= product["units"] %>
     </p>
   </div>
+
+  <% if product["batch"] %>
+    <p class="card-text">
+      <%= content_tag :span, t("labels.batch"), 
+        class: "font-weight-bold text-uppercase" %><br>
+      <%= product["batch"] %>
+    </p>
+  <% end %>
 </div>

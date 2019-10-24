@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   def create
     user = authenticate_user(params[:session])
     if user
-      log_in(user, params[:session])
+      log_in(user, params[:session][:remember_me])
       redirect_back_or admin_home_path
     else
       flash.now[:info] = "El correo y/o contraseña es incorrecto"

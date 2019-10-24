@@ -9,22 +9,32 @@
         <h3 class="card-title"><%= yield :title %></h3>
         <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @warehouse_shipment} %>
 
-        <p class="card-text">
-          <%= content_tag :span, WarehouseShipment.human_attribute_name(:user_id), 
-            class: "font-weight-bold text-uppercase" %><br>
-          <%= link_to @warehouse_shipment.user, admin_user_path(@warehouse_shipment.user) %>
-        </p>
-        <p class="card-text">
-          <%= content_tag :span, WarehouseShipment.human_attribute_name(:warehouse_id), 
-            class: "font-weight-bold text-uppercase" %><br>
-          <%= link_to @warehouse_shipment.warehouse, admin_warehouse_path(@warehouse_shipment.warehouse) %>
-        </p>
-        <p class="card-text">
-          <%= content_tag :span, WarehouseShipment.human_attribute_name(:receiver_user_id), 
-            class: "font-weight-bold text-uppercase" %><br>
-          <%= link_to @warehouse_shipment.user, 
-            admin_user_path(@warehouse_shipment.user) if @warehouse_shipment.receiver.present? %>
-        </p>
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <p class="card-text">
+              <%= content_tag :span, WarehouseShipment.human_attribute_name(:user_id), 
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= link_to @warehouse_shipment.user, admin_user_path(@warehouse_shipment.user) %>
+            </p>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <p class="card-text">
+              <%= content_tag :span, WarehouseShipment.human_attribute_name(:receiver_user_id), 
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= link_to @warehouse_shipment.user, 
+                admin_user_path(@warehouse_shipment.user) if @warehouse_shipment.receiver.present? %>
+            </p>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <p class="card-text">
+              <%= content_tag :span, WarehouseShipment.human_attribute_name(:warehouse_id), 
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= link_to @warehouse_shipment.warehouse, admin_warehouse_path(@warehouse_shipment.warehouse) %>
+            </p>
+          </div>
+        </div><hr>
         
         <%= content_tag :h3, WarehouseShipment.human_attribute_name(:products), class: "card-title" %>
         <%= form_for :report, url: report_admin_warehouse_shipment_path(@warehouse_shipment) do |f| %>

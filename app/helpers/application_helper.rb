@@ -1,14 +1,22 @@
 module ApplicationHelper
-  def authenticate_user(session = {})
-    email = session[:email]
-    password = session[:password]
-
-    user = User.find_by(email: email)
-    if user and user.authenticate(password)
-      return user
-    else
-      return nil
+  def authenticate_user(options = {})
+    if options[:auth_token].nil? and options[:email].nil? and options[:password].nil?
+      raise ArgumentError, "an :email and :password are required or an :auth_token"
     end
+
+    user = nil
+    if options[:auth_token].present?
+      decoded_token = JsonWebToken.decode(options[:auth_token])
+      return nil unless decoded_token
+
+      user = User.find_by(id: decoded_token[:user_id])
+      return nil unless user
+    else
+      user = User.find_by(email: options[:email])
+      return nil unless user and user.authenticate(options[:password])
+    end
+
+    return user.active? ? user : nil
   end
 
   def avatar_variant
