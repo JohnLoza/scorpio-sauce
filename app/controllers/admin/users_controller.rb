@@ -63,8 +63,17 @@ class Admin::UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :cellphone, :email, :email_confirmation, 
-        :password, :password_confirmation, :roles, :warehouse_id, :avatar)
+      params.require(:user).permit(
+        :name, 
+        :cellphone, 
+        :email, 
+        :email_confirmation, 
+        :password, 
+        :password_confirmation, 
+        :roles, 
+        :warehouse_id, 
+        :avatar
+      )
     end
 
     def can_edit?(user)

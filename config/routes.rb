@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     post 'sessions', controller: 'sessions', action: 'create'
-    resources :users
+    resources :clients, except: [:new, :edit]
   end
 
   match '*path', via: :all, to: 'application#render_404'

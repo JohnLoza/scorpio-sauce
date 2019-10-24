@@ -9,12 +9,13 @@ class User < ApplicationRecord
     delivery_man: "delivery_man".freeze
   }
 
-  has_one_attached :avatar
-
   before_save { self.email = email.downcase }
   has_secure_password
 
+  has_one_attached :avatar
+
   belongs_to :warehouse
+  has_many :clients
 
   validates :name, :email, :cellphone,
     :roles, presence: true

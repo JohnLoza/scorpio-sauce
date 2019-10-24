@@ -1,10 +1,9 @@
 module ApplicationHelper
   def authenticate_user(options = {})
-    if options[:auth_token].nil? and options[:email].nil? and options[:password].nil?
+    if options[:auth_token].nil? and (options[:email].nil? or options[:password].nil?)
       raise ArgumentError, "an :email and :password are required or an :auth_token"
     end
 
-    user = nil
     if options[:auth_token].present?
       decoded_token = JsonWebToken.decode(options[:auth_token])
       return nil unless decoded_token

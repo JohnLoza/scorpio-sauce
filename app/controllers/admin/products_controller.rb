@@ -60,8 +60,14 @@ class Admin::ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:product).permit(:name, :main_image, 
-        :retail_price, :half_wholesale_price, :wholesale_price, 
-        :required_units_half_wholesale, :required_units_wholesale)
+      params.require(:product).permit(
+        :name, 
+        :main_image, 
+        :retail_price, 
+        :half_wholesale_price, 
+        :required_units_half_wholesale, 
+        :wholesale_price, 
+        :required_units_wholesale
+      )
     end
 end
