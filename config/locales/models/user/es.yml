@@ -14,7 +14,6 @@ es:
         email_confirmation: Confirmación de correo electrónico
         password: Contraseña
         password_confirmation: Confirmación de contraseña
-        roles: Roles
-        rol: Rol
+        role: Rol
         warehouse_id: Almacén
         deleted_at: Dado de baja

@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :email
       t.string :cellphone
-      t.string :roles
+      t.string :role
       t.string :password_digest
       t.string :recover_password_digest
       t.datetime :deleted_at

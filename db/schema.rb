@@ -109,7 +109,6 @@ ActiveRecord::Schema.define(version: 2019_10_15_180034) do
     t.bigint "supplier_user_id"
     t.bigint "warehouse_id"
     t.json "to_supply"
-    t.json "supplies"
     t.boolean "processed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -134,7 +133,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_180034) do
     t.string "name"
     t.string "email"
     t.string "cellphone"
-    t.string "roles"
+    t.string "role"
     t.string "password_digest"
     t.string "recover_password_digest"
     t.datetime "deleted_at"

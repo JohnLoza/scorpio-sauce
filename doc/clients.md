@@ -1,8 +1,6 @@
 # Clients
-every request requires an authentication token in 
-a 'Authorization' header
-
-sample curl request
+Every request requires an authentication token in a 'Authorization' header  
+Sample curl request
 
 ```bash
 curl base_url/api/clients \
@@ -13,7 +11,7 @@ curl base_url/api/clients \
 Every request that require an :id will return a 404 if the resource is not found
 
 ## /api/clients **GET Request**
-list of clients of the current user
+List of clients of the current user
 
 ### Response
 ```json
@@ -30,9 +28,8 @@ list of clients of the current user
 ```
 
 ## /api/clients **POST Request**
-creates a new client record and returns the client object
-
-requires the full client object, the billing object is optional
+Creates a new client record and returns the client object  
+Requires the full client object, the billing object is optional
 
 ### Response
 ```json
@@ -58,9 +55,8 @@ Asks for the information of the given client by id
 ```
 
 ## /api/clients/:id **PATCH/PUT Request**
-Update an existing client by id and returns the client object
-
-requires the client object with the attributes to update
+Update an existing client by id and returns the client object  
+Requires the client object with the attributes to update
 
 ### Response
 ```json
@@ -73,7 +69,7 @@ requires the client object with the attributes to update
 ```
 
 ## /api/clients/:id **DELETE Request**
-  Delete an existing client by id and returns the client object
+Delete an existing client by id and returns the client object
 
 ### Response
 ```json

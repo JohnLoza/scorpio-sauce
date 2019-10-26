@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xl-3 col-lg-3 col-md-3 col-md-6 col-sm-6">
     <p class="card-text">
-      <%= content_tag :span, t("labels.name"), 
+      <%= content_tag :span, t("labels.name"),
         class: "font-weight-bold text-uppercase" %><br>
       <%= product_names[ product["product_id"].to_i ] %>
     </p>
@@ -9,17 +9,29 @@
 
   <div class="col-xl-3 col-lg-3 col-md-3 col-md-6 col-sm-6">
     <p class="card-text">
-      <%= content_tag :span, t("labels.units"), 
+      <%= content_tag :span, t("labels.units"),
         class: "font-weight-bold text-uppercase" %><br>
       <%= product["units"] %>
     </p>
   </div>
 
   <% if product["batch"] %>
-    <p class="card-text">
-      <%= content_tag :span, t("labels.batch"), 
-        class: "font-weight-bold text-uppercase" %><br>
-      <%= product["batch"] %>
-    </p>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-md-6 col-sm-6">
+      <p class="card-text">
+        <%= content_tag :span, t("labels.batch"),
+          class: "font-weight-bold text-uppercase" %><br>
+        <%= product["batch"] %>
+      </p>
+    </div>
+  <% end %>
+
+  <% if product["units_left"] %>
+    <div class="col-xl-3 col-lg-3 col-md-3 col-md-6 col-sm-6">
+      <p class="card-text">
+        <%= content_tag :span, t("labels.units_left"),
+          class: "font-weight-bold text-uppercase" %><br>
+        <%= product["units_left"] %>
+      </p>
+    </div>
   <% end %>
 </div>

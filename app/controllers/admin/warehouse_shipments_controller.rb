@@ -2,16 +2,16 @@ class Admin::WarehouseShipmentsController < ApplicationController
   def index
     @warehouse_shipments = WarehouseShipment.recent.includes(:user, :receiver, :warehouse)
   end
-  
+
   def show
     @warehouse_shipment = WarehouseShipment.find(params[:id])
     @product_names = @warehouse_shipment.product_names
   end
-  
+
   def new
     @warehouse_shipment = WarehouseShipment.new
   end
-  
+
   def create
     @warehouse_shipment = WarehouseShipment.new(warehouse_shipment_params)
     if @warehouse_shipment.save
@@ -53,11 +53,11 @@ class Admin::WarehouseShipmentsController < ApplicationController
     else
       flash[:info] = t(".failure")
     end
-    
+
     @product_names = @warehouse_shipment.product_names
     render :show
   end
-  
+
   def process_report
     @warehouse_shipment = WarehouseShipment.find(params[:id])
 
@@ -66,11 +66,11 @@ class Admin::WarehouseShipmentsController < ApplicationController
     else
       flash[:info] = t(".failure")
     end
-    
+
     @product_names = @warehouse_shipment.product_names
     render :show
   end
-  
+
   private
     def warehouse_shipment_params
       {
@@ -91,5 +91,5 @@ class Admin::WarehouseShipmentsController < ApplicationController
         status: WarehouseShipment::STATUS[:reported]
       }
     end
-    
+
 end

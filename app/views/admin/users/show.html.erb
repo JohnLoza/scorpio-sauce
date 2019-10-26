@@ -20,27 +20,27 @@
       <div class="card-body">
         <h3 class="card-title"><%= yield :title %></h3>
         <p class="card-text">
-          <%= content_tag :span, User.human_attribute_name(:name), 
+          <%= content_tag :span, User.human_attribute_name(:name),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @user %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, User.human_attribute_name(:email), 
+          <%= content_tag :span, User.human_attribute_name(:email),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @user.email %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, User.human_attribute_name(:cellphone), 
+          <%= content_tag :span, User.human_attribute_name(:cellphone),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @user.cellphone %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, User.human_attribute_name(:rol), 
+          <%= content_tag :span, User.human_attribute_name(:rol),
             class: "font-weight-bold text-uppercase" %><br>
           <%= content_tag :span, t("roles.#{@user.role}"), class: "badge badge-secondary badge-pill" %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, User.human_attribute_name(:warehouse_id), 
+          <%= content_tag :span, User.human_attribute_name(:warehouse_id),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @user.warehouse %>
         </p>

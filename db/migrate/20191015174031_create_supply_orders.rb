@@ -6,7 +6,6 @@ class CreateSupplyOrders < ActiveRecord::Migration[5.2]
       t.bigint :supplier_user_id
       t.belongs_to :warehouse
       t.json :to_supply
-      t.json :supplies
       t.boolean :processed, default: false
 
       t.timestamps

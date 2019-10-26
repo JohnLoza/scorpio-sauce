@@ -1,7 +1,7 @@
 # Sessions
 
 ## /api/sessions **POST Request**
-requires the parameters **email** and **password** encapsulated by **session**
+Requires the parameters **email** and **password** encapsulated by **session**
 
 ```json
 session: {

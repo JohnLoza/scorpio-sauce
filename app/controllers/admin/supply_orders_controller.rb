@@ -16,7 +16,7 @@ class Admin::SupplyOrdersController < ApplicationController
   def new
     @supply_order = SupplyOrder.new
   end
-  
+
   def create
     @supply_order = SupplyOrder.new(supply_order_params)
     if @supply_order.save
@@ -26,7 +26,7 @@ class Admin::SupplyOrdersController < ApplicationController
       render :new
     end
   end
-  
+
   def destroy
     @supply_order = SupplyOrder.find(params[:id])
     if @supply_order.destroy
@@ -64,5 +64,5 @@ class Admin::SupplyOrdersController < ApplicationController
         supplies: params[:products].values
       }
     end
-  
+
 end

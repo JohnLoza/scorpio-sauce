@@ -14,7 +14,7 @@ class Warehouse < ApplicationRecord
   def to_param
     "#{id}-#{telephone}"
   end
-  
+
   def self.for_select
     self.active.map{ |w| [w.address, w.id] }
   end

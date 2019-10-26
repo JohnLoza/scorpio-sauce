@@ -32,7 +32,7 @@ class Api::ClientsController < ApiController
       render_unprocessable_error(@client)
     end
   end
-  
+
   def destroy
     @client = @current_user.clients.find(params[:id])
     if @client.destroy
@@ -42,7 +42,7 @@ class Api::ClientsController < ApiController
       render_unprocessable_error(@client)
     end
   end
-  
+
   private
     def client_params
       params.require(:client).permit(

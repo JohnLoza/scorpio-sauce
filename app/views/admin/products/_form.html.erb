@@ -3,7 +3,7 @@
   <div class="card-body">
     <%= form_for [:admin, @product] do |f| %>
       <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @product} %>
-      
+
       <div class="form-group">
         <%= f.label :name %>
         <%= f.text_field :name, class: "form-control", required: true %>
@@ -11,7 +11,7 @@
 
       <div class="form-group">
         <%= f.label :retail_price %>
-        <%= f.number_field :retail_price, class: "form-control", 
+        <%= f.number_field :retail_price, class: "form-control",
           required: true, min: 1, step: 0.01 %>
       </div>
 
@@ -19,7 +19,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
             <%= f.label :half_wholesale_price %>
-            <%= f.number_field :half_wholesale_price, class: "form-control", required: true, 
+            <%= f.number_field :half_wholesale_price, class: "form-control", required: true,
               "data-parsley-lower-or-equalto" => "#product_retail_price", step: 0.01 %>
           </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
             <%= f.label :required_units_half_wholesale %>
-            <%= f.number_field :required_units_half_wholesale, class: "form-control", 
+            <%= f.number_field :required_units_half_wholesale, class: "form-control",
               required: true, min: 1, step: 1 %>
           </div>
         </div>
@@ -37,7 +37,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
             <%= f.label :wholesale_price %>
-            <%= f.number_field :wholesale_price, class: "form-control", required: true, 
+            <%= f.number_field :wholesale_price, class: "form-control", required: true,
               "data-parsley-lower-or-equalto" => "#product_half_wholesale_price", step: 0.01 %>
           </div>
         </div>
@@ -45,7 +45,7 @@
         <div class="col-md-6 col-sm-12">
           <div class="form-group">
             <%= f.label :required_units_wholesale %>
-            <%= f.number_field :required_units_wholesale, class: "form-control", required: true, 
+            <%= f.number_field :required_units_wholesale, class: "form-control", required: true,
               "data-parsley-bigger-or-equalto" => "#product_required_units_half_wholesale", step: 1 %>
           </div>
         </div>

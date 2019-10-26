@@ -11,7 +11,7 @@
 
       <div class="form-group">
         <%= f.label :cellphone %>
-        <%= f.text_field :cellphone, class: "form-control", 
+        <%= f.text_field :cellphone, class: "form-control",
           required: true, maxlength: 20 %>
       </div>
 
@@ -22,7 +22,7 @@
 
       <div class="form-group">
         <%= f.label :email_confirmation %>
-        <%= f.email_field :email_confirmation, class: "form-control", 
+        <%= f.email_field :email_confirmation, class: "form-control",
           required: true, "data-parsley-equalto" => "#user_email" %>
       </div>
 
@@ -34,13 +34,13 @@
 
       <div class="form-group">
         <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, class: "form-control", 
+        <%= f.password_field :password_confirmation, class: "form-control",
           required: true, "data-parsley-equalto" => "#user_password" %>
       </div>
 
       <div class="form-group">
-        <%= f.label :roles %>
-        <%= f.select :roles, User.roles_for_select,
+        <%= f.label :role %>
+        <%= f.select :role, User.roles_for_select,
           {prompt: t("labels.select")}, {class: "form-control", required: true} %>
       </div>
 

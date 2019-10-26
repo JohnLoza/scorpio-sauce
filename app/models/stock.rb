@@ -8,18 +8,15 @@ class Stock < ApplicationRecord
 
   scope :available, -> (ammount = 1) { where("units >= ?", ammount) }
   scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) }
-  scope :by_product, -> (p_ids){
-    return all unless p_ids.present?
-    where(product_id: p_ids)
-  }
-  scope :by_batch, -> (batch) { find_by(batch: batch) }
+  scope :by_product, -> (p_ids){ where(product_id: p_ids) if p_ids.present? }
+  scope :by_batch, -> (batch) { find_by(batch: batch) if batch.present? }
   scope :depleted, -> { where(units: 0) }
 
   def self.withdraw_supplies!(supplies, warehouse_id)
     supplies.each do |s_i|
       stock = Stock.find_by(warehouse_id: warehouse_id,
         product_id: s_i["product_id"], batch: s_i["batch"])
-      
+
       unless stock
         raise StandardError, I18n.t("errors.product_not_found", batch: s_i["batch"])
       end

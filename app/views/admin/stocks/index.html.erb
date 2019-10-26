@@ -1,7 +1,9 @@
 <%= provide :title, Stock.model_name.human(count: 2) %>
 <%= provide :page_header, Stock.model_name.human(count: 2) %>
 
-<%= render "filters" %>
+<%= render partial: "filters" %>
+
+<%= render partial: "/shared/admin/warehouse_header", locals: {warehouse: @warehouse} %>
 
 <div class="row">
   <div class="col-md-12">

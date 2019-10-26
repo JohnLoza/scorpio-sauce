@@ -19,17 +19,17 @@
       <div class="card-body">
         <h3 class="card-title"><%= yield :title %></h3>
         <p class="card-text">
-          <%= content_tag :span, Warehouse.human_attribute_name(:address), 
+          <%= content_tag :span, Warehouse.human_attribute_name(:address),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @warehouse.address %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, Warehouse.human_attribute_name(:telephone), 
+          <%= content_tag :span, Warehouse.human_attribute_name(:telephone),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @warehouse.telephone %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, Warehouse.human_attribute_name(:city_id), 
+          <%= content_tag :span, Warehouse.human_attribute_name(:city_id),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @warehouse.location %>
         </p>

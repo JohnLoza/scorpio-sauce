@@ -3,7 +3,7 @@
   <div class="card-body">
     <%= form_for [:admin, @warehouse_shipment] do |f| %>
       <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @warehouse_shipment} %>
-      
+
       <div class="form-group">
         <%= f.label :warehouse_id %>
         <%= f.select :warehouse_id, Warehouse.for_select,
@@ -11,7 +11,7 @@
       </div>
 
       <section class="products-container">
-        
+
       </section>
 
       <%= content_tag :a, t(".add_product"), onclick: "addProductFields()",

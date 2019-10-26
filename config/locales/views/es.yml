@@ -20,6 +20,7 @@ es:
     select: Selecciona
     state: Estado
     units: Unidades
+    units_left: Unidades restantes
     units_per_box: Unidades por caja
 
     processed:

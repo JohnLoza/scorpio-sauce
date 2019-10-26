@@ -10,6 +10,7 @@ es:
         user_id: Emisor
         target_user_id: Usuario objetivo
         supplier_user_id: Suministró
+        route_stock_id: Inventario en ruta
         to_supply: Unidades de producto liberadas
         supplies: Detalles de suministros
         processed: Procesado

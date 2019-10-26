@@ -15,5 +15,5 @@ class Api::SessionsController < ApiController
     response = { status: "completed", data: { authentication_token: token } }
     render json: JSON.pretty_generate(response)
   end
-  
+
 end

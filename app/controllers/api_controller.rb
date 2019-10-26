@@ -17,7 +17,7 @@ class ApiController < ActionController::API
   def authenticate_user!
     auth_token = request.headers["Authorization"]
     render_auth_error and return unless auth_token.present?
-      
+
     @current_user ||= authenticate_user(auth_token: auth_token)
     unless @current_user and @current_user.role?(:delivery_man)
       render_auth_error and return
@@ -29,7 +29,12 @@ class ApiController < ActionController::API
       head :not_found
       return true
     end
-    
+
+    def render_auth_error
+      response = { status: "error", message: "authentication_error" }
+      render status: 401, json: JSON.pretty_generate(response)
+    end
+
     def render_parameter_validation_error(msg)
       response = { status: "error", message: "parameter_validation_error", details: msg }
       render status: 422, json: JSON.pretty_generate(response)
@@ -39,11 +44,6 @@ class ApiController < ActionController::API
     def render_unprocessable_error(obj)
       response = { status: "error", message: :unprocessable, errors: obj.errors.full_messages }
       render json: JSON.pretty_generate(response)
-      return true
-    end
-
-    def render_auth_error
-      render status: 401
       return true
     end
 

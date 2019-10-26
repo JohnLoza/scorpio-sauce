@@ -30,7 +30,7 @@ class Admin::WarehousesController < ApplicationController
 
   def edit
     @warehouse = Warehouse.find(params[:id])
-    
+
     city = @warehouse.city
     params[:warehouse] = { city_id: city.id, state_id: city.state_id }
 
@@ -74,8 +74,8 @@ class Admin::WarehousesController < ApplicationController
   private
     def warehouse_params
       params.require(:warehouse).permit(
-        :address, 
-        :telephone, 
+        :address,
+        :telephone,
         :city_id
       )
     end

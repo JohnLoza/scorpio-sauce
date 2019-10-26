@@ -18,6 +18,20 @@ module ApplicationHelper
     return user.active? ? user : nil
   end
 
+  def filter_params(options = {})
+    filter = params[:filter] || { }
+
+    if required = options[:require]
+      if def_value = options[:default_value]
+        filter[required].blank? ? def_value : filter[required]
+      else
+        filter[required]
+      end
+    else
+      filter
+    end
+  end
+
   def avatar_variant
     {
       combine_options: {

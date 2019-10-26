@@ -43,7 +43,7 @@ class WarehouseShipment < ApplicationRecord
         self.products.each do |product|
           Stock.create!({
             product_id: product["product_id"],
-            warehouse_id: self.warehouse_id, 
+            warehouse_id: self.warehouse_id,
             units: product["real_units"] || product["units"],
             batch: product["batch"],
             expires_at: product["expires_at"]
@@ -65,5 +65,5 @@ class WarehouseShipment < ApplicationRecord
     def set_new_status
       self.status = STATUS[:new]
     end
-    
+
 end

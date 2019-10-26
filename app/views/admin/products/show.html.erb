@@ -19,32 +19,32 @@
       <div class="card-body">
         <h3 class="card-title"><%= yield :title %></h3>
         <p class="card-text">
-          <%= content_tag :span, Product.human_attribute_name(:name), 
+          <%= content_tag :span, Product.human_attribute_name(:name),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @product %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, Product.human_attribute_name(:retail_price), 
+          <%= content_tag :span, Product.human_attribute_name(:retail_price),
             class: "font-weight-bold text-uppercase" %><br>
           <%= t(:product_price, price: @product.retail_price) %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, Product.human_attribute_name(:half_wholesale_price), 
+          <%= content_tag :span, Product.human_attribute_name(:half_wholesale_price),
             class: "font-weight-bold text-uppercase" %><br>
           <%= t(:product_price, price: @product.half_wholesale_price) %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, Product.human_attribute_name(:required_units_half_wholesale), 
+          <%= content_tag :span, Product.human_attribute_name(:required_units_half_wholesale),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @product.required_units_half_wholesale %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, Product.human_attribute_name(:wholesale_price), 
+          <%= content_tag :span, Product.human_attribute_name(:wholesale_price),
             class: "font-weight-bold text-uppercase" %><br>
           <%= t(:product_price, price: @product.wholesale_price) %>
         </p>
         <p class="card-text">
-          <%= content_tag :span, Product.human_attribute_name(:required_units_wholesale), 
+          <%= content_tag :span, Product.human_attribute_name(:required_units_wholesale),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @product.required_units_wholesale %>
         </p>

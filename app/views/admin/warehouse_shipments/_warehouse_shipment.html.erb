@@ -6,21 +6,21 @@
     <%= link_to warehouse_shipment.warehouse, admin_warehouse_path(warehouse_shipment.warehouse) %>
   </td>
   <td>
-    <%= link_to warehouse_shipment.receiver, 
+    <%= link_to warehouse_shipment.receiver,
       admin_user_path(warehouse_shipment.receiver) if warehouse_shipment.receiver.present? %>
   </td>
   <td>
-    <%= content_tag :span, t("status.#{warehouse_shipment.status}"), 
+    <%= content_tag :span, t("status.#{warehouse_shipment.status}"),
       class: "badge badge-secondary badge-pill" %>
   </td>
   <td>
-    <%= link_to admin_warehouse_shipment_path(warehouse_shipment), 
+    <%= link_to admin_warehouse_shipment_path(warehouse_shipment),
       class: "btn btn-outline-light btn-sm" do %>
       <i class="fas fa-fw fa-eye"></i>
     <% end %>
-    
-    <%= link_to admin_warehouse_shipment_path(warehouse_shipment), 
-      method: :delete, class: "btn btn-danger btn-sm", 
+
+    <%= link_to admin_warehouse_shipment_path(warehouse_shipment),
+      method: :delete, class: "btn btn-danger btn-sm",
       data: { confirm: t(".you_sure") } do %>
       <i class="fas fa-fw fa-trash"></i>
     <% end if warehouse_shipment.deletable? %>

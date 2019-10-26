@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/', controller: 'home', action: 'index', as: :home
-    
+
     resources :users do
       post 'restore', on: :member
     end

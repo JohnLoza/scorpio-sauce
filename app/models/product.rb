@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
   include Searchable
   include SoftDeletable
-  
+
   has_one_attached :main_image
 
   validates :name, :retail_price, :half_wholesale_price,
@@ -12,11 +12,11 @@ class Product < ApplicationRecord
   validates :half_wholesale_price, numericality: { lower_than_or_equal_to: :retail_price }
   validates :wholesale_price, numericality: { lower_than_or_equal_to: :half_wholesale_price }
 
-  validates :required_units_half_wholesale, 
+  validates :required_units_half_wholesale,
     numericality: { only_integer: true, greater_than: 0 }
-  validates :required_units_wholesale, 
+  validates :required_units_wholesale,
     numericality: { only_integer: true, greater_than: :required_units_half_wholesale}
-  
+
   scope :recent, -> { order(created_at: :desc) }
   scope :order_by_name, -> (way = :asc) {
     order(name: way)
@@ -53,8 +53,8 @@ class Product < ApplicationRecord
     box_names.each.with_index do |box_name, indx|
       boxes_array << {name: box_names[indx], units: box_units[indx].to_i}
     end
-    
+
     self.boxes = boxes_array
   end
-  
+
 end

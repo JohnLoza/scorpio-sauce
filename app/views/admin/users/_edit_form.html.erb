@@ -21,7 +21,7 @@
 
       <div class="form-group">
         <%= f.label :email_confirmation %>
-        <%= f.email_field :email_confirmation, class: "form-control", 
+        <%= f.email_field :email_confirmation, class: "form-control",
           required: true, "data-parsley-equalto" => "#user_email" %>
       </div>
 
@@ -35,16 +35,16 @@
       <div class="form-group">
         <%= f.label :password_confirmation %>
         <%= content_tag :span, t("labels.optional"), class: "badge badge-secondary badge-pill" %>
-        <%= f.password_field :password_confirmation, class: "form-control", 
+        <%= f.password_field :password_confirmation, class: "form-control",
           "data-parsley-equalto" => "#user_password" %>
       </div>
 
       <div class="form-group">
-        <%= f.label :roles %>
+        <%= f.label :role %>
         <% if current_user.role?(:admin) and current_user?(@user) # admin editing himself %>
           <%= content_tag :span, t("roles.#{current_user.role}"), class: "badge badge-secondary badge-pill" %>
         <% else %>
-          <%= f.select :roles, User.roles_for_select,
+          <%= f.select :role, User.roles_for_select,
             {prompt: t("labels.select")}, {class: "form-control", required: true} %>
         <% end %>
       </div>

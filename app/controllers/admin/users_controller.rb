@@ -1,8 +1,11 @@
 class Admin::UsersController < ApplicationController
   def index
-    warehouse_id = current_user.warehouse_id
+    warehouse_id = filter_params(require: :warehouse_id, default_value: current_user.warehouse_id)
+
     @users = User.active.by_warehouse(warehouse_id)
+      .by_role(filter_params(require: :role))
       .non_admin.not(current_user.id).order_by_name
+      .with_attached_avatar
   end
 
   def show
@@ -64,14 +67,14 @@ class Admin::UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(
-        :name, 
-        :cellphone, 
-        :email, 
-        :email_confirmation, 
-        :password, 
-        :password_confirmation, 
-        :roles, 
-        :warehouse_id, 
+        :name,
+        :cellphone,
+        :email,
+        :email_confirmation,
+        :password,
+        :password_confirmation,
+        :role,
+        :warehouse_id,
         :avatar
       )
     end

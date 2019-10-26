@@ -3,7 +3,7 @@
   <div class="card-body">
     <%= form_for [:admin, @supply_order] do |f| %>
       <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @supply_order} %>
-      
+
       <div class="form-group">
         <%= f.label :target_user_id %>
         <%= f.select :target_user_id, User.for_select(warehouse_id: current_user.warehouse_id, role: :delivery_man),

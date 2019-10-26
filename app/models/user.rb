@@ -18,7 +18,7 @@ class User < ApplicationRecord
   has_many :clients
 
   validates :name, :email, :cellphone,
-    :roles, presence: true
+    :role, presence: true
 
   validates :name, :email, length: { in: 6..100 }
 
@@ -29,12 +29,12 @@ class User < ApplicationRecord
   validates :email, uniqueness: { case_sensitive: false }, on: :create
   validates :email, confirmation: true
 
-  scope :non_admin, -> { where.not(roles: User::ROLES[:admin]) }
+  scope :non_admin, -> { where.not(role: User::ROLES[:admin]) }
   scope :not, -> (ids) { where.not(id: ids) }
   scope :recent, -> { order(created_at: :desc) }
   scope :order_by_name, -> (way = :asc) { order(name: way) }
-  scope :by_warehouse, -> (wid) { where(warehouse_id: wid) }
-  scope :by_role, -> (role) { where(roles: role )}
+  scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) if w_id.present? }
+  scope :by_role, -> (role) { where(role: role ) if role.present? }
 
   def to_s
     name
@@ -44,13 +44,32 @@ class User < ApplicationRecord
     "#{id}-#{name}"
   end
 
-  def self.available_roles
-    ROLES.select {|key, value| key != :admin}
+  def admin?
+    self.role == ROLES[:admin]
+  end
+
+  def role?(role)
+    if self.admin?
+      return true
+    else
+      self.role == ROLES[role]
+    end
+  end
+
+  def self.roles_without(role)
+    if role.kind_of?(Array)
+      ROLES.select{|key, value| !role.include?(key)}
+    elsif role.kind_of?(Symbol)
+      ROLES.select{|key, value| key != role}
+    else
+      raise ArgumentError, "Parameter should be a Symbol or an Array"
+    end
   end
 
   def self.roles_for_select
-    available_roles = self.available_roles
-    available_roles.map{|key, value| [I18n.t("roles.#{key}"), value] }
+    roles = self.roles_without(:admin)
+    roles = roles.map{|key, value| [I18n.t("roles.#{key}"), value]}
+    roles.sort{|a,b| a.first <=> b.first}
   end
 
   def self.for_select(options = {})
@@ -59,13 +78,5 @@ class User < ApplicationRecord
 
     User.by_warehouse(options[:warehouse_id]).by_role(ROLES[options[:role]])
       .map{ |user| [user.name, user.id] }
-  end
-
-  def role
-    self.roles
-  end
-
-  def role?(role)
-    self.role == ROLES[role]
   end
 end

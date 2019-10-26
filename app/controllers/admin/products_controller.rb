@@ -2,15 +2,15 @@ class Admin::ProductsController < ApplicationController
   def index
     @products = Product.active
   end
-  
+
   def show
     @product = Product.find(params[:id])
   end
-  
+
   def new
     @product = Product.new
   end
-  
+
   def create
     @product = Product.new(product_params)
     @product.build_boxes_json(params[:box_names], params[:box_units])
@@ -21,11 +21,11 @@ class Admin::ProductsController < ApplicationController
       render 'new'
     end
   end
-  
+
   def edit
     @product = Product.find(params[:id])
   end
-  
+
   def update
     @product = Product.find(params[:id])
     @product.build_boxes_json(params[:box_names], params[:box_units])
@@ -61,12 +61,12 @@ class Admin::ProductsController < ApplicationController
   private
     def product_params
       params.require(:product).permit(
-        :name, 
-        :main_image, 
-        :retail_price, 
-        :half_wholesale_price, 
-        :required_units_half_wholesale, 
-        :wholesale_price, 
+        :name,
+        :main_image,
+        :retail_price,
+        :half_wholesale_price,
+        :required_units_half_wholesale,
+        :wholesale_price,
         :required_units_wholesale
       )
     end

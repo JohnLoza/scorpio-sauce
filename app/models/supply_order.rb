@@ -3,6 +3,7 @@ class SupplyOrder < ApplicationRecord
   belongs_to :target_user, class_name: :User, foreign_key: :target_user_id
   belongs_to :supplier, class_name: :User, foreign_key: :supplier_user_id, optional: true
   belongs_to :warehouse
+  has_one :route_stock
 
   validates :to_supply, presence: true
 
@@ -26,15 +27,11 @@ class SupplyOrder < ApplicationRecord
       return false
     end
 
-    ActiveRecord::Base.transaction do 
+    ActiveRecord::Base.transaction do
       begin
-        self.update_attributes!(supplier_user_id: options[:supplier],
-          supplies: options[:supplies], processed: true)
-
+        self.build_route_stock(user_id: self.target_user_id, products: options[:supplies])
+        self.update_attributes!(supplier_user_id: options[:supplier], processed: true)
         Stock.withdraw_supplies!(options[:supplies], self.warehouse_id)
-
-        RouteStock.create!(user_id: self.target_user_id, 
-          products: options[:supplies])
       rescue => exception
         self.processed = false
         self.errors.add(:supplies, exception.message)
@@ -66,5 +63,5 @@ class SupplyOrder < ApplicationRecord
       end
       return !self.errors.any?
     end
-  
+
 end

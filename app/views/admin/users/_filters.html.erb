@@ -15,9 +15,9 @@
           <% end %>
 
           <div class="form-group mx-sm-3">
-            <%= f.label :product_id, Product.model_name.human(count: 1), class: "sr-only"  %>
-            <%= f.select :product_id, Product.for_select,
-              { prompt: Product.model_name.human, selected: filter_params(require: :product_id) },
+            <%= f.label :role, User.human_attribute_name(:role), class: "sr-only"  %>
+            <%= f.select :role, User.roles_for_select,
+              { prompt: User.human_attribute_name(:role), selected: filter_params(require: :role) },
               { class: "form-control" } %>
           </div>
 

@@ -10,13 +10,13 @@
   </td>
   <%= content_tag :td, t("labels.processed.#{supply_order.processed}").html_safe %>
   <td>
-    <%= link_to admin_supply_order_path(supply_order), 
+    <%= link_to admin_supply_order_path(supply_order),
       class: "btn btn-outline-light btn-sm" do %>
       <i class="fas fa-fw fa-eye"></i>
     <% end %>
-    
-    <%= link_to admin_supply_order_path(supply_order), 
-      method: :delete, class: "btn btn-danger btn-sm", 
+
+    <%= link_to admin_supply_order_path(supply_order),
+      method: :delete, class: "btn btn-danger btn-sm",
       data: { confirm: t(".you_sure") } do %>
       <i class="fas fa-fw fa-trash"></i>
     <% end if supply_order.deletable_by?(current_user) %>
