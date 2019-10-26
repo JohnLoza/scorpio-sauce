@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       post 'restore', on: :member
     end
 
+    resources :clients, only: [:index, :show]
+
     resources :stocks, only: :index
 
     resources :warehouse_shipments, except: [:edit, :update] do

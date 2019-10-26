@@ -43,6 +43,13 @@
           </li>
 
           <li class="nav-item">
+            <%= link_to admin_clients_path, class: "nav-link clients-controller" do %>
+              <i class="fas fa-fw fa-cubes"></i>
+              <%= Client.model_name.human(count: 2) %>
+            <% end %>
+          </li>
+
+          <li class="nav-item">
             <%= link_to admin_stocks_path, class: "nav-link stocks-controller" do %>
               <i class="fas fa-fw fa-boxes"></i>
               <%= Stock.model_name.human(count: 2) %>

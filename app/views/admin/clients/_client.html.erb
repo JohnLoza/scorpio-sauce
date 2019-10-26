@@ -1,0 +1,12 @@
+<tr>
+  <td>
+    <%= link_to client, admin_client_path(client) %>
+  </td>
+  <td>
+    <%= link_to client.user, admin_user_path(client.user)  %>
+  </td>
+  <%= content_tag :td, client.location %>
+  <%= content_tag :td, client.address %>
+  <%= content_tag :td, client.colony %>
+  <%= content_tag :td, client.zc %>
+</tr>

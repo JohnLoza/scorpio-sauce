@@ -1,0 +1,17 @@
+es:
+  activerecord:
+    models:
+      client:
+        one: Cliente
+        other: Clientes
+    attributes:
+      client:
+        id: Clave
+        user_id: Trabajador
+        city_id: Ubicación
+        name: Nombre
+        address: Dirección
+        colony: Colonia
+        zc: Código postal
+        billing_data: Información de facturación
+        deleted_at: Dado de baja
