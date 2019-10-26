@@ -19,18 +19,18 @@ class ApplicationController < ActionController::Base
     render_parameter_validation_error(e.message)
   end
 
+  def render_404
+    respond_to do |format|
+      format.html { render file: Rails.root.join("public", "404"), layout: false, status: 404 }
+      format.any { head :not_found }
+    end
+  end
+
   private
     def require_active_session
       unless logged_in?
         store_location
         redirect_to new_session_path
-      end
-    end
-
-    def render_404
-      respond_to do |format|
-        format.html { render file: Rails.root.join("public", "404"), layout: false, status: 404 }
-        format.any { head :not_found }
       end
     end
 

@@ -1,19 +1,11 @@
 <!--Alerts-->
 <% flash.each do |message_type, message| %>
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $.notify({
-        icon: "fas fa-fw fa-info-circle",
-        message: '<%= message.html_safe %>'
-      },{
-        type: "<%= message_type %>",
-        timer: 20000,
-        placement: {
-          from: "top",
-          align: "center"
-        }
-      });
-    });
-  </script>
+  <div class="alert alert-<%= message_type %> alert-dismissible fade show">
+    <i class="fas fa-fw fa-chevron-right"></i>
+    <%= message %>
+    <a class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">×</span>
+    </a>
+  </div>
 <% end %>
 <!--End Alerts-->

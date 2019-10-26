@@ -8,8 +8,9 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
     <title><%= yield :title %> | Admin Salsa Scorpio</title>
   </head>
   <body>
@@ -29,6 +30,7 @@
             <%= render "/shared/admin/page_header.html.erb" %>
 
             <div class="ecommerce-widget">
+              <%= render "/shared/alerts.html.erb" %>
               <%= yield %>
             </div>
           </div>
@@ -42,9 +44,9 @@
     <!-- ============================================================== -->
     <!-- end main wrapper  -->
     <!-- ============================================================== -->
-
     <script>
-      $(document).ready(function(){
+      $(document).on("turbolinks:load", function(){
+        $(".navbar").find("a.active").removeClass("active");
         $(".<%= params[:controller].sub "admin/", "" %>-controller").addClass("active");
         $("form").parsley();
 
@@ -54,6 +56,5 @@
         }
       });
     </script>
-    <%= render "/shared/alerts.html.erb" %>
   </body>
 </html>

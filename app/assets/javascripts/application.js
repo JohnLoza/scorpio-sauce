@@ -12,11 +12,11 @@
 //
 //= require rails-ujs
 //= require activestorage
+//= require turbolinks
 //= require jquery-3.3.1.min.js
 //= require bootstrap.bundle.js
 //= require jquery.slimscroll.js
 //= require concept.js
-//= require bootstrap-notify.min.js
 //= require bootstrap-datepicker.min.js
 //= require parsley.js
 //= require parsley-es.js

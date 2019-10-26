@@ -34,7 +34,9 @@ function addProductFields(){
   });
 }
 
-$(document).ready(function(){
-  $(".add-product-btn").click();
+$(document).on("turbolinks:load", function(){
+  if ($(".removable-parent").length == 0) {
+    $(".add-product-btn").click();
+  }
 })
 </script>

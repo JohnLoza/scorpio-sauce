@@ -15,7 +15,6 @@
 //= require jquery-3.3.1.min.js
 //= require bootstrap.bundle.js
 //= require concept.js
-//= require bootstrap-notify.min.js
 //= require parsley.js
 //= require parsley-es.js
 //

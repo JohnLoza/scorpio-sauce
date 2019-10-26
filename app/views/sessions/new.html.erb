@@ -8,7 +8,14 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'sessions', media: 'all' %>
+    <%= stylesheet_link_tag 'sessions', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'sessions', 'data-turbolinks-track': 'reload' %>
+
+    <script>
+      $(document).on("turbolinks:load", function(){
+        $("form").parsley();
+      });
+    </script>
 
     <style>
       html,
@@ -38,6 +45,8 @@
     <!-- login page  -->
     <!-- ============================================================== -->
     <div class="splash-container">
+      <%= render "/shared/alerts.html.erb" %>
+
       <div class="card ">
         <div class="card-header text-center">
           <h1 class="navbar-brand">Salsa Scorpio</h1>
@@ -77,13 +86,5 @@
     <!-- ============================================================== -->
     <!-- end login page  -->
     <!-- ============================================================== -->
-
-    <%= javascript_include_tag 'sessions' %>
-    <%= render "/shared/alerts.html.erb" %>
-    <script>
-      $(document).ready(function(){
-        $("form").parsley();
-      });
-    </script>
   </body>
 </html>

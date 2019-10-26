@@ -1,12 +1,7 @@
 <% box = Hash.new unless box %>
 
 <div class="removable-parent">
-  <h5>
-    <%= t(".title") %>
-    <a href="#" onclick="removeParent(this)">
-      <i class="fas fa-fw fa-times fa-2x float-right"></i>
-    </a>
-  </h5>
+  <%= render partial: "/shared/admin/remove_parent_btn", locals: {title: t(".title")} %>
 
   <div class="form-group">
     <%= label_tag :name, t("labels.name") %>
