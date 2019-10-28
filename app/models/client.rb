@@ -5,7 +5,8 @@ class Client < ApplicationRecord
   belongs_to :user
   belongs_to :city
 
-  validates :name, :address, :colony, :zc, presence: true
+  validates :name, :telephone, :address, :colony, :zc,
+    :lat, :lng, presence: true
   validates :name, :colony, length: { in: 6..75 }
   validates :zc, length: { in: 4..8 }
   validates :address, length: { in: 6..150 }

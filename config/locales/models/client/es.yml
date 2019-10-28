@@ -10,8 +10,11 @@ es:
         user_id: Trabajador
         city_id: Ubicación
         name: Nombre
+        telephone: Teléfono
         address: Dirección
         colony: Colonia
         zc: Código postal
+        lat: Latitud
+        lng: Longitud
         billing_data: Información de facturación
         deleted_at: Dado de baja

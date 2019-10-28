@@ -2,6 +2,7 @@
   <td>
     <%= link_to client, admin_client_path(client) %>
   </td>
+  <%= content_tag :td, client.telephone %>
   <td>
     <%= link_to client.user, admin_user_path(client.user)  %>
   </td>

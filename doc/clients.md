@@ -87,9 +87,12 @@ Delete an existing client by id and returns the client object
   user_id: 2,
   city_id: 20192,
   name: "Juan Carlos",
+  telephone: "33 1252 5342",
   address: "Bartolomé Gutiérrez #3130",
   colony: "Miravalle",
   zc: "44523",
+  lat: "20.6170177",
+  lng: "-103.3683971"
   billing_data: billing object
 }
 ```

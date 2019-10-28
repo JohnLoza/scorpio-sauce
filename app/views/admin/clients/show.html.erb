@@ -23,16 +23,25 @@
             class: "font-weight-bold text-uppercase" %><br>
           <%= link_to @client.user, admin_user_path(@client.user) %>
         </p>
+
+        <p class="card-text">
+          <%= content_tag :span, Client.human_attribute_name(:telephone),
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @client.telephone %>
+        </p>
+
         <p class="card-text">
           <%= content_tag :span, Client.human_attribute_name(:city_id),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @client.location %>
         </p>
+
         <p class="card-text">
           <%= content_tag :span, Client.human_attribute_name(:address),
             class: "font-weight-bold text-uppercase" %><br>
           <%= @client.full_address %>
         </p>
+
         <hr>
         <p class="card-text">
           <%= content_tag :span, Client.human_attribute_name(:billing_data),
