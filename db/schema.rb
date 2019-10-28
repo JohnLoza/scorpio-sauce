@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_15_180034) do
+ActiveRecord::Schema.define(version: 2019_10_28_184650) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 2019_10_15_180034) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_clients_on_user_id"
     t.index ["city_id"], name: "index_clients_on_city_id"
     t.index ["deleted_at"], name: "index_clients_on_deleted_at"
+    t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(version: 2019_10_15_180034) do
 
   create_table "route_stocks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
+    t.bigint "supply_order_id"
     t.json "products"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -131,6 +132,19 @@ ActiveRecord::Schema.define(version: 2019_10_15_180034) do
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "stock_id"
+    t.bigint "user_id"
+    t.boolean "incoming"
+    t.string "concept"
+    t.integer "units"
+    t.integer "units_post_transaction"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stock_id"], name: "index_transactions_on_stock_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "warehouse_id"
     t.string "name"
@@ -166,7 +180,6 @@ ActiveRecord::Schema.define(version: 2019_10_15_180034) do
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["deleted_at"], name: "index_warehouses_on_deleted_at"
     t.index ["city_id"], name: "index_warehouses_on_city_id"
   end
 

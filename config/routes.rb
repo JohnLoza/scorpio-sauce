@@ -21,7 +21,9 @@ Rails.application.routes.draw do
 
     resources :clients, only: [:index, :show]
 
-    resources :stocks, only: :index
+    resources :stocks, only: :index do
+      get 'transactions', on: :collection
+    end
 
     resources :warehouse_shipments, except: [:edit, :update] do
       post 'process_shipment', on: :member

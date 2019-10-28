@@ -16,18 +16,12 @@
             <i class="fa fa-ellipsis-v fa-1x"></i>
           </button>
           <div class="dropdown-menu">
-            <%= link_to "#", class: "dropdown-item icon" do %>
-              <i class="fas fa-fw fa-cogs"></i> work in progress
-            <% end %>
+            <%= link_to transactions_admin_stocks_path(), class: "dropdown-item icon" do %>
+              <i class="fas fa-fw fa-clipboard-list"></i> Transactions
+            <% end if current_user.admin? %>
 
             <%= link_to "#", class: "dropdown-item icon" do %>
-              <i class="fas fa-fw fa-cogs"></i> work in progress
-            <% end %>
-
-            <!-- Link to cancel the order -->
-            <div class="dropdown-divider"></div>
-            <%= link_to "#", class: "dropdown-item icon" do %>
-              <i class="fas fa-fw fa-cogs"></i> work in progress
+              <i class="fas fa-fw fa-cogs"></i> Work in progress
             <% end %>
           </div>
         </div>

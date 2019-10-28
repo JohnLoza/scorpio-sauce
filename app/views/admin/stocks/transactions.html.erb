@@ -1,0 +1,39 @@
+<%= provide :title, "Transactions" %>
+<%= provide :page_header, "Transactions" %>
+
+<%= render partial: "filters" %>
+
+<%= render partial: "/shared/admin/warehouse_header", locals: {warehouse: @warehouse} %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <%= content_tag :h5, :Transactions %>
+
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="bg-light">
+              <tr class="border-0">
+                <%= content_tag :th, t("labels.date"), class: "border-0" %>
+                <%= content_tag :th, Product.model_name.human, class: "border-0" %>
+                <%= content_tag :td, t("labels.batch"), class: "border-0" %>
+                <%= content_tag :td, User.model_name.human, class: "border-0" %>
+                <%= content_tag :td, t("labels.concept"), class: "border-0" %>
+                <%= content_tag :td, t("labels.units"), class: "border-0" %>
+                <%= content_tag :td, t("labels.balance"), class: "border-0" %>
+              </tr>
+            </thead>
+            <tbody>
+              <% @transactions.reverse_each do |transaction| %>
+                <%= render partial: "transaction", locals: {transaction: transaction} %>
+              <% end %>
+            </tbody>
+          </table>
+
+          <%== pagy_bootstrap_nav(@pagy) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

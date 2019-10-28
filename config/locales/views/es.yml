@@ -5,8 +5,11 @@ es:
     account: Cuenta
     actions: Acciones
     active_session: Sesión activa
+    balance: Balance
     batch: No lote
+    concept: Concepto
     city: Ciudad/Población
+    date: Fecha
     do_filter: Filtrar
     expires_at: Fecha de Expiración
     filters: Filtros
@@ -35,6 +38,10 @@ es:
     new: Nuevo
     reported: Reportado
     processed: Procesado
+  concepts:
+    incoming: <span class="badge badge-primary badge-pill">Ingreso</span>
+    route: <span class="badge badge-secondary badge-pill">Ruta</span>
+    devolution: <span class="badge badge-warning badge-pill">Devolución</span>
   errors:
     batch_in_use: Lote en uso '%{batch}'
     incomplete_supplies: Los suministros están incompletos

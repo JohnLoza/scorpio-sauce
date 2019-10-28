@@ -10,6 +10,20 @@ class Admin::StocksController < ApplicationController
     )
   end
 
+  def transactions
+    w_id = filter_params(require: :warehouse_id, default_value: current_user.warehouse_id)
+    @warehouse = Warehouse.find(w_id)
+
+    @pagy, @transactions = pagy(
+      Transaction.all
+        .order(created_at: :desc)
+        .joins(:stock).merge(
+          Stock.by_warehouse(w_id).by_product(filter_params(require: :product_id))
+        ).includes(:user, stock: :product),
+      items: 50
+    )
+  end
+
   private
     def warehouse_id
       params[:filters] = params[:filters] || {}

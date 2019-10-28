@@ -48,9 +48,12 @@ class Api::ClientsController < ApiController
       params.require(:client).permit(
         :city_id,
         :name,
+        :telephone,
         :address,
         :colony,
         :zc,
+        :lat,
+        :lng,
         :billing_data
       )
     end

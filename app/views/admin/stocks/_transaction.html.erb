@@ -1,0 +1,10 @@
+<% stock = transaction.stock %>
+<tr>
+  <%= content_tag :td, l(transaction.created_at, format: :short) %>
+  <%= content_tag :td, stock.product %>
+  <%= content_tag :td, stock.batch %>
+  <%= content_tag :td, transaction.user %>
+  <%= content_tag :td, t("concepts.#{transaction.concept}").html_safe %>
+  <%= content_tag :td, transaction.units %>
+  <%= content_tag :td, transaction.units_post_transaction %>
+</tr>

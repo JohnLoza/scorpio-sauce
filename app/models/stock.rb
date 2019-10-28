@@ -1,6 +1,7 @@
 class Stock < ApplicationRecord
   belongs_to :product
   belongs_to :warehouse
+  has_many :transactions
 
   validates :units, :batch, :expires_at, presence: true
   validates :units, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -12,7 +13,7 @@ class Stock < ApplicationRecord
   scope :by_batch, -> (batch) { find_by(batch: batch) if batch.present? }
   scope :depleted, -> { where(units: 0) }
 
-  def self.withdraw_supplies!(supplies, warehouse_id)
+  def self.withdraw_supplies!(supplies, warehouse_id, user)
     supplies.each do |s_i|
       stock = Stock.find_by(warehouse_id: warehouse_id,
         product_id: s_i["product_id"], batch: s_i["batch"])
@@ -22,6 +23,14 @@ class Stock < ApplicationRecord
       end
 
       stock.withdraw!(s_i["units"].to_i)
+      Transaction.create!({
+        stock_id: stock.id,
+        user_id: user,
+        units: s_i["units"].to_i,
+        units_post_transaction: stock.units,
+        incoming: false,
+        concept: "route"
+      })
     end
   end
 
@@ -30,7 +39,11 @@ class Stock < ApplicationRecord
       raise StandardError, I18n.t("errors.not_enough_stock", batch: self.batch)
     end
 
-    self.update_attributes!(units: units - quantity)
+    self.update_attributes!(units: self.units - quantity)
+  end
+
+  def add!(quantity)
+    self.update_attributes!(units: self.units + quantity)
   end
 
   def batch_uniqueness
