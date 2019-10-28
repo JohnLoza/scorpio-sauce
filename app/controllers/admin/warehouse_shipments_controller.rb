@@ -1,6 +1,9 @@
 class Admin::WarehouseShipmentsController < ApplicationController
   def index
-    @warehouse_shipments = WarehouseShipment.recent.includes(:user, :receiver, :warehouse)
+    @pagy, @warehouse_shipments = pagy(
+      WarehouseShipment.recent
+        .includes(:user, :receiver, :warehouse)
+    )
   end
 
   def show

@@ -2,10 +2,12 @@ class Admin::UsersController < ApplicationController
   def index
     warehouse_id = filter_params(require: :warehouse_id, default_value: current_user.warehouse_id)
 
-    @users = User.active.by_warehouse(warehouse_id)
-      .by_role(filter_params(require: :role))
-      .non_admin.not(current_user.id).order_by_name
-      .with_attached_avatar
+    @pagy, @users = pagy(
+      User.active.by_warehouse(warehouse_id)
+        .by_role(filter_params(require: :role))
+        .non_admin.not(current_user.id).order_by_name
+        .with_attached_avatar
+    )
   end
 
   def show

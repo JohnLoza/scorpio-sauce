@@ -4,8 +4,10 @@ class Admin::SupplyOrdersController < ApplicationController
     params[:filters] = {} unless params[:filters]
     w_id = params[:filters][:warehouse_id] || current_user.warehouse_id
 
-    @supply_orders = SupplyOrder.by_warehouse(w_id).recent
-      .includes(:user, :target_user, :supplier)
+    @pagy, @supply_orders = pagy(
+      SupplyOrder.by_warehouse(w_id).recent
+        .includes(:user, :target_user, :supplier)
+    )
   end
 
   def show

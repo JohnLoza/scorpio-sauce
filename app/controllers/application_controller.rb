@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pagy::Backend
   include ApplicationHelper
   include SessionsHelper
   before_action :require_active_session

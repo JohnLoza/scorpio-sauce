@@ -1,6 +1,8 @@
 class Admin::ProductsController < ApplicationController
   def index
-    @products = Product.active
+    @pagy, @products = pagy(
+      Product.active
+    )
   end
 
   def show

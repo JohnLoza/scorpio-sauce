@@ -1,4 +1,5 @@
 class ApiController < ActionController::API
+  include Pagy::Backend
   include ApplicationHelper
   before_action :authenticate_user!
 

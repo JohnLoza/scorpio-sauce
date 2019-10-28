@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def authenticate_user(options = {})
     if options[:auth_token].nil? and (options[:email].nil? or options[:password].nil?)
       raise ArgumentError, "an :email and :password are required or an :auth_token"

@@ -1,6 +1,8 @@
 class Admin::ClientsController < ApplicationController
   def index
-    @clients = Client.active.includes(:user, city: :state)
+    @pagy, @clients = pagy(
+      Client.active.includes(:user, city: :state)
+    )
   end
 
   def show
