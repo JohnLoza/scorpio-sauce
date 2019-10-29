@@ -1,14 +1,8 @@
 class Admin::StocksController < ApplicationController
-  def index
-    w_id = filter_params(require: :warehouse_id, default_value: current_user.warehouse_id)
-    @warehouse = Warehouse.find(w_id)
+  before_action :load_stocks, only: :index
+  load_and_authorize_resource
 
-    @pagy, @stocks = pagy(
-      Stock.by_warehouse(w_id)
-        .availability(filter_params(require: :availability))
-        .by_product(filter_params(require: :product_id))
-        .order(:product_id).includes(:product)
-    )
+  def index
   end
 
   def transactions
@@ -29,6 +23,18 @@ class Admin::StocksController < ApplicationController
     def warehouse_id
       params[:filters] = params[:filters] || {}
       params[:filters][:warehouse_id].blank? ? current_user.warehouse_id : params[:filters][:warehouse_id]
+    end
+
+    def load_stocks
+      w_id = filter_params(require: :warehouse_id, default_value: current_user.warehouse_id)
+      @warehouse = Warehouse.find(w_id)
+
+      @pagy, @stocks = pagy(
+        Stock.by_warehouse(w_id)
+          .availability(filter_params(require: :availability))
+          .by_product(filter_params(require: :product_id))
+          .order(:product_id).includes(:product)
+      )
     end
 
 end

@@ -39,9 +39,9 @@ es:
     warehouse: bodega
     delivery_man: repartidor
   status:
-    new: Nuevo
-    reported: Reportado
-    processed: Procesado
+    new: <span class="badge badge-secondary badge-pill">Nuevo</span>
+    reported: <span class="badge badge-warning badge-pill">Reportado</span>
+    processed: <span class="badge badge-primary badge-pill">Procesado</span>
   concepts:
     incoming: <span class="badge badge-primary badge-pill">Ingreso</span>
     route: <span class="badge badge-secondary badge-pill">Ruta</span>

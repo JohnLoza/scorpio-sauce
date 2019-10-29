@@ -1,26 +1,18 @@
 class Admin::SupplyOrdersController < ApplicationController
-  # index new create destroy supply
-  def index
-    params[:filters] = {} unless params[:filters]
-    w_id = params[:filters][:warehouse_id] || current_user.warehouse_id
+  before_action :load_supply_orders, only: :index
+  load_and_authorize_resource
 
-    @pagy, @supply_orders = pagy(
-      SupplyOrder.by_warehouse(w_id).recent
-        .includes(:user, :target_user, :supplier)
-    )
+  def index
   end
 
   def show
-    @supply_order = SupplyOrder.find(params[:id])
     @product_names = @supply_order.product_names
   end
 
   def new
-    @supply_order = SupplyOrder.new
   end
 
   def create
-    @supply_order = SupplyOrder.new(supply_order_params)
     if @supply_order.save
       flash[:success] = t(".success")
       redirect_to [:admin, @supply_order]
@@ -30,7 +22,6 @@ class Admin::SupplyOrdersController < ApplicationController
   end
 
   def destroy
-    @supply_order = SupplyOrder.find(params[:id])
     if @supply_order.destroy
       flash[:success] = t(".success")
     else
@@ -40,7 +31,6 @@ class Admin::SupplyOrdersController < ApplicationController
   end
 
   def supply
-    @supply_order = SupplyOrder.find(params[:id])
     if @supply_order.supply(supplies_params)
       flash[:success] = t(".success")
       redirect_to [:admin, @supply_order]
@@ -65,6 +55,15 @@ class Admin::SupplyOrdersController < ApplicationController
         supplier: current_user.id,
         supplies: params[:products].values
       }
+    end
+
+    def load_supply_orders
+      w_id = filter_params(require: :warehouse_id, default_value: current_user.warehouse_id)
+
+      @pagy, @supply_orders = pagy(
+        SupplyOrder.by_warehouse(w_id).recent
+          .includes(:user, :target_user, :supplier)
+      )
     end
 
 end

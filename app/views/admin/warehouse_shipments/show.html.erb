@@ -42,21 +42,21 @@
             <%= render partial: "product", locals: {product: product, product_names: @product_names} %>
           <% end %>
 
-          <%= f.text_area :message, class: "form-control report hidden", maxlength: 200,
-            required: true if @warehouse_shipment.reportable? %>
-          <%= f.submit t(".to_report"), class: "btn btn-brand report hidden",
-            style: "margin-top: 1em;" if @warehouse_shipment.reportable? %>
+          <% if @warehouse_shipment.reportable? and can? :report, @warehouse_shipment %>
+            <%= f.text_area :message, class: "form-control report hidden", maxlength: 200, required: true %>
+            <%= f.submit t(".to_report"), class: "btn btn-brand report hidden", style: "margin-top: 1em;" %>
+          <% end %>
         <% end %>
 
         <%= content_tag :p, @warehouse_shipment.report["message"] if @warehouse_shipment.report.present? %>
 
         <%= link_to t(".process_shipment"), process_shipment_admin_warehouse_shipment_path(@warehouse_shipment),
           method: :post, class: "btn btn-primary btn-lg process-btn", style: "margin-top: 1em;",
-          data: { confirm: t(".you_sure_process") } if @warehouse_shipment.processable? %>
+          data: { confirm: t(".you_sure_process") } if @warehouse_shipment.processable? and can? :process_shipment, @warehouse_shipment %>
 
         <%= link_to t(".process_report"), process_report_admin_warehouse_shipment_path(@warehouse_shipment),
           method: :post, class: "btn btn-primary btn-lg", style: "margin-top: 1em;",
-          data: { confirm: t(".you_sure_process_report") } if @warehouse_shipment.reported? %>
+          data: { confirm: t(".you_sure_process_report") } if @warehouse_shipment.reported? and can? :process_report, @warehouse_shipment %>
       </div>
     </div>
   </div>

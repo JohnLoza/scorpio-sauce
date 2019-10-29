@@ -1,5 +1,6 @@
 class StaticPagesController < ApplicationController
   skip_before_action :require_active_session
+  skip_authorization_check
 
   def index
     render :index, layout: false

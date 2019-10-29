@@ -6,11 +6,12 @@
     <%= link_to edit_admin_warehouse_path(warehouse),
       class: "btn btn-outline-light btn-sm" do %>
       <i class="fas fa-fw fa-pencil-alt"></i>
-    <% end %>
+    <% end if can? :update, warehouse %>
+
     <%= link_to admin_warehouse_path(warehouse),
       method: :delete, class: "btn btn-danger btn-sm",
       data: { confirm: t(".you_sure", warehouse: warehouse) } do %>
       <i class="fas fa-fw fa-trash"></i>
-    <% end %>
+    <% end if can? :destroy, warehouse %>
   </td>
 </tr>

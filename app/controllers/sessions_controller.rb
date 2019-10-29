@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :require_active_session
+  skip_authorization_check
 
   def new
     redirect_to admin_home_path and return if logged_in?

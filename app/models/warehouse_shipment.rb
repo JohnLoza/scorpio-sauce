@@ -13,6 +13,7 @@ class WarehouseShipment < ApplicationRecord
 
   validates :products, presence: true
 
+  scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) if w_id }
   scope :recent, -> { order(created_at: :desc) }
 
   def product_names

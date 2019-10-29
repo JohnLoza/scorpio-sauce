@@ -10,7 +10,7 @@
         <%= t(".card_title") %>
         <%= link_to new_admin_user_path do %>
           <i class="fas fa-fw fa-plus-circle fa-2x float-right"></i>
-        <% end %>
+        <% end if can? :create, User %>
       </h5>
       <div class="card-body">
         <div class="table-responsive">

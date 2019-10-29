@@ -8,7 +8,7 @@
         <%= yield :title %>
         <%= link_to new_admin_warehouse_shipment_path, class: "float-right" do %>
           <i class="fas fa-fw fa-plus-circle fa-2x"></i>
-        <% end %>
+        <% end if can? :create, WarehouseShipment %>
       </h5>
 
       <div class="card-body p-0">
@@ -20,6 +20,7 @@
                 <%= content_tag :th, WarehouseShipment.human_attribute_name(:warehouse_id), class: "border-0" %>
                 <%= content_tag :th, WarehouseShipment.human_attribute_name(:receiver_user_id), class: "border-0" %>
                 <%= content_tag :th, WarehouseShipment.human_attribute_name(:status), class: "border-0" %>
+                <%= content_tag :th, t("labels.date"), class: "border-0" %>
                 <%= content_tag :th, t("labels.actions") %>
               </tr>
             </thead>

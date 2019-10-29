@@ -11,8 +11,8 @@ class SupplyOrder < ApplicationRecord
   scope :processed, -> (processed = true) { where(processed: processed) }
   scope :recent, -> { order(created_at: :desc) }
 
-  def deletable_by?(user)
-    processed == false and user_id == user.id
+  def deletable?
+    processed == false
   end
 
   def processable?

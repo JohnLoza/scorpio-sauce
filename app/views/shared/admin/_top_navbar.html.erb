@@ -19,10 +19,11 @@
               <%= content_tag :h5, current_user.name, class: "mb-0 text-white nav-user-name" %>
               <span class="status"></span><%= content_tag :span, t("labels.active_session"), class: "ml-2" %>
             </div>
+
             <%= link_to edit_admin_user_path(current_user), class: "dropdown-item" do %>
               <i class="fas fa-user mr-2"></i> <%= t("labels.account") %>
-            <% end if current_user.role?(:admin) %>
-            <a class="dropdown-item" href="#"><i class="fas fa-cogs mr-2"></i>Work in Progress</a>
+            <% end if can? :update, current_user %>
+
             <%= link_to session_path(current_user),
               class: "dropdown-item", method: :delete do %>
               <i class="fas fa-fw fa-power-off mr-2"></i> Cerrar sesión

@@ -1,22 +1,18 @@
 class Admin::WarehouseShipmentsController < ApplicationController
+  before_action :load_warehouse_shipments, only: :index
+  load_and_authorize_resource
+
   def index
-    @pagy, @warehouse_shipments = pagy(
-      WarehouseShipment.recent
-        .includes(:user, :receiver, :warehouse)
-    )
   end
 
   def show
-    @warehouse_shipment = WarehouseShipment.find(params[:id])
     @product_names = @warehouse_shipment.product_names
   end
 
   def new
-    @warehouse_shipment = WarehouseShipment.new
   end
 
   def create
-    @warehouse_shipment = WarehouseShipment.new(warehouse_shipment_params)
     if @warehouse_shipment.save
       flash[:success] = t(".success")
       redirect_to [:admin, @warehouse_shipment]
@@ -26,7 +22,6 @@ class Admin::WarehouseShipmentsController < ApplicationController
   end
 
   def destroy
-    @warehouse_shipment = WarehouseShipment.find(params[:id])
     if @warehouse_shipment.destroy
       flash[:success] = t(".success")
     else
@@ -36,8 +31,6 @@ class Admin::WarehouseShipmentsController < ApplicationController
   end
 
   def process_shipment
-    @warehouse_shipment = WarehouseShipment.find(params[:id])
-
     if @warehouse_shipment.process_shipment(current_user)
       flash[:success] = t(".success")
     else
@@ -49,8 +42,6 @@ class Admin::WarehouseShipmentsController < ApplicationController
   end
 
   def report
-    @warehouse_shipment = WarehouseShipment.find(params[:id])
-
     if @warehouse_shipment.update_attributes(report_params(@warehouse_shipment.products))
       flash[:success] = t(".success")
     else
@@ -62,8 +53,6 @@ class Admin::WarehouseShipmentsController < ApplicationController
   end
 
   def process_report
-    @warehouse_shipment = WarehouseShipment.find(params[:id])
-
     if @warehouse_shipment.process_shipment_report(current_user)
       flash[:success] = t(".success")
     else
@@ -93,6 +82,16 @@ class Admin::WarehouseShipmentsController < ApplicationController
         report: { message: params[:report][:message] },
         status: WarehouseShipment::STATUS[:reported]
       }
+    end
+
+    def load_warehouse_shipments
+      default_value = current_user.role?(:warehouse) ? current_user.warehouse_id : nil
+      w_id = filter_params(require: :warehouse_id, default_value: default_value)
+
+      @pagy, @warehouse_shipments = pagy(
+        WarehouseShipment.recent.by_warehouse(w_id)
+          .includes(:user, :receiver, :warehouse)
+      )
     end
 
 end

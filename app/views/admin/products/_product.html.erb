@@ -15,11 +15,12 @@
     <%= link_to edit_admin_product_path(product),
       class: "btn btn-outline-light btn-sm" do %>
       <i class="fas fa-fw fa-pencil-alt"></i>
-    <% end %>
+    <% end if can? :update, product %>
+
     <%= link_to admin_product_path(product),
       method: :delete, class: "btn btn-danger btn-sm",
       data: { confirm: t(".you_sure", product: product) } do %>
       <i class="fas fa-fw fa-trash"></i>
-    <% end %>
+    <% end if can? :destroy, product %>
   </td>
 </tr>

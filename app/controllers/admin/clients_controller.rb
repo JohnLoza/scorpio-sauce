@@ -1,11 +1,18 @@
 class Admin::ClientsController < ApplicationController
+  before_action :load_clients, only: :index
+  load_and_authorize_resource
+
   def index
-    @pagy, @clients = pagy(
-      Client.active.includes(:user, city: :state)
-    )
   end
 
   def show
-    @client = Client.find(params[:id])
   end
+
+  private
+    def load_clients
+      @pagy, @clients = pagy(
+        Client.active.includes(:user, city: :state)
+      )
+    end
+
 end

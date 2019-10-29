@@ -38,7 +38,7 @@
     <div class="form-group">
       <%= number_field_tag "real_units[]", product["units"],
         class: "form-control", min: 1, step: 1, max: product["units"], required: true,
-        onchange: "toggleForm(this)" if @warehouse_shipment.reportable? %>
+        onkeydown: "toggleForm(this)" if @warehouse_shipment.reportable? and can? :report, @warehouse_shipment %>
     </div>
   </div>
 

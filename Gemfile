@@ -66,3 +66,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'turbolinks', '~> 5.2.0'
 gem 'jwt'
 gem 'pagy', '~> 3.6'
+gem 'cancancan', '~> 3.0'

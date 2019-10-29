@@ -58,7 +58,7 @@
           <% end %>
         <% end %>
 
-        <%= render 'supplies_form' if @supply_order.processable? %>
+        <%= render 'supplies_form' if @supply_order.processable? and can? :supply, @supply_order %>
       </div>
     </div>
   </div>

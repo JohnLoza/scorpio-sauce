@@ -1,20 +1,17 @@
 class Admin::ProductsController < ApplicationController
+  before_action :load_products, only: :index
+  load_and_authorize_resource
+
   def index
-    @pagy, @products = pagy(
-      Product.active
-    )
   end
 
   def show
-    @product = Product.find(params[:id])
   end
 
   def new
-    @product = Product.new
   end
 
   def create
-    @product = Product.new(product_params)
     @product.build_boxes_json(params[:box_names], params[:box_units])
     if @product.save
       flash[:success] = t(".success", product: @product)
@@ -25,11 +22,9 @@ class Admin::ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
   end
 
   def update
-    @product = Product.find(params[:id])
     @product.build_boxes_json(params[:box_names], params[:box_units])
     if @product.update_attributes(product_params)
       flash[:success] = t(".success", product: @product)
@@ -40,7 +35,6 @@ class Admin::ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
     if @product.destroy
       flash[:success] = t(".success", product: @product, url: restore_admin_product_path(@product))
     else
@@ -50,7 +44,6 @@ class Admin::ProductsController < ApplicationController
   end
 
   def restore
-    @product = Product.find(params[:id])
     if @product.restore!
       flash[:success] = t(".success", product: @product)
       redirect_to [:admin, @product]
@@ -72,4 +65,11 @@ class Admin::ProductsController < ApplicationController
         :required_units_wholesale
       )
     end
+
+    def load_products
+      @pagy, @products = pagy(
+        Product.active
+      )
+    end
+
 end

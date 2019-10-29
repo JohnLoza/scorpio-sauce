@@ -6,7 +6,7 @@ es:
 
       show:
         title: Detalles de envío
-        process_shipment: Procesar envío
+        process: Procesar envío
         you_sure_process: ¿Estás seguro(a) de que todo está bien? las cantidades y lotes enviados serán agregados al inventario
         to_report: Reportar
         process_report: Procesar reporte
@@ -31,7 +31,7 @@ es:
         failure: Ocurrió un error al enviar el reporte
 
       process_report:
-        success: Los productor reportador fueron agregados a existencias
+        success: Los productos reportados fueron agregados a existencias
         failure: Ocurrió un error al procesar el reporte
 
       #partials
@@ -40,6 +40,6 @@ es:
 
       product_fields:
         title: Información de producto
-      
+
       warehouse_shipment:
         you_sure: ¿Estás seguro(a) de eliminar el envío? esto no puede deshacerse
