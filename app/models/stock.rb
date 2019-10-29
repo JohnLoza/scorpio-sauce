@@ -8,10 +8,18 @@ class Stock < ApplicationRecord
   validate :batch_uniqueness, on: :create
 
   scope :available, -> (ammount = 1) { where("units >= ?", ammount) }
+  scope :depleted, -> { where(units: 0) }
   scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) }
   scope :by_product, -> (p_ids){ where(product_id: p_ids) if p_ids.present? }
   scope :by_batch, -> (batch) { find_by(batch: batch) if batch.present? }
-  scope :depleted, -> { where(units: 0) }
+
+  scope :availability, -> (availability){
+    if availability == "depleted"
+      depleted()
+    else
+      available()
+    end
+  }
 
   def self.withdraw_supplies!(supplies, warehouse_id, user)
     supplies.each do |s_i|

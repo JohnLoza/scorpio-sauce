@@ -21,13 +21,6 @@
               { class: "form-control" } %>
           </div>
 
-          <div class="form-group mx-sm-3">
-            <%= f.label :availability, t("labels.availability"), class: "sr-only"  %>
-            <%= f.select :availability, [[t("labels.available"), :available], [t("labels.depleted"), :depleted]],
-              { prompt: t("labels.availability"), selected: filter_params(require: :availability) },
-              { class: "form-control" } %>
-          </div>
-
           <%= f.submit t("labels.do_filter"), class: "btn btn-primary" %>
         <% end %>
       </div>

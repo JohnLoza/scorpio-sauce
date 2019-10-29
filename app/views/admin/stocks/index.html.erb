@@ -17,7 +17,7 @@
           </button>
           <div class="dropdown-menu">
             <%= link_to transactions_admin_stocks_path(), class: "dropdown-item icon" do %>
-              <i class="fas fa-fw fa-clipboard-list"></i> Transactions
+              <i class="fas fa-fw fa-clipboard-list"></i> <%= t("labels.transactions") %>
             <% end if current_user.admin? %>
 
             <%= link_to "#", class: "dropdown-item icon" do %>

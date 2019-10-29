@@ -5,11 +5,14 @@ es:
     account: Cuenta
     actions: Acciones
     active_session: Sesión activa
+    availability: Disponibilidad
+    available: Disponible
     balance: Balance
     batch: No lote
     concept: Concepto
     city: Ciudad/Población
     date: Fecha
+    depleted: Agotado
     do_filter: Filtrar
     expires_at: Fecha de Expiración
     filters: Filtros
@@ -22,6 +25,7 @@ es:
     search: Buscar
     select: Selecciona
     state: Estado
+    transactions: Transacciones
     units: Unidades
     units_left: Unidades restantes
     units_per_box: Unidades por caja

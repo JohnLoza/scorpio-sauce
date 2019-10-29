@@ -4,7 +4,8 @@ class Admin::StocksController < ApplicationController
     @warehouse = Warehouse.find(w_id)
 
     @pagy, @stocks = pagy(
-      Stock.available.by_warehouse(w_id)
+      Stock.by_warehouse(w_id)
+        .availability(filter_params(require: :availability))
         .by_product(filter_params(require: :product_id))
         .order(:product_id).includes(:product)
     )
