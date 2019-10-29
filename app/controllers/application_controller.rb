@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
     end
 
     def render_parameter_validation_error(msg)
-      response = { status: "error", message: "parameter_validation_error", details: msg }
+      response = { status: :error, message: "parameter_validation_error", details: msg }
       render status: 422, json: JSON.pretty_generate(response)
       return true
     end

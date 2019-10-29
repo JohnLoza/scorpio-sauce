@@ -32,18 +32,18 @@ class ApiController < ActionController::API
     end
 
     def render_auth_error
-      response = { status: "error", message: "authentication_error" }
+      response = { status: :error, message: "authentication_error" }
       render status: 401, json: JSON.pretty_generate(response)
     end
 
     def render_parameter_validation_error(msg)
-      response = { status: "error", message: "parameter_validation_error", details: msg }
+      response = { status: :error, message: "parameter_validation_error", details: msg }
       render status: 422, json: JSON.pretty_generate(response)
       return true
     end
 
     def render_unprocessable_error(obj)
-      response = { status: "error", message: :unprocessable, errors: obj.errors.full_messages }
+      response = { status: :error, message: :unprocessable, errors: obj.errors.full_messages }
       render json: JSON.pretty_generate(response)
       return true
     end

@@ -6,12 +6,15 @@ class StaticPagesController < ApplicationController
     render :index, layout: false
   end
 
+  def states
+    @states = State.all.order_by_name
+    response = { status: :completed, data: @states.as_json(only: [:id, :name]) }
+    render json: JSON.pretty_generate(response)
+  end
+
   def cities
     @cities = City.where(state_id: params[:state_id]).order_by_name
-
-    respond_to do |format|
-      format.json{ render json: @cities.as_json(only: [:id, :name]), status: 200 }
-      format.any{ head :not_found }
-    end
+    response = { status: :completed, data: @cities.as_json(only: [:id, :name]) }
+    render json: JSON.pretty_generate(response)
   end
 end

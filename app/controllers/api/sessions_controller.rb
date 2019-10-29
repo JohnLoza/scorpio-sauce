@@ -12,7 +12,7 @@ class Api::SessionsController < ApiController
     end
 
     token = JsonWebToken.encode(user_id: user.id)
-    response = { status: "completed", data: { authentication_token: token } }
+    response = { status: :completed, data: { authentication_token: token } }
     render json: JSON.pretty_generate(response)
   end
 

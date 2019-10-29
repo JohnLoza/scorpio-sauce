@@ -13,7 +13,7 @@ session: {
 ### Responses
 ```json
 {
-  status: "completed",
+  status: :completed,
   data: {
     authentication_token: "auth_token"
   } 

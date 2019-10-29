@@ -16,7 +16,7 @@ List of clients of the current user
 ### Response
 ```json
 {
-  status: "completed",
+  status: :completed,
   data: {
     [
       client object,
@@ -34,7 +34,7 @@ Requires the full client object, the billing object is optional
 ### Response
 ```json
 {
-  status: "completed",
+  status: :completed,
   data: {
     client object
   }
@@ -47,7 +47,7 @@ Asks for the information of the given client by id
 ### Response
 ```json
 {
-  status: "completed",
+  status: :completed,
   data: {
     client object
   }
@@ -61,7 +61,7 @@ Requires the client object with the attributes to update
 ### Response
 ```json
 {
-  status: "completed",
+  status: :completed,
   data: {
     client object
   }
@@ -74,7 +74,7 @@ Delete an existing client by id and returns the client object
 ### Response
 ```json
 {
-  status: "completed",
+  status: :completed,
   data: {
     client object
   }
