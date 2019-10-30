@@ -79,4 +79,5 @@ class User < ApplicationRecord
     User.by_warehouse(options[:warehouse_id]).by_role(ROLES[options[:role]])
       .map{ |user| [user.name, user.id] }
   end
+
 end

@@ -1,22 +1,30 @@
 class Api::ClientsController < ApiController
   def index
-    @clients = @current_user.clients.active
+    @pagy, @clients = pagy(
+      @current_user.clients.active.includes(city: :state)
+    )
 
-    response = { status: :completed, data: @clients.to_json }
+    response = {
+      status: :completed,
+      data: @clients.as_json(),
+      pagy: pagy_metadata(@pagy)
+    }
+
     render json: JSON.pretty_generate(response)
   end
 
   def show
-    @client = Client.find(params[:id])
+    @client = @current_user.clients.active.find(params[:id])
 
-    response = { status: :completed, data: @client.to_json }
+    response = { status: :completed, data: @client.as_json()}
     render json: JSON.pretty_generate(response)
   end
 
   def create
     @client = @current_user.clients.build(client_params)
+    @client.billing_data = params[:client][:billing_data]
     if @client.save
-      response = { status: :completed, data: @client.to_json }
+      response = { status: :completed, data: @client.as_json()}
       render json: JSON.pretty_generate(response)
     else
       render_unprocessable_error(@client)
@@ -24,9 +32,9 @@ class Api::ClientsController < ApiController
   end
 
   def update
-    @client = @current_user.clients.find(params[:id])
+    @client = @current_user.clients.active.find(params[:id])
     if @client.update_attributes(client_params)
-      response = { status: :completed, data: @client.to_json }
+      response = { status: :completed, data: @client.as_json() }
       render json: JSON.pretty_generate(response)
     else
       render_unprocessable_error(@client)
@@ -34,13 +42,23 @@ class Api::ClientsController < ApiController
   end
 
   def destroy
-    @client = @current_user.clients.find(params[:id])
+    @client = @current_user.clients.active.find(params[:id])
     if @client.destroy
-      response = { status: :completed, data: @client.to_json }
+      response = { status: :completed }
       render json: JSON.pretty_generate(response)
     else
       render_unprocessable_error(@client)
     end
+  end
+
+  def locations
+    @clients = @current_user.clients.active
+
+    response = {
+      status: :completed,
+      data: @clients.as_json(only: [:name, :lat, :lng])
+    }
+    render json: JSON.pretty_generate(response)
   end
 
   private
@@ -53,8 +71,7 @@ class Api::ClientsController < ApiController
         :colony,
         :zc,
         :lat,
-        :lng,
-        :billing_data
+        :lng
       )
     end
 end

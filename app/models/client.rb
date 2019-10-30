@@ -26,4 +26,15 @@ class Client < ApplicationRecord
   def full_address
     "#{address}, #{colony}, #{zc}"
   end
+
+  def as_json(options = nil)
+    unless options.present?
+      options = {
+        except: [:user_id, :city_id, :deleted_at, :created_at, :updated_at],
+        include: { city: { include: :state } }
+      }
+    end
+
+    super(options)
+  end
 end

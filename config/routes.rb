@@ -40,7 +40,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     post 'sessions', controller: 'sessions', action: 'create'
-    resources :clients, except: [:new, :edit]
+    resources :clients, except: [:new, :edit] do
+      get 'locations', on: :collection
+    end
   end
 
   match '*path', via: :all, to: 'application#render_404'

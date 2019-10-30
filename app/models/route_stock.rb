@@ -6,6 +6,8 @@ class RouteStock < ApplicationRecord
 
   validates :products, presence: true
 
+  scope :current_day, -> { where("created_at > ?", Date.today) }
+
   private
     def set_products_units_left
       self.products.each_with_index do |product, indx|

@@ -74,18 +74,31 @@ Delete an existing client by id and returns the client object
 ### Response
 ```json
 {
+  status: :completed
+}
+```
+
+## /api/clients/locations **GET Request**
+List of locations of all clients for the current user
+
+### Response
+```json
+{
   status: :completed,
-  data: {
-    client object
-  }
+  data: [
+    {
+      name: "clients name",
+      lat: "latitude",
+      lng: "longitude"
+    }
+  ]
 }
 ```
 
 ## Sample Client Object
 ```json
 {
-  user_id: 2,
-  city_id: 20192,
+  id: 3
   name: "Juan Carlos",
   telephone: "33 1252 5342",
   address: "Bartolomé Gutiérrez #3130",
@@ -100,9 +113,10 @@ Delete an existing client by id and returns the client object
 ## Sample Billing Object
 ```json
 {
+  city_id: 20192,
   name: "Super y Farmacias Carlos Rivera",
   rfc: "ISJD283AJS",
-  city_id: 20192,
+  email: "email@sample.com",
   address: "Bartolomé Gutiérrez #3130",
   colony: "Miravalle",
   zc: "44523"

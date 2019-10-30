@@ -46,7 +46,7 @@
         <p class="card-text">
           <%= content_tag :span, Client.human_attribute_name(:billing_data),
             class: "font-weight-bold text-uppercase" %><br>
-          <%= @client.billing_data %>
+          <%= render partial: "billing", locals: {billing: @client.billing_data} if @client.billing_data %>
         </p>
       </div>
     </div>

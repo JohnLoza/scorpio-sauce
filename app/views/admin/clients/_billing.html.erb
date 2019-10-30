@@ -1,0 +1,36 @@
+<p class="card-text">
+  <%= content_tag :span, Client.human_attribute_name(:name),
+    class: "font-weight-bold text-uppercase" %><br>
+  <%= billing["name"] %>
+</p>
+
+<p class="card-text">
+  <%= content_tag :span, :rfc,
+    class: "font-weight-bold text-uppercase" %><br>
+  <%= billing["rfc"] %>
+</p>
+
+<p class="card-text">
+  <% city = City.find_by(id: billing["city_id"]) %>
+  <%= content_tag :span, Client.human_attribute_name(:city_id),
+    class: "font-weight-bold text-uppercase" %><br>
+  <%= "#{city}, #{city.state}" if city %>
+</p>
+
+<p class="card-text">
+  <%= content_tag :span, Client.human_attribute_name(:address),
+    class: "font-weight-bold text-uppercase" %><br>
+  <%= billing["address"] %>
+</p>
+
+<p class="card-text">
+  <%= content_tag :span, Client.human_attribute_name(:colony),
+    class: "font-weight-bold text-uppercase" %><br>
+  <%= billing["colony"] %>
+</p>
+
+<p class="card-text">
+  <%= content_tag :span, Client.human_attribute_name(:zc),
+    class: "font-weight-bold text-uppercase" %><br>
+  <%= billing["zc"] %>
+</p>
