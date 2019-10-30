@@ -26,7 +26,7 @@ class Ability
       can :read, Product
       can :read, Client
 
-      can :read, Stock
+      can [:read, :print_qr], Stock
 
       can [:read, :create], WarehouseShipment
       can :destroy, WarehouseShipment, user_id: user.id, status: WarehouseShipment::STATUS[:new]
@@ -36,7 +36,7 @@ class Ability
       can :destroy, SupplyOrder, user_id: user.id, supplier_user_id: nil
 
     when User::ROLES[:warehouse]
-      can :read, Stock
+      can [:read, :print_qr], Stock
 
       can [:read, :process_shipment, :report], WarehouseShipment, warehouse_id: user.warehouse_id
 

@@ -5,4 +5,8 @@
   <%= content_tag :td, stock.units %>
   <%= content_tag :td, stock.batch %>
   <%= content_tag :td, l(stock.expires_at, format: :long) %>
+  <td>
+    <%= link_to t("labels.print_qr"), print_qr_admin_stock_path(stock),
+      class: "btn btn-primary", target: "_blank" if can? :print_qr, stock %>
+  </td>
 </tr>

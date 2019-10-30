@@ -20,6 +20,7 @@ es:
     home: Inicio
     name: Nombre
     optional: Opcional
+    print_qr: Imprimir código QR
     product: Producto
     save: Guardar
     search: Buscar

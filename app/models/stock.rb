@@ -64,4 +64,8 @@ class Stock < ApplicationRecord
   def has_minimum_stock?(required)
     units >= required
   end
+
+  def data_for_qr()
+    "#{self.product_id}|#{self.batch}"
+  end
 end

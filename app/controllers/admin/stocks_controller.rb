@@ -19,6 +19,12 @@ class Admin::StocksController < ApplicationController
     )
   end
 
+  def print_qr
+    require 'rqrcode'
+    @qr = RQRCode::QRCode.new(@stock.data_for_qr)
+    render :print_qr, layout: false
+  end
+
   private
     def warehouse_id
       params[:filters] = params[:filters] || {}
