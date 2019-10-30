@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   belongs_to :warehouse
   has_many :clients
+  has_many :tickets
+  has_many :route_stocks
 
   validates :name, :email, :cellphone,
     :role, presence: true

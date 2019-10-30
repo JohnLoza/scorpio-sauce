@@ -6,7 +6,22 @@ class RouteStock < ApplicationRecord
 
   validates :products, presence: true
 
-  scope :current_day, -> { where("created_at > ?", Date.today) }
+  scope :current_day, -> { where("created_at > ?", Date.today).take() }
+
+  def withdraw!(@ticket)
+    @ticket.details.each do |ticket_detail|
+      product = self.products.select {|e| e["product_id"].to_i == ticket_detail.product_id and e["batch"] == ticket_detail.batch }
+
+      unless product
+        raise StandardError, I18n.t("errors.route_stock_product_not_found", batch: ticket_detail.batch)
+      end
+      unless product["units_left"] >= ticket_detail.units
+        raise StandardError, I18n.t("errors.not_enough_stock", batch: ticket_detail.batch)
+      end
+
+      product["units_left"] -= ticket_detail.units
+    end
+  end
 
   private
     def set_products_units_left

@@ -43,6 +43,8 @@ Rails.application.routes.draw do
     resources :clients, except: [:new, :edit] do
       get 'locations', on: :collection
     end
+
+    resources :tickets, except: [:new, :edit, :update]
   end
 
   match '*path', via: :all, to: 'application#render_404'

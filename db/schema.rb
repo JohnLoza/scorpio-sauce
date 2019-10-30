@@ -120,12 +120,21 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
     t.index ["warehouse_id"], name: "index_supply_orders_on_warehouse_id"
   end
 
+  create_table "ticket_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "ticket_id"
+    t.bigint "product_id"
+    t.integer "units"
+    t.string "batch"
+    t.decimal "sub_total", precision: 8, scale: 2
+    t.index ["product_id"], name: "index_ticket_details_on_product_id"
+    t.index ["ticket_id"], name: "index_ticket_details_on_ticket_id"
+  end
+
   create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "client_id"
     t.decimal "total", precision: 10, scale: 2
     t.string "payment_method"
-    t.json "details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_tickets_on_client_id"
@@ -135,7 +144,7 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "stock_id"
     t.bigint "user_id"
-    t.boolean "incoming"
+    t.integer "incoming", limit: 1
     t.string "concept"
     t.integer "units"
     t.integer "units_post_transaction"

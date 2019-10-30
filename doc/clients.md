@@ -16,8 +16,8 @@ List of clients of the current user
 ### Response
 ```json
 {
-  status: :completed,
-  data: {
+  "status": "completed",
+  "data": {
     [
       client object,
       client object,
@@ -34,8 +34,8 @@ Requires the full client object, the billing object is optional
 ### Response
 ```json
 {
-  status: :completed,
-  data: {
+  "status": "completed",
+  "data": {
     client object
   }
 }
@@ -47,8 +47,8 @@ Asks for the information of the given client by id
 ### Response
 ```json
 {
-  status: :completed,
-  data: {
+  "status": "completed",
+  "data": {
     client object
   }
 }
@@ -61,8 +61,8 @@ Requires the client object with the attributes to update
 ### Response
 ```json
 {
-  status: :completed,
-  data: {
+  "status": "completed",
+  "data": {
     client object
   }
 }
@@ -74,7 +74,7 @@ Delete an existing client by id and returns the client object
 ### Response
 ```json
 {
-  status: :completed
+  "status": "completed"
 }
 ```
 
@@ -84,41 +84,36 @@ List of locations of all clients for the current user
 ### Response
 ```json
 {
-  status: :completed,
-  data: [
+  "status": "completed",
+  "data": [
     {
-      name: "clients name",
-      lat: "latitude",
-      lng: "longitude"
+      "name": "clients name",
+      "lat": "latitude",
+      "lng": "longitude"
     }
   ]
 }
 ```
 
-## Sample Client Object
+## Client params
 ```json
 {
-  id: 3
-  name: "Juan Carlos",
-  telephone: "33 1252 5342",
-  address: "Bartolomé Gutiérrez #3130",
-  colony: "Miravalle",
-  zc: "44523",
-  lat: "20.6170177",
-  lng: "-103.3683971"
-  billing_data: billing object
-}
-```
-
-## Sample Billing Object
-```json
-{
-  city_id: 20192,
-  name: "Super y Farmacias Carlos Rivera",
-  rfc: "ISJD283AJS",
-  email: "email@sample.com",
-  address: "Bartolomé Gutiérrez #3130",
-  colony: "Miravalle",
-  zc: "44523"
+  "id": 3,
+  "name": "Juan Carlos",
+  "telephone": "33 1252 5342",
+  "address": "Bartolomé Gutiérrez #3130",
+  "colony": "Miravalle",
+  "zc": "44523",
+  "lat": "20.6170177",
+  "lng": "-103.3683971",
+  "billing_data": {
+    "city_id": 20192,
+    "name": "Super y Farmacias Carlos Rivera",
+    "rfc": "ISJD283AJS",
+    "email": "email@sample.com",
+    "address": "Bartolomé Gutiérrez #3130",
+    "colony": "Miravalle",
+    "zc": "44523"
+  }
 }
 ```

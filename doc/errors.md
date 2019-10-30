@@ -11,9 +11,9 @@ Some of the parameters in your request were missing or had invalid values
 
 ```json
 {
-  status: :error,
-  message: "parameter_validation_error",
-  details: "error_reason"
+  "status": "error",
+  "message": "parameter_validation_error",
+  "details": "error_reason"
 }
 ```
 
@@ -23,9 +23,9 @@ see the errors section of the response for more details
 
 ```json
 {
-  status: :error,
-  message: "unprocessable",
-  errors: [
+  "status": "error",
+  "message": "unprocessable",
+  "errors": [
     "error_message",
     "error_message"
   ]

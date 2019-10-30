@@ -6,9 +6,9 @@ List of states
 ### Response
 ```json
 [
-  {"id":2526, "name":"Aguascalientes"},
-  {"id":2527, "name":"Baja California"},
-  {"id":2528, "name":"Baja California Sur"}
+  {"id": 2526, "name": "Aguascalientes"},
+  {"id": 2527, "name": "Baja California"},
+  {"id": 2528, "name": "Baja California Sur"}
 ]
 ```
 
@@ -19,8 +19,8 @@ Requires **state_id** parameter
 ### Response
 ```json
 [
-  {"id":2526, "name":"Guadalajara"},
-  {"id":2527, "name":"Zapopan"},
-  {"id":2528, "name":"Tlaquepaque"}
+  {"id": 2526, "name": "Guadalajara"},
+  {"id": 2527, "name": "Zapopan"},
+  {"id": 2528, "name": "Tlaquepaque"}
 ]
 ```
