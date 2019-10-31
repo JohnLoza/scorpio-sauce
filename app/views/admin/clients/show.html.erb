@@ -39,7 +39,7 @@
         <p class="card-text">
           <%= content_tag :span, Client.human_attribute_name(:address),
             class: "font-weight-bold text-uppercase" %><br>
-          <%= @client.full_address %>
+          <%= link_to @client.full_address, @client.google_maps_link, target: "_blank" %>
         </p>
 
         <hr>

@@ -20,19 +20,9 @@ class Admin::TicketsController < ApiController
 
   def create
     @ticket = build_ticket_and_details
+    rs = @current_user.route_stocks.current_day.last
 
-    begin
-      ActiveRecord::Base.transaction do
-        @ticket.save!
-        current_route_stock = @current_user.route_stocks.merge(RouteStock.current_day)
-        current_route_stock.withdraw!(@ticket)
-        current_route_stock.save!
-      end
-    rescue => exception
-      @ticket.errors.add(:details, exception.message)
-    end
-
-    if @ticket.persisted? and @ticket.errors.empty?
+    if @ticket.save_and_update_route_stock(rs)
       response = { status: :completed, data: @ticket.as_json() }
       render json: JSON.pretty_generate(response)
     else

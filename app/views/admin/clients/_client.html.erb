@@ -7,7 +7,7 @@
     <%= link_to client.user, admin_user_path(client.user)  %>
   </td>
   <%= content_tag :td, client.location %>
-  <%= content_tag :td, client.address %>
+  <%= content_tag :td, link_to(client.address, client.google_maps_link, target: "_blank") %>
   <%= content_tag :td, client.colony %>
   <%= content_tag :td, client.zc %>
 </tr>

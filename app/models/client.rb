@@ -27,6 +27,10 @@ class Client < ApplicationRecord
     "#{address}, #{colony}, #{zc}"
   end
 
+  def google_maps_link
+    "https://www.google.com/maps/search/?api=1&query=#{lat},#{lng}"
+  end
+
   def as_json(options = nil)
     unless options.present?
       options = {
