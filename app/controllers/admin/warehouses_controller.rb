@@ -66,11 +66,7 @@ class Admin::WarehousesController < ApplicationController
 
   private
     def warehouse_params
-      params.require(:warehouse).permit(
-        :address,
-        :telephone,
-        :city_id
-      )
+      params.require(:warehouse).permit(:address, :telephone, :city_id)
     end
 
     def state_params

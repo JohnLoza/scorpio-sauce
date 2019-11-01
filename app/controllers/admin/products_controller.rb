@@ -25,7 +25,6 @@ class Admin::ProductsController < ApplicationController
   end
 
   def update
-    @product.build_boxes_json(params[:box_names], params[:box_units])
     if @product.update_attributes(product_params)
       flash[:success] = t(".success", product: @product)
       redirect_to [:admin, @product]
@@ -55,15 +54,23 @@ class Admin::ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:product).permit(
-        :name,
-        :main_image,
-        :retail_price,
-        :half_wholesale_price,
-        :required_units_half_wholesale,
-        :wholesale_price,
-        :required_units_wholesale
+      hash_params = params.require(:product).permit(
+        :name, :main_image, :retail_price,
+        :half_wholesale_price, :required_units_half_wholesale,
+        :wholesale_price, :required_units_wholesale
       )
+
+      if params[:box_names].nil? or params[:box_units].nil?
+        hash_params[:boxes] = nil; return hash_params
+      end
+
+      boxes_array = Array.new
+      params[:box_names].each.with_index do |box_name, indx|
+        boxes_array << {name: params[:box_names][indx], units: params[:box_units][indx].to_i}
+      end
+
+      hash_params[:boxes] = boxes_array
+      return hash_params
     end
 
     def load_products

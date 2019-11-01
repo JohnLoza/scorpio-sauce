@@ -22,7 +22,6 @@ class Api::ClientsController < ApiController
 
   def create
     @client = @current_user.clients.build(client_params)
-    @client.billing_data = params[:client][:billing_data]
     if @client.save
       response = { status: :completed, data: @client.as_json()}
       render json: JSON.pretty_generate(response)
@@ -56,22 +55,19 @@ class Api::ClientsController < ApiController
 
     response = {
       status: :completed,
-      data: @clients.as_json(only: [:name, :lat, :lng])
+      data: @clients.as_json(only: [:name, :address, :lat, :lng])
     }
     render json: JSON.pretty_generate(response)
   end
 
   private
     def client_params
+      billing_keys = params[:client][:billing_data].try(:keys)
+
       params.require(:client).permit(
-        :city_id,
-        :name,
-        :telephone,
-        :address,
-        :colony,
-        :zc,
-        :lat,
-        :lng
+        :city_id, :name, :telephone, :address,
+        :colony, :zc, :lat, :lng,
+        billing_data: {}
       )
     end
 end

@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
     t.string "colony"
     t.string "zc"
     t.json "billing_data"
-    t.decimal "lat", precision: 10, scale: 8
-    t.decimal "lng", precision: 11, scale: 8
+    t.decimal "lat", precision: 8, scale: 6
+    t.decimal "lng", precision: 9, scale: 6
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

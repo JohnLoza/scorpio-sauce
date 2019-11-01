@@ -8,8 +8,8 @@ class CreateClients < ActiveRecord::Migration[5.2]
       t.string :address
       t.string :colony
       t.string :zc
-      t.decimal :lat, precision: 10, scale: 8
-      t.decimal :lng, precision: 11, scale: 8
+      t.decimal :lat, precision: 8, scale: 6
+      t.decimal :lng, precision: 9, scale: 6
       t.json :billing_data
       t.datetime :deleted_at
 

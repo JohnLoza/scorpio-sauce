@@ -44,17 +44,4 @@ class Product < ApplicationRecord
     products.map{ |p| [p.name, p.id] }
   end
 
-  def build_boxes_json(box_names, box_units)
-    if box_names.nil? or box_units.nil?
-      self.boxes = nil; return
-    end
-
-    boxes_array = Array.new
-    box_names.each.with_index do |box_name, indx|
-      boxes_array << {name: box_names[indx], units: box_units[indx].to_i}
-    end
-
-    self.boxes = boxes_array
-  end
-
 end
