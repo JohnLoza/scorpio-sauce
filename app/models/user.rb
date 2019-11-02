@@ -19,17 +19,16 @@ class User < ApplicationRecord
   has_many :tickets
   has_many :route_stocks
 
-  validates :name, :email, :cellphone,
-    :role, presence: true
+  validates :name, presence: true, length: { maximum: 50 }
+  validates :cellphone, presence: true, length: { maximum: 20 }
+  validates :email, presence: true
+  validates :role, presence: true
 
-  validates :name, :email, length: { in: 6..100 }
+  validates :password, presence: true, length: { in: 6..20 }, on: :create
 
-  validates :password, :password_confirmation,
-    presence: true, length: { in: 6..20 }, on: :create
-
-  validates :email, format: { with: /\A.+@.+\z/ }
-  validates :email, uniqueness: { case_sensitive: false }, on: :create
-  validates :email, confirmation: true
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
+    uniqueness: { case_sensitive: false }, confirmation: true
 
   scope :non_admin, -> { where.not(role: User::ROLES[:admin]) }
   scope :not, -> (ids) { where.not(id: ids) }
