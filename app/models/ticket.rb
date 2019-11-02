@@ -1,6 +1,7 @@
 class Ticket < ApplicationRecord
   belongs_to :user
   belongs_to :client
+  has_many :details, class_name: :TicketDetail
 
   validates :total, :payment_method, presence: true
   validates :total, numericality: { greater_than: 0 }

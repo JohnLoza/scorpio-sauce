@@ -17,3 +17,11 @@ unless admin
     role: "ADMIN", cellphone: "33 1409 4197", password: "StarAlpha2019",
     password_confirmation: "StarAlpha2019", warehouse_id: 1)
 end
+
+unless State.all.any?
+  ActiveRecord::Base.connection.execute(IO.read("vendor/states.sql"))
+end
+
+unless City.all.any?
+  ActiveRecord::Base.connection.execute(IO.read("vendor/cities.sql"))
+end

@@ -1,4 +1,4 @@
-class Admin::TicketsController < ApiController
+class Api::TicketsController < ApiController
   def index
     @pagy, @tickets = pagy(@current_user.tickets)
 
@@ -35,10 +35,15 @@ class Admin::TicketsController < ApiController
   end
 
   private
+    def ticket_params
+      params.require(:ticket).permit(:client_id, :total, :payment_method)
+    end
+
     def build_ticket_and_details
       ticket = @current_user.tickets.build(ticket_params)
-      params[:ticket][:details].values.each do |detail_params|
-        ticket.details << ticket.build_detail(detail_params)
+      params[:ticket][:details].each do |detail_params|
+        permited_params = detail_params.permit(:product_id, :units, :batch, :sub_total)
+        ticket.details.build(detail_params.permit(:product_id, :units, :batch, :sub_total))
       end
 
       ticket

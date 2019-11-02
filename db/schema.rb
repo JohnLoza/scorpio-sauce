@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_184650) do
+ActiveRecord::Schema.define(version: 2019_10_29_112321) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -47,9 +47,9 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
     t.string "address"
     t.string "colony"
     t.string "zc"
-    t.json "billing_data"
     t.decimal "lat", precision: 8, scale: 6
     t.decimal "lng", precision: 9, scale: 6
+    t.json "billing_data"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
     t.json "products"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["supply_order_id"], name: "index_route_stocks_on_supply_order_id"
     t.index ["user_id"], name: "index_route_stocks_on_user_id"
   end
 
@@ -144,7 +145,7 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "stock_id"
     t.bigint "user_id"
-    t.integer "incoming", limit: 1
+    t.boolean "incoming"
     t.string "concept"
     t.integer "units"
     t.integer "units_post_transaction"

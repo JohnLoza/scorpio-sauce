@@ -37,10 +37,10 @@ Postgres gem ´pg´ may require to install this library as a dependency
     $ rails db:migrate RAILS_ENV=production
     $ rails db:seed RAILS_ENV=production
 
-## 6. Execute the sql scripts in vendor
+## 6. Execute the sql scripts in vendor (now done in seeds.rb)
 ### For MySql
     $ mysql -u <username> -p
-    mysql > use black-brocket_development
+    mysql > use <database>
     mysql > source /path_to_project/vendor/states.sql
     mysql > source /path_to_project/vendor/cities.sql
 
