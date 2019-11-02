@@ -57,6 +57,14 @@ class User < ApplicationRecord
     end
   end
 
+  def avatar_url(variant_options = {})
+    if self.avatar.attached?
+      self.avatar.variant(variant_options).processed
+    else
+      "/user_avatar.png"
+    end
+  end
+
   def self.roles_without(role)
     if role.kind_of?(Array)
       ROLES.select{|key, value| !role.include?(key)}

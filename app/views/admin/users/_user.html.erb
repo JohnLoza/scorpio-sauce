@@ -2,8 +2,8 @@
   <td>
     <div class="m-r-10">
       <%= link_to admin_user_path(user) do %>
-        <%= image_tag user.avatar.variant(avatar_variant).processed,
-          class: "rounded table-img" if user.avatar.attached? %>
+        <%= image_tag user.avatar_url(avatar_variant),
+          class: "rounded table-img" %>
       <% end %>
     </div>
   </td>
