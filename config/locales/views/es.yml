@@ -43,6 +43,9 @@ es:
     new: <span class="badge badge-secondary badge-pill">Nuevo</span>
     reported: <span class="badge badge-warning badge-pill">Reportado</span>
     processed: <span class="badge badge-primary badge-pill">Procesado</span>
+    devolution: <span class="badge badge-warning badge-pill">Devolución</span>
+    devolution_reported: <span class="badge badge-warning badge-pill">Devolución reportada</span>
+    devolution_processed: <span class="badge badge-warning badge-pill">Devolución procesada</span>
   concepts:
     incoming: <span class="badge badge-primary badge-pill">Ingreso</span>
     route: <span class="badge badge-secondary badge-pill">Ruta</span>

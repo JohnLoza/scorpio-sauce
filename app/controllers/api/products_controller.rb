@@ -1,5 +1,5 @@
 class Api::ProductsController < ApiController
-  def def index
+  def index
     @products = Product.active.by_id(params[:id])
 
     response ={
@@ -9,7 +9,7 @@ class Api::ProductsController < ApiController
     render json: JSON.pretty_generate(response)
   end
 
-  def def show
+  def show
     @product = Product.find(params[:id])
 
     response = { status: :completed, data: @product.as_json()}

@@ -10,6 +10,14 @@
           {prompt: t("labels.select")}, {class: "form-control", required: true} %>
       </div>
 
+      <div class="form-group">
+        <%= f.label :status, t("status.devolution").html_safe %>
+        <div class="switch-button switch-button-yesno">
+          <%= f.check_box :status, {}, WarehouseShipment::STATUS[:devolution], nil %>
+          <span><label for="warehouse_shipment_status"></label></span>
+        </div>
+      </div>
+
       <section class="products-container">
 
       </section>

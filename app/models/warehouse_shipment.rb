@@ -4,7 +4,10 @@ class WarehouseShipment < ApplicationRecord
   STATUS = {
     new: "new".freeze,
     reported: "reported".freeze,
-    processed: "processed".freeze
+    processed: "processed".freeze,
+    devolution: "devolution".freeze,
+    devolution_reported: "devolution_reported".freeze,
+    devolution_processed: "devolution_processed".freeze
   }
 
   belongs_to :user
@@ -23,25 +26,42 @@ class WarehouseShipment < ApplicationRecord
   end
 
   def processable?
-    self.status == STATUS[:new]
+    [STATUS[:new], STATUS[:devolution]].include?(self.status)
   end
 
   def reportable?
-    self.status == STATUS[:new]
+    [STATUS[:new], STATUS[:devolution]].include?(self.status)
   end
 
   def reported?
-    self.status == STATUS[:reported]
+    [STATUS[:reported], STATUS[:devolution_reported]].include?(self.status)
   end
 
   def deletable?
-    self.status == STATUS[:new]
+    [STATUS[:new], STATUS[:devolution]].include?(self.status)
+  end
+
+  def devolution?
+    [
+      STATUS[:devolution],
+      STATUS[:devolution_reported],
+      STATUS[:devolution_processed]
+    ].include?(self.status)
+  end
+
+  def set_processed_status
+    if self.devolution?
+      self.status = STATUS[:devolution_processed]
+    else
+      self.status = STATUS[:processed]
+    end
   end
 
   def process_shipment(user)
     ActiveRecord::Base.transaction do
       begin
-        self.update_attributes!(status: STATUS[:processed], receiver_user_id: user.id)
+        self.set_processed_status()
+        self.update_attributes!(receiver_user_id: user.id)
         self.products.each do |product|
           if s = Stock.find_by(product_id: product["product_id"], warehouse_id: self.warehouse_id, batch: product["batch"])
             units_to_add = (product["real_units"] || product["units"]).to_i
@@ -64,7 +84,7 @@ class WarehouseShipment < ApplicationRecord
 
   private
     def set_new_status
-      self.status = STATUS[:new]
+      self.status = STATUS[:new] unless self.status.present?
     end
 
     def stock_params(product)

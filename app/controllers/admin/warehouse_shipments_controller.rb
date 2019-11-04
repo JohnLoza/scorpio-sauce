@@ -66,7 +66,7 @@ class Admin::WarehouseShipmentsController < ApplicationController
   private
     def warehouse_shipment_params
       {
-        user_id: current_user.id,
+        user_id: current_user.id, status: params[:warehouse_shipment][:status],
         warehouse_id: params[:warehouse_shipment][:warehouse_id],
         products: params[:products].values
       }
@@ -77,11 +77,18 @@ class Admin::WarehouseShipmentsController < ApplicationController
         products[indx]["real_units"] = params[:real_units][indx]
       end
 
-      {
+      params_hash = {
         products: products,
-        report: { message: params[:report][:message] },
-        status: WarehouseShipment::STATUS[:reported]
+        report: { message: params[:report][:message] }
       }
+
+      if @warehouse_shipment.devolution?
+        params_hash[:status] = WarehouseShipment::STATUS[:devolution_reported]
+      else
+        params_hash[:status] = WarehouseShipment::STATUS[:reported]
+      end
+
+      return params_hash
     end
 
     def load_warehouse_shipments

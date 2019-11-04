@@ -6,7 +6,7 @@ es:
 
       show:
         title: Detalles de envío
-        process: Procesar envío
+        process_shipment: Procesar envío
         you_sure_process: ¿Estás seguro(a) de que todo está bien? las cantidades y lotes enviados serán agregados al inventario
         to_report: Reportar
         process_report: Procesar reporte
