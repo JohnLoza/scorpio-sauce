@@ -17,6 +17,7 @@ class Product < ApplicationRecord
   validates :required_units_wholesale,
     numericality: { only_integer: true, greater_than: :required_units_half_wholesale}
 
+  scope :by_id, -> (id) { where(id: id) if id.present? }
   scope :recent, -> { order(created_at: :desc) }
   scope :order_by_name, -> (way = :asc) {
     order(name: way)
@@ -31,6 +32,14 @@ class Product < ApplicationRecord
 
   def to_param
     "#{id}-#{name}"
+  end
+
+  def as_json(options = nil)
+    unless options.present?
+      options = { except: [:boxes, :deleted_at, :created_at, :updated_at] }
+    end
+
+    super(options)
   end
 
   def self.for_select(options = {})

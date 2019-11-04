@@ -46,6 +46,8 @@ Rails.application.routes.draw do
     end
 
     resources :tickets, except: [:new, :edit, :update]
+
+    resources :products, only: [:index, :show]
   end
 
   match '*path', via: :all, to: 'application#render_404'

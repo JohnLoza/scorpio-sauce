@@ -12,7 +12,7 @@ Requires the parameters **email** and **password** encapsulated by **session**
 }
 ```
 
-### Responses
+### **response**s
 ```json
 {
   "status": "completed",

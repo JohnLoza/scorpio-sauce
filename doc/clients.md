@@ -13,7 +13,7 @@ Every request that require an :id will return a 404 if the resource is not found
 ## /api/clients **GET Request**
 List of clients of the current user
 
-### Response
+### **response**
 ```json
 {
   "status": "completed",
@@ -31,7 +31,7 @@ List of clients of the current user
 Creates a new client record and returns the client object  
 Requires the full client object, the billing object is optional
 
-### Response
+### **response**
 ```json
 {
   "status": "completed",
@@ -44,7 +44,7 @@ Requires the full client object, the billing object is optional
 ## /api/clients/:id **GET Request**
 Asks for the information of the given client by id
 
-### Response
+### **response**
 ```json
 {
   "status": "completed",
@@ -58,7 +58,7 @@ Asks for the information of the given client by id
 Update an existing client by id and returns the client object  
 Requires the client object with the attributes to update
 
-### Response
+### **response**
 ```json
 {
   "status": "completed",
@@ -71,7 +71,7 @@ Requires the client object with the attributes to update
 ## /api/clients/:id **DELETE Request**
 Delete an existing client by id and returns the client object
 
-### Response
+### **response**
 ```json
 {
   "status": "completed"
@@ -81,7 +81,7 @@ Delete an existing client by id and returns the client object
 ## /api/clients/locations **GET Request**
 List of locations of all clients for the current user
 
-### Response
+### **response**
 ```json
 {
   "status": "completed",

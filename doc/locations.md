@@ -3,7 +3,7 @@
 ## base_url/states **GET Request**
 List of states
 
-### Response
+### **response**
 ```json
 [
   {"id": 2526, "name": "Aguascalientes"},
@@ -16,7 +16,7 @@ List of states
 List of cities  
 Requires **state_id** parameter
 
-### Response
+### **response**
 ```json
 [
   {"id": 2526, "name": "Guadalajara"},

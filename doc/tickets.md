@@ -3,7 +3,7 @@
 ## api/tickets **GET Request**
 List of available tickets
 
-### Response
+### **response**
 ```json
 {
   "status": "completed",
@@ -21,7 +21,7 @@ List of available tickets
 create a new ticket  
 requires the ticket params including the details of the ticket
 
-### Response
+### **response**
 ```json
 {
   "status": "completed",
@@ -32,7 +32,7 @@ requires the ticket params including the details of the ticket
 ## api/tickets/:id **GET Request**
 get the details of a given ticket
 
-### Response
+### **response**
 ```json
 {
   "status": "completed",
