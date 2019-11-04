@@ -12,6 +12,14 @@ FactoryBot.define do
     factory :admin do
       role { User::ROLES[:admin] }
     end
+
+    factory :admin_staff_user do
+      role { User::ROLES[:admin_staff] }
+    end
+
+    factory :warehouse_user do
+      role { User::ROLES[:warehouse] }
+    end
   end
 
   factory :warehouse do

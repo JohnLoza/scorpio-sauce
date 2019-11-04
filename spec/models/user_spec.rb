@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   before do
     warehouse = create(:warehouse)
-
-    @user = FactoryBot.build(:user, role: User::ROLES[:admin_staff], warehouse: warehouse)
+    @user = FactoryBot.build(:admin_staff_user, warehouse: warehouse)
   end
 
   subject { @user }

@@ -3,15 +3,14 @@ require 'rails_helper'
 RSpec.describe Admin::UsersController, type: :controller do
   before do
     @warehouse = create(:warehouse)
-
     @user = FactoryBot.create(:admin, warehouse: @warehouse)
     log_in(@user)
   end
 
   context 'GET Index' do
     it 'assigns @users' do
-      user = FactoryBot.create(:user, role: User::ROLES[:admin_staff], warehouse: @warehouse)
-      another_user = FactoryBot.create(:user, role: User::ROLES[:warehouse], warehouse: @warehouse)
+      user = FactoryBot.create(:admin_staff_user, warehouse: @warehouse)
+      another_user = FactoryBot.create(:warehouse_user, warehouse: @warehouse)
 
       get :index
       expect(assigns(:users)).to eq([user, another_user])
@@ -63,7 +62,9 @@ RSpec.describe Admin::UsersController, type: :controller do
   end
 
   context "GET Edit" do
-    before { @another_user = FactoryBot.create(:user, warehouse: @warehouse, role: :admin_staff) }
+    before do
+      @another_user = FactoryBot.create(:admin_staff_user, warehouse: @warehouse)
+    end
 
     it 'when id is wrong' do
       get :edit, params: { id: 0 }
@@ -83,7 +84,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   context 'PUT Update' do
     before do
-      @another_user = FactoryBot.create(:user, warehouse: @warehouse, role: :admin_staff)
+      @another_user = FactoryBot.create(:admin_staff_user, warehouse: @warehouse)
     end
 
     it 'when id is wrong' do
@@ -120,7 +121,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   context 'DELETE Destroy' do
     before do
-      @another_user = FactoryBot.create(:user, role: :admin_staff, warehouse: @warehouse)
+      @another_user = FactoryBot.create(:admin_staff_user, warehouse: @warehouse)
     end
 
     it 'when id is wrong' do
@@ -136,7 +137,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
   context 'POST Restore' do
     before do
-      @another_user = FactoryBot.create(:user, role: :admin_staff, warehouse: @warehouse)
+      @another_user = FactoryBot.create(:admin_staff_user, warehouse: @warehouse)
       @another_user.destroy
     end
 
