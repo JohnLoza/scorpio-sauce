@@ -49,17 +49,9 @@ class WarehouseShipment < ApplicationRecord
     ].include?(self.status)
   end
 
-  def set_processed_status
-    if self.devolution?
-      self.status = STATUS[:devolution_processed]
-    else
-      self.status = STATUS[:processed]
-    end
-  end
-
   def process_shipment(user)
-    ActiveRecord::Base.transaction do
-      begin
+    begin
+      ActiveRecord::Base.transaction do
         self.set_processed_status()
         self.update_attributes!(receiver_user_id: user.id)
         self.products.each do |product|
@@ -71,11 +63,10 @@ class WarehouseShipment < ApplicationRecord
           end
           Transaction.create!(transaction_params(s, product))
         end
-      rescue => exception
-        self.errors.add(:products, exception.message)
-        raise ActiveRecord::Rollback
-      end
-    end # transaction end
+      end # transaction end
+    rescue => exception
+      self.errors.add(:products, exception.message)
+    end
   end
 
   def process_shipment_report(user)
@@ -106,6 +97,14 @@ class WarehouseShipment < ApplicationRecord
         incoming: true,
         concept: "incoming"
       }
+    end
+
+    def set_processed_status
+      if self.devolution?
+        self.status = STATUS[:devolution_processed]
+      else
+        self.status = STATUS[:processed]
+      end
     end
 
 end

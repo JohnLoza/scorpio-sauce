@@ -18,7 +18,6 @@ class Ticket < ApplicationRecord
       end
     rescue => exception
       self.errors.add(:details, exception.message)
-      raise ActiveRecord::Rollback
     end
   end
 

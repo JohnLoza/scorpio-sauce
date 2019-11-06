@@ -27,16 +27,15 @@ class SupplyOrder < ApplicationRecord
       return false
     end
 
-    ActiveRecord::Base.transaction do
-      begin
+    begin
+      ActiveRecord::Base.transaction do
         self.build_route_stock(user_id: self.target_user_id, products: options[:supplies])
         self.update_attributes!(supplier_user_id: options[:supplier], processed: true)
         Stock.withdraw_supplies!(options[:supplies], self.warehouse_id, options[:supplier])
-      rescue => exception
-        self.processed = false
-        self.errors.add(:supplies, exception.message)
-        raise ActiveRecord::Rollback
       end
+    rescue => exception
+      self.processed = false
+      self.errors.add(:supplies, exception.message)
     end
   end
 

@@ -2,7 +2,7 @@ class Warehouse < ApplicationRecord
   include SoftDeletable
   belongs_to :city
 
-  validates :address, presence: true, length: { in: 6..100 }
+  validates :address, presence: true, length: { maximum: 100 }
   validates :telephone, presence: true, length: { in: 6..20 }
 
   scope :include_location, -> { includes(city: :state) }
