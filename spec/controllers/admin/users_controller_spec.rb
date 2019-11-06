@@ -114,7 +114,7 @@ RSpec.describe Admin::UsersController, type: :controller do
           warehouse_id: @warehouse.id, role: User::ROLES[:warehouse]
         }
       }
-      expect(assigns(:user)).to be_persisted
+      expect(assigns(:user).errors.any?).to eq(false)
       expect(response.status).to eq(302)
     end
   end
