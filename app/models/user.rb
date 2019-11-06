@@ -65,10 +65,6 @@ class User < ApplicationRecord
     end
   end
 
-  def same_as?(another_user)
-    self.id == another_user.id
-  end
-
   def self.roles_without(role)
     if role.kind_of?(Array)
       ROLES.select{|key, value| !role.include?(key)}

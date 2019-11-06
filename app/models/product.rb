@@ -9,13 +9,13 @@ class Product < ApplicationRecord
     :required_units_wholesale, presence: true
 
   validates :retail_price, numericality: true
-  validates :half_wholesale_price, numericality: { lower_than_or_equal_to: :retail_price }
-  validates :wholesale_price, numericality: { lower_than_or_equal_to: :half_wholesale_price }
+
+  validate :prices_incongruencies
 
   validates :required_units_half_wholesale,
     numericality: { only_integer: true, greater_than: 0 }
-  validates :required_units_wholesale,
-    numericality: { only_integer: true, greater_than: :required_units_half_wholesale}
+
+  validate :required_units_wholesale_is_greater_than_half_wholesales
 
   scope :by_id, -> (id) { where(id: id) if id.present? }
   scope :recent, -> { order(created_at: :desc) }
@@ -53,4 +53,24 @@ class Product < ApplicationRecord
     products.map{ |p| [p.name, p.id] }
   end
 
+  private
+    def prices_incongruencies
+      return unless retail_price and half_wholesale_price and wholesale_price
+
+      if half_wholesale_price > retail_price
+        self.errors.add(:half_wholesale_price, I18n.t("errors.messages.greater_than_or_equal_to", count: retail_price))
+      end
+
+      if wholesale_price > half_wholesale_price
+        self.errors.add(:wholesale_price, I18n.t("errors.messages.greater_than_or_equal_to", count: half_wholesale_price))
+      end
+    end
+
+    def required_units_wholesale_is_greater_than_half_wholesales
+      return unless required_units_wholesale and required_units_half_wholesale
+
+      if required_units_wholesale <= required_units_half_wholesale
+        self.errors.add(:required_units_wholesale, I18n.t("error.messages.greater_than", count: required_units_half_wholesale))
+      end
+    end
 end

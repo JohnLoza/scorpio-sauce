@@ -73,7 +73,7 @@ RSpec.describe Admin::UsersController, type: :controller do
 
     it 'assigns @user' do
       get :edit, params: { id: @another_user }
-      expect(assigns(:user)).to be_same_as @another_user
+      expect(assigns(:user).id).to eq(@another_user.id)
     end
 
     it 'renders the edit template' do

@@ -28,6 +28,19 @@ FactoryBot.define do
     telephone { "333 2938 1756" }
   end
 
+  factory :product do
+    name { "Salsa scorpio 225ml" }
+    retail_price { "25.00" }
+    half_wholesale_price { "23.00" }
+    required_units_half_wholesale { 10 }
+    wholesale_price { "21.00" }
+    required_units_wholesale { 20 }
+
+    factory :inactive_product do
+      deleted_at { Time.now }
+    end
+  end
+
   factory :client do
     user {}
     city_id { 19597 }

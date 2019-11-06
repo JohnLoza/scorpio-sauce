@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    warehouse = create(:warehouse)
-    @user = FactoryBot.build(:admin_staff_user, warehouse: warehouse)
+    @warehouse = create(:warehouse)
+    @user = FactoryBot.build(:admin_staff_user, warehouse: @warehouse)
   end
 
   subject { @user }
@@ -153,16 +153,24 @@ RSpec.describe User, type: :model do
   end
 
   context "client associations" do
-    before { @user.save }
+    before do
+      @user.save
+      @another_user = FactoryBot.create(:admin, warehouse: @warehouse)
+    end
     let!(:first_client) do
       FactoryBot.create(:client, user: @user)
     end
     let!(:second_client) do
       FactoryBot.create(:client, user: @user)
     end
+    let!(:third_client) do
+      FactoryBot.create(:client, user: @another_user)
+    end
 
     it 'should have the right clients' do
-      expect(@user.clients.to_a).to eq [first_client, second_client]
+      clients_array = @user.clients.to_a
+      expect(clients_array).to eq [first_client, second_client]
+      expect(clients_array).not_to include(third_client)
     end
   end
 

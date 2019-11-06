@@ -54,7 +54,7 @@ class Admin::WarehousesController < ApplicationController
     redirect_to admin_warehouses_path
   end
 
-  def restore!
+  def restore
     if @warehouse.restore!
       flash[:success] = t(".success", warehouse: @warehouse)
       redirect_to [:admin, @warehouse]

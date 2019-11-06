@@ -12,7 +12,6 @@ class Admin::ProductsController < ApplicationController
   end
 
   def create
-    @product.build_boxes_json(params[:box_names], params[:box_units])
     if @product.save
       flash[:success] = t(".success", product: @product)
       redirect_to [:admin, @product]
