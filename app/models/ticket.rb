@@ -4,7 +4,9 @@ class Ticket < ApplicationRecord
   has_many :details, class_name: :TicketDetail
 
   validates :total, :payment_method, presence: true
+
   validates :total, numericality: { greater_than: 0 }
+
   validates :payment_method, length: { maximum: 20 }
 
   def save_and_update_route_stock(route_stock)

@@ -20,8 +20,11 @@ class User < ApplicationRecord
   has_many :route_stocks
 
   validates :name, presence: true, length: { maximum: 50 }
+
   validates :cellphone, presence: true, length: { maximum: 20 }
+
   validates :email, presence: true
+
   validates :role, presence: true
 
   validates :password, presence: true, length: { in: 6..20 }, on: :create

@@ -4,7 +4,9 @@ class Stock < ApplicationRecord
   has_many :transactions
 
   validates :units, :batch, :expires_at, presence: true
+
   validates :units, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+
   validate :batch_uniqueness, on: :create
 
   scope :available, -> (ammount = 1) { where("units >= ?", ammount) }

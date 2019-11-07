@@ -3,7 +3,8 @@ class Warehouse < ApplicationRecord
   belongs_to :city
 
   validates :address, presence: true, length: { maximum: 100 }
-  validates :telephone, presence: true, length: { in: 6..20 }
+
+  validates :telephone, presence: true, length: { in: 8..20 }
 
   scope :include_location, -> { includes(city: :state) }
 
