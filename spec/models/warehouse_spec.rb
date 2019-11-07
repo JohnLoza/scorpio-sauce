@@ -26,12 +26,12 @@ RSpec.describe Warehouse, type: :model do
   end
 
   context 'when telephone is too short' do
-    before { @warehouse.telephone = "21" }
+    before { @warehouse.telephone = "1234567" }
     it { should_not be_valid }
   end
 
   context 'when telephone is too long' do
-    before { @warehouse.telephone = "3"*21 }
+    before { @warehouse.telephone = "3" * 21 }
     it { should_not be_valid }
   end
 
