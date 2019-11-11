@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Admin::ProductsController, type: :controller do
   before do
-    @warehouse = create(:warehouse)
+    @warehouse = FactoryBot.create(:warehouse)
     @user = FactoryBot.create(:admin, warehouse: @warehouse)
     log_in(@user)
   end

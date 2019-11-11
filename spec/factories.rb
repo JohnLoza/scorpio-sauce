@@ -41,6 +41,14 @@ FactoryBot.define do
     end
   end
 
+  factory :stock do
+    warehouse {}
+    product {}
+    units { 1000 }
+    batch {}
+    expires_at { "28-10-2022" }
+  end
+
   factory :client do
     user {}
     city_id { 19597 }

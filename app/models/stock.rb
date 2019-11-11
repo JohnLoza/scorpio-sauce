@@ -7,6 +7,7 @@ class Stock < ApplicationRecord
 
   validates :units, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
+  validates :batch, length: { maximum:15 }
   validate :batch_uniqueness, on: :create
 
   scope :available, -> (ammount = 1) { where("units >= ?", ammount) }
@@ -56,13 +57,6 @@ class Stock < ApplicationRecord
     self.update_attributes!(units: self.units + quantity)
   end
 
-  def batch_uniqueness
-    existing_batch = Stock.find_by(batch: batch, warehouse_id: warehouse_id)
-    if existing_batch
-      self.errors.add(:batch, I18n.t("errors.batch_in_use", batch: batch))
-    end
-  end
-
   def has_minimum_stock?(required)
     units >= required
   end
@@ -70,4 +64,12 @@ class Stock < ApplicationRecord
   def data_for_qr()
     "#{self.product_id}|#{self.batch}"
   end
+
+  private
+    def batch_uniqueness
+      existing_batch = Stock.find_by(batch: batch, warehouse_id: warehouse_id)
+      if existing_batch
+        self.errors.add(:batch, I18n.t("errors.batch_in_use", batch: batch))
+      end
+    end
 end
