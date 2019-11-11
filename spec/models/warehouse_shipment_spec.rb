@@ -62,4 +62,34 @@ RSpec.describe WarehouseShipment, type: :model do
     it { should_not be_valid }
   end
 
+  context 'when products product_id key is not present' do
+    before { @w_ship.products[0].except!("product_id") }
+    it { should_not be_valid }
+  end
+
+  context 'when products units key is not present' do
+    before { @w_ship.products[0].except!("units") }
+    it { should_not be_valid }
+  end
+
+  context 'when products batch key is not present' do
+    before { @w_ship.products[0].except!("batch") }
+    it { should_not be_valid }
+  end
+
+  context 'when products expires_at key is not present' do
+    before { @w_ship.products[0].except!("expires_at") }
+    it { should_not be_valid }
+  end
+
+  context 'when products real_units key is present' do
+    before { @w_ship.products[0]["real_units"] = "5" }
+    it { should be_valid }
+  end
+
+  context 'when products contains an unknown key' do
+    before { @w_ship.products[0]["unknown"] = "2ldisnd" }
+    it { should_not be_valid }
+  end
+
 end

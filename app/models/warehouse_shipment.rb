@@ -15,6 +15,7 @@ class WarehouseShipment < ApplicationRecord
   belongs_to :warehouse
 
   validates :products, presence: true
+  validate :products_hash_keys
 
   scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) if w_id }
   scope :recent, -> { order(created_at: :desc) }
@@ -108,6 +109,29 @@ class WarehouseShipment < ApplicationRecord
         STATUS[:devolution_processed]
       else
         STATUS[:processed]
+      end
+    end
+
+    def products_hash_keys
+      unless self.products.present?
+        self.errors.add(:products, I18n.t("errors.messages.invalid"))
+        return
+      end
+
+      required_keys = ["product_id", "units", "batch", "expires_at"]
+
+      self.products.each do |product|
+        product.keys.each do |key|
+          if required_keys.include?(key) or key == "real_units"
+            required_keys.delete(key)
+          else
+            self.errors.add(:products, I18n.t("errors.messages.invalid"))
+          end
+        end
+      end
+
+      if required_keys.any?
+        self.errors.add(:products, I18n.t("errors.messages.invalid"))
       end
     end
 
