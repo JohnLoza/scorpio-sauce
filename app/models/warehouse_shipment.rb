@@ -33,12 +33,12 @@ class WarehouseShipment < ApplicationRecord
     [STATUS[:new], STATUS[:devolution]].include?(self.status)
   end
 
-  def reported?
-    [STATUS[:reported], STATUS[:devolution_reported]].include?(self.status)
-  end
-
   def deletable?
     [STATUS[:new], STATUS[:devolution]].include?(self.status)
+  end
+
+  def reported?
+    [STATUS[:reported], STATUS[:devolution_reported]].include?(self.status)
   end
 
   def devolution?
@@ -49,10 +49,14 @@ class WarehouseShipment < ApplicationRecord
     ].include?(self.status)
   end
 
+  def processed?
+    [STATUS[:processed], STATUS[:devolution_processed]].include?(self.status)
+  end
+
   def process_shipment(user)
+    self.status = self.devolution? ? STATUS[:devolution_processed] : STATUS[:processed]
     begin
       ActiveRecord::Base.transaction do
-        self.set_processed_status()
         self.update_attributes!(receiver_user_id: user.id)
         self.products.each do |product|
           if s = Stock.find_by(product_id: product["product_id"], warehouse_id: self.warehouse_id, batch: product["batch"])
@@ -101,9 +105,9 @@ class WarehouseShipment < ApplicationRecord
 
     def set_processed_status
       if self.devolution?
-        self.status = STATUS[:devolution_processed]
+        STATUS[:devolution_processed]
       else
-        self.status = STATUS[:processed]
+        STATUS[:processed]
       end
     end
 

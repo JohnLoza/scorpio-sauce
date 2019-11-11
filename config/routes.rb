@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root controller: 'static_pages', action: 'index'
+  root controller: 'sessions', action: 'new'
   get 'cities', controller: 'static_pages'
   get 'states', controller: 'static_pages'
 
