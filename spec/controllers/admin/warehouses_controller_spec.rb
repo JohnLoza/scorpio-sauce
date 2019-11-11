@@ -19,6 +19,25 @@ RSpec.describe Admin::WarehousesController, type: :controller do
     it 'renders the index template' do
       get :index
       expect(response).to render_template(:index)
+      expect(response.status).to eq(200)
+    end
+  end
+
+  context 'GET Show' do
+    it 'when id is wrong' do
+      get :show, params: { id: 0 }
+      expect(response.status).to eq(404)
+    end
+
+    it 'assigns @warehouse' do
+      get :show, params: { id: @warehouse }
+      expect(assigns(:warehouse).id).to eq(@warehouse.id)
+    end
+
+    it 'renders the show template' do
+      get :show, params: { id: @warehouse }
+      expect(response).to render_template(:show)
+      expect(response.status).to eq(200)
     end
   end
 
@@ -31,6 +50,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
     it 'renders the new template' do
       get :new
       expect(response).to render_template(:new)
+      expect(response.status).to eq(200)
     end
   end
 
@@ -45,6 +65,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
         warehouse: { name: nil }
       }
       expect(response).to render_template(:new)
+      expect(response.status).to eq(200)
     end
 
     it 'saves the record' do
@@ -70,6 +91,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
     it 'renders the edit template' do
       get :edit, params: { id: @warehouse }
       expect(response).to render_template(:edit)
+      expect(response.status).to eq(200)
     end
   end
 
@@ -91,6 +113,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
       }
 
       expect(response).to render_template(:edit)
+      expect(response.status).to eq(200)
     end
 
     it 'saves record' do
@@ -112,6 +135,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
     it 'should destroy warehouse' do
       delete :destroy, params: { id: @warehouse }
       expect(assigns(:warehouse)).to be_inactive
+      expect(response.status).to eq(302)
     end
   end
 
@@ -126,6 +150,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
     it 'should reactivate warehouse' do
       post :restore, params: { id: @warehouse }
       expect(assigns(:warehouse)).to be_active
+      expect(response.status).to eq(302)
     end
   end
 

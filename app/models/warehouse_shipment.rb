@@ -118,9 +118,9 @@ class WarehouseShipment < ApplicationRecord
         return
       end
 
-      required_keys = ["product_id", "units", "batch", "expires_at"]
-
       self.products.each do |product|
+        required_keys = ["product_id", "units", "batch", "expires_at"]
+
         product.keys.each do |key|
           if required_keys.include?(key) or key == "real_units"
             required_keys.delete(key)
@@ -128,11 +128,12 @@ class WarehouseShipment < ApplicationRecord
             self.errors.add(:products, I18n.t("errors.messages.invalid"))
           end
         end
+
+        if required_keys.any?
+          self.errors.add(:products, I18n.t("errors.messages.invalid"))
+        end
       end
 
-      if required_keys.any?
-        self.errors.add(:products, I18n.t("errors.messages.invalid"))
-      end
     end
 
 end

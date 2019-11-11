@@ -1,5 +1,7 @@
 <tr>
-  <%= content_tag :td, warehouse.address %>
+  <td>
+    <%= link_to warehouse.address, admin_warehouse_path(warehouse) %>
+  </td>
   <%= content_tag :td, warehouse.telephone %>
   <%= content_tag :td, warehouse.location %>
   <td>

@@ -19,6 +19,25 @@ RSpec.describe Admin::UsersController, type: :controller do
     it 'renders the index template' do
       get :index
       expect(response).to render_template(:index)
+      expect(response.status).to eq(200)
+    end
+  end
+
+  context 'GET Show' do
+    it 'when id is wrong' do
+      get :show, params: { id: 0 }
+      expect(response.status).to eq(404)
+    end
+
+    it 'assigns @user' do
+      get :show, params: { id: @user }
+      expect(assigns(:user).id).to eq(@user.id)
+    end
+
+    it 'renders the show template' do
+      get :show, params: { id: @user }
+      expect(response).to render_template(:show)
+      expect(response.status).to eq(200)
     end
   end
 
@@ -31,6 +50,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     it 'renders the new template' do
       get :new
       expect(response).to render_template(:new)
+      expect(response.status).to eq(200)
     end
   end
 
@@ -46,6 +66,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       }
       expect(assigns(:user)).not_to be_persisted
       expect(response).to render_template(:new)
+      expect(response.status).to eq(200)
     end
 
     it 'saves record' do
@@ -79,6 +100,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     it 'renders the edit template' do
       get :edit, params: { id: @another_user }
       expect(response).to render_template(:edit)
+      expect(response.status).to eq(200)
     end
   end
 
@@ -104,6 +126,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       }
 
       expect(response).to render_template(:edit)
+      expect(response.status).to eq(200)
     end
 
     it 'saves record' do
@@ -132,6 +155,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     it 'should destroy user' do
       delete :destroy, params: { id: @another_user.id }
       expect(assigns(:user)).to be_inactive
+      expect(response.status).to eq(302)
     end
   end
 
@@ -149,6 +173,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     it 'should reactivate user' do
       post :restore, params: { id: @another_user }
       expect(assigns(:user)).to be_active
+      expect(response.status).to eq(302)
     end
   end
 

@@ -21,6 +21,27 @@ RSpec.describe Admin::ProductsController, type: :controller do
     it 'renders the index template' do
       get :index
       expect(response).to render_template(:index)
+      expect(response.status).to eq(200)
+    end
+  end
+
+  context 'GET Show' do
+    let!(:product) { FactoryBot.create(:product) }
+
+    it 'when id is wrong' do
+      get :show, params: { id: 0 }
+      expect(response.status).to eq(404)
+    end
+
+    it 'assigns @product' do
+      get :show, params: { id: product }
+      expect(assigns(:product).id).to eq(product.id)
+    end
+
+    it 'renders the show template' do
+      get :show, params: { id: product }
+      expect(response).to render_template(:show)
+      expect(response.status).to eq(200)
     end
   end
 
@@ -34,6 +55,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
     it 'renders the new template' do
       get :new
       expect(response).to render_template(:new)
+      expect(response.status).to eq(200)
     end
   end
 
@@ -49,6 +71,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
       }
       expect(assigns(:product)).not_to be_persisted
       expect(response).to render_template(:new)
+      expect(response.status).to eq(200)
     end
 
     it 'saves record' do
@@ -80,6 +103,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
     it 'renders the edit template' do
       get :edit, params: { id: product }
       expect(response).to render_template(:edit)
+      expect(response.status).to eq(200)
     end
   end
 
@@ -103,6 +127,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
       }
 
       expect(response).to render_template(:edit)
+      expect(response.status).to eq(200)
     end
 
     it 'saves record' do
@@ -126,6 +151,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
     it 'should destroy product' do
       delete :destroy, params: { id: product }
       expect(assigns(:product)).to be_inactive
+      expect(response.status).to eq(302)
     end
   end
 
@@ -143,6 +169,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
     it 'should reactivate user' do
       post :restore, params: { id: @product }
       expect(assigns(:product)).to be_active
+      expect(response.status).to eq(302)
     end
   end
 

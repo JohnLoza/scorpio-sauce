@@ -19,6 +19,27 @@ RSpec.describe Admin::ClientsController, type: :controller do
     it 'renders the index template' do
       get :index
       expect(response).to render_template(:index)
+      expect(response.status).to eq(200)
+    end
+  end
+
+  context 'GET Show' do
+    let!(:client){ FactoryBot.create(:client, user: @user) }
+
+    it 'when id is wrong' do
+      get :show, params: { id: 0 }
+      expect(response.status).to eq(404)
+    end
+
+    it 'assigns @user' do
+      get :show, params: { id: client }
+      expect(assigns(:client).id).to eq(client.id)
+    end
+
+    it 'renders the show template' do
+      get :show, params: { id: client }
+      expect(response).to render_template(:show)
+      expect(response.status).to eq(200)
     end
   end
 
