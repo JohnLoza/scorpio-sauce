@@ -1,7 +1,7 @@
 <%= provide :title, t("labels.transactions") %>
 <%= provide :page_header, t("labels.transactions") %>
 
-<%= render partial: "transaction_filters" %>
+<%= render "transaction_filters" %>
 
 <%= render partial: "/shared/admin/warehouse_header", locals: {warehouse: @warehouse} %>
 
