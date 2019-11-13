@@ -24,7 +24,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
   end
 
   context 'GET Show' do
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       get :show, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -78,7 +78,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
   end
 
   context "GET Edit" do
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       get :edit, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -96,7 +96,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
   end
 
   context 'PUT Update' do
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       put :update, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -127,7 +127,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
   end
 
   context 'DELETE Destroy' do
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       delete :destroy, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -142,7 +142,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
   context 'POST Restore' do
     before { @warehouse.destroy }
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       post :restore, params: { id: 0 }
       expect(response.status).to eq(404)
     end

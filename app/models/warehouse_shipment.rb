@@ -113,10 +113,7 @@ class WarehouseShipment < ApplicationRecord
     end
 
     def products_hash_keys
-      unless self.products.present?
-        self.errors.add(:products, I18n.t("errors.messages.invalid"))
-        return
-      end
+      return unless self.products.present?
 
       self.products.each do |product|
         required_keys = ["product_id", "units", "batch", "expires_at"]
@@ -133,7 +130,6 @@ class WarehouseShipment < ApplicationRecord
           self.errors.add(:products, I18n.t("errors.messages.invalid"))
         end
       end
-
     end
 
 end

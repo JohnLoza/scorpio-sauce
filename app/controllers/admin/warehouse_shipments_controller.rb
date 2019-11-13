@@ -66,7 +66,7 @@ class Admin::WarehouseShipmentsController < ApplicationController
   private
     def warehouse_shipment_params
       unless params[:warehouse_shipment].present? and params[:products].present?
-        raise ActionController::ParameterMissing, :warehouse_shipment
+        raise ActionController::ParameterMissing, :products
       end
 
       {

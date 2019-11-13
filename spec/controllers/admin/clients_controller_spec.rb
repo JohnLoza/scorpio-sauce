@@ -26,7 +26,7 @@ RSpec.describe Admin::ClientsController, type: :controller do
   context 'GET Show' do
     let!(:client){ FactoryBot.create(:client, user: @user) }
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       get :show, params: { id: 0 }
       expect(response.status).to eq(404)
     end

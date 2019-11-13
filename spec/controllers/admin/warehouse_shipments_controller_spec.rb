@@ -55,7 +55,7 @@ RSpec.describe Admin::WarehouseShipmentsController, type: :controller do
       expect(response.status).to eq(422)
     end
 
-    it 'when product has errors' do
+    it 'when errors are present' do
       post :create, params: {
         warehouse_shipment: { warehouse_id: "0" },
         products: {random_hash: {product_id: "0"} }
@@ -90,12 +90,12 @@ RSpec.describe Admin::WarehouseShipmentsController, type: :controller do
       @w_ship.save!
     end
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       delete :destroy, params: { id: 0 }
       expect(response.status).to eq(404)
     end
 
-    it 'should destroy product' do
+    it 'should destroy warehouse shipment' do
       delete :destroy, params: { id: @w_ship }
       expect(assigns(:warehouse_shipment)).to be_destroyed
     end
@@ -110,7 +110,7 @@ RSpec.describe Admin::WarehouseShipmentsController, type: :controller do
       @w_ship.save!
     end
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       post :process_shipment, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -133,7 +133,7 @@ RSpec.describe Admin::WarehouseShipmentsController, type: :controller do
       @w_ship.save!
     end
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       post :report, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -155,7 +155,7 @@ RSpec.describe Admin::WarehouseShipmentsController, type: :controller do
       @w_ship.save!
     end
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       post :report, params: { id: 0 }
       expect(response.status).to eq(404)
     end

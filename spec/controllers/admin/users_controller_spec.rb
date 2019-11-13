@@ -24,7 +24,7 @@ RSpec.describe Admin::UsersController, type: :controller do
   end
 
   context 'GET Show' do
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       get :show, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -87,7 +87,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       @another_user = FactoryBot.create(:admin_staff_user, warehouse: @warehouse)
     end
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       get :edit, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -109,7 +109,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       @another_user = FactoryBot.create(:admin_staff_user, warehouse: @warehouse)
     end
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       put :update, params: { id: 0, user: {} }
       expect(response.status).to eq(404)
     end
@@ -147,7 +147,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       @another_user = FactoryBot.create(:admin_staff_user, warehouse: @warehouse)
     end
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       delete :destroy, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -165,7 +165,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       @another_user.destroy
     end
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       post :restore, params: { id: 0 }
       expect(response.status).to eq(404)
     end

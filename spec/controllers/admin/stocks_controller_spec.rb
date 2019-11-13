@@ -26,7 +26,7 @@ RSpec.describe Admin::StocksController, type: :controller do
   context 'GET PrintQr' do
     before { @stock = FactoryBot.create(:stock, warehouse: @warehouse, product: @product, batch: "ABC123") }
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       get :print_qr, params: { id: 0 }
       expect(response.status).to eq(404)
     end

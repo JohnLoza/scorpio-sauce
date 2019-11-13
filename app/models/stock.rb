@@ -24,7 +24,7 @@ class Stock < ApplicationRecord
     end
   }
 
-  def self.withdraw_supplies!(supplies, warehouse_id, user)
+  def self.withdraw_supplies!(supplies, warehouse_id, user_id)
     supplies.each do |s_i|
       stock = Stock.find_by(warehouse_id: warehouse_id,
         product_id: s_i["product_id"], batch: s_i["batch"])
@@ -36,7 +36,7 @@ class Stock < ApplicationRecord
       stock.withdraw!(s_i["units"].to_i)
       Transaction.create!({
         stock_id: stock.id,
-        user_id: user,
+        user_id: user_id,
         units: s_i["units"].to_i,
         units_post_transaction: stock.units,
         incoming: false,

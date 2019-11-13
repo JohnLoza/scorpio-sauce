@@ -28,7 +28,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
   context 'GET Show' do
     let!(:product) { FactoryBot.create(:product) }
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       get :show, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -90,7 +90,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
   context "GET Edit" do
     let!(:product){ FactoryBot.create(:product) }
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       get :edit, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -110,7 +110,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
   context 'PUT Update' do
     let!(:product){ FactoryBot.create(:product) }
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       put :update, params: { id: 0, product: {} }
       expect(response.status).to eq(404)
     end
@@ -143,7 +143,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
   context 'DELETE Destroy' do
     let!(:product){ FactoryBot.create(:product) }
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       delete :destroy, params: { id: 0 }
       expect(response.status).to eq(404)
     end
@@ -161,7 +161,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
       @product.destroy
     }
 
-    it 'when id is wrong' do
+    it 'when id is invalid' do
       post :restore, params: { id: 0 }
       expect(response.status).to eq(404)
     end
