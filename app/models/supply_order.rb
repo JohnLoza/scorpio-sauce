@@ -6,6 +6,7 @@ class SupplyOrder < ApplicationRecord
   has_one :route_stock
 
   validates :to_supply, presence: true
+  validate :to_supply_hash_keys
 
   scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) }
   scope :processed, -> (processed = true) { where(processed: processed) }
@@ -36,6 +37,7 @@ class SupplyOrder < ApplicationRecord
     rescue => exception
       self.processed = false
       self.errors.add(:supplies, exception.message)
+      return false
     end
   end
 
@@ -61,6 +63,26 @@ class SupplyOrder < ApplicationRecord
         self.errors.add(:supplies, I18n.t("errors.incomplete_supplies"))
       end
       return !self.errors.any?
+    end
+
+    def to_supply_hash_keys
+      return unless self.to_supply.present?
+
+      self.to_supply.each do |product_to_supply|
+        required_keys = ["product_id", "units"]
+
+        product_to_supply.keys.each do |key|
+          if required_keys.include?(key)
+            required_keys.delete(key)
+          else
+            self.errors.add(:products, I18n.t("errors.messages.invalid"))
+          end
+        end
+
+        if required_keys.any?
+          self.errors.add(:products, I18n.t("errors.messages.invalid"))
+        end
+      end
     end
 
 end

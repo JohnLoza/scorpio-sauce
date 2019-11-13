@@ -42,6 +42,10 @@ class Admin::SupplyOrdersController < ApplicationController
 
   private
     def supply_order_params
+      unless params[:supply_order].present? and params[:products].present?
+        raise ActionController::ParameterMissing, :products
+      end
+
       {
         user_id: current_user.id,
         target_user_id: params[:supply_order][:target_user_id],
