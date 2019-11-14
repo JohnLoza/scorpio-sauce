@@ -62,8 +62,6 @@ class Api::ClientsController < ApiController
 
   private
     def client_params
-      billing_keys = params[:client][:billing_data].try(:keys)
-
       params.require(:client).permit(
         :city_id, :name, :telephone, :address,
         :colony, :zc, :lat, :lng,

@@ -60,7 +60,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       expect(response.status).to eq(422)
     end
 
-    it 'when user has errors' do
+    it 'when errors are present' do
       post :create, params: {
         user: { name: "John Doe" }
       }
@@ -119,7 +119,7 @@ RSpec.describe Admin::UsersController, type: :controller do
       expect(response.status).to eq(422)
     end
 
-    it 'when user has errors' do
+    it 'when errors are present' do
       put :update, params: {
         id: @another_user.id,
         user: { name: nil }

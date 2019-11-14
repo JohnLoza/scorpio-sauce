@@ -43,8 +43,8 @@ class ApiController < ActionController::API
     end
 
     def render_unprocessable_error(obj)
-      response = { status: :error, message: :unprocessable, errors: obj.errors.full_messages }
-      render json: JSON.pretty_generate(response)
+      response = { status: :error, message: "unprocessable_entity", errors: obj.errors.full_messages }
+      render status: 422, json: JSON.pretty_generate(response)
       return true
     end
 

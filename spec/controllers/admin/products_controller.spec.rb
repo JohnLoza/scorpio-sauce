@@ -65,7 +65,7 @@ RSpec.describe Admin::ProductsController, type: :controller do
       expect(response.status).to eq(422)
     end
 
-    it 'when product has errors' do
+    it 'when errors are present' do
       post :create, params: {
         product: { name: "salsa scorpio 225ml" }
       }

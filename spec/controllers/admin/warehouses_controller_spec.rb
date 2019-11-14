@@ -60,7 +60,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
       expect(response.status).to eq(422)
     end
 
-    it 'when warehouse has errors' do
+    it 'when errors are present' do
       post :create, params: {
         warehouse: { name: nil }
       }
@@ -106,7 +106,7 @@ RSpec.describe Admin::WarehousesController, type: :controller do
       expect(response.status).to eq(422)
     end
 
-    it 'when warehouse has errors' do
+    it 'when errors are present' do
       put :update, params: {
         id: @warehouse,
         warehouse: { address: nil }

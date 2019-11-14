@@ -2,7 +2,7 @@ class Api::SessionsController < ApiController
   skip_before_action :authenticate_user!
 
   def create
-    unless params[:session]
+    unless params[:session] and params[:session][:email] and params[:session][:password]
       render_auth_error and return
     end
 
