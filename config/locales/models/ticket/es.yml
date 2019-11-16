@@ -1,0 +1,13 @@
+es:
+  activerecord:
+    models:
+      ticket:
+        one: Venta
+        other: Ventas
+    attributes:
+      ticket:
+        id: Clave
+        user_id: Repartidor
+        client_id: Cliente
+        total: Total
+        payment_method: Método de pago

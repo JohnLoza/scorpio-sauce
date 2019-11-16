@@ -45,22 +45,22 @@ get the details of a given ticket
 {
   "ticket":{
     "client_id": "1",
-    "total": "803.00",
+    "total": "805.00",
     "payment_method": "payment_method",
-    "details": {
-      "random_hash_key":{
+    "details": [
+      {
         "product_id": "2",
         "units": "15",
         "batch": "19O23AFG",
-        "sub_total": "203.00"
+        "sub_total": "202.50"
       },
-      "random_hash_key":{
+      {
         "product_id": "3",
         "units": "15",
         "batch": "19O23BFG",
-        "sub_total": "603.00"
+        "sub_total": "602.50"
       }
-    }
+    ]
   }
 }
 ```

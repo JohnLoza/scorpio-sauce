@@ -43,7 +43,7 @@ class Api::TicketsController < ApiController
       ticket = @current_user.tickets.build(ticket_params)
       params[:ticket][:details].each do |detail_params|
         permited_params = detail_params.permit(:product_id, :units, :batch, :sub_total)
-        ticket.details.build(detail_params.permit(:product_id, :units, :batch, :sub_total))
+        ticket.details.build(permited_params)
       end
 
       ticket

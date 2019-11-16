@@ -69,6 +69,13 @@
               <%= SupplyOrder.model_name.human(count: 2) %>
             <% end if can? :read, SupplyOrder %>
           </li>
+
+          <li class="nav-item">
+            <%= link_to admin_tickets_path, class: "nav-link tickets-controller" do %>
+              <i class="fas fa-fw fa-clipboard-list"></i>
+              <%= Ticket.model_name.human(count: 2) %>
+            <% end if can? :read, Ticket %>
+          </li>
         </ul>
       </div>
     </nav>

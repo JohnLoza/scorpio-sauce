@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     resources :supply_orders, except: [:edit, :update] do
       post 'supply', on: :member
     end
+
+    resources :tickets, only: [:index, :show]
   end
 
   namespace :api do

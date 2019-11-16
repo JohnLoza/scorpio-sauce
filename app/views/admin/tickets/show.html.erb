@@ -1,0 +1,56 @@
+<%= provide :title, Ticket.model_name.human %>
+<%= provide :page_header, Ticket.model_name.human %>
+
+<div class="row">
+  <div class="col-xl-12 col-lg-12 col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><%= yield :title %></h3>
+        <div class="row">
+          <div class="col-xl-3 col-lg-3 col-md-3 col-md-6 col-sm-6">
+            <p class="card-text">
+              <%= content_tag :span, Ticket.human_attribute_name(:user_id),
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= link_to @ticket.user, admin_user_path(@ticket.user) %>
+            </p>
+          </div>
+
+          <div class="col-xl-3 col-lg-3 col-md-3 col-md-6 col-sm-6">
+            <p class="card-text">
+              <%= content_tag :span, Ticket.human_attribute_name(:client_id),
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= link_to @ticket.client, admin_client_path(@ticket.client) %>
+            </p>
+          </div>
+
+          <div class="col-xl-3 col-lg-3 col-md-3 col-md-6 col-sm-6">
+            <p class="card-text">
+              <%= content_tag :span, Ticket.human_attribute_name(:total),
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= t("labels.currency", ammount: @ticket.total) %>
+            </p>
+          </div>
+
+          <div class="col-xl-3 col-lg-3 col-md-3 col-md-6 col-sm-6">
+            <p class="card-text">
+              <%= content_tag :span, Ticket.human_attribute_name(:payment_method),
+                class: "font-weight-bold text-uppercase" %><br>
+              <%= @ticket.payment_method %>
+            </p>
+          </div>
+        </div>
+
+        <p class="card-text">
+          <%= content_tag :span, t("labels.date"),
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= l(@ticket.created_at, format: :long) %>
+        </p>
+
+        <h3 class="card-title">Details</h3>
+        <% @ticket.details.includes(:product).each do |detail| %>
+          <%= render partial: "detail", locals: { detail: detail} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -26,12 +26,12 @@
         <p class="card-text">
           <%= content_tag :span, Product.human_attribute_name(:retail_price),
             class: "font-weight-bold text-uppercase" %><br>
-          <%= t(:product_price, price: @product.retail_price) %>
+          <%= t("labels.currency", ammount: @product.retail_price) %>
         </p>
         <p class="card-text">
           <%= content_tag :span, Product.human_attribute_name(:half_wholesale_price),
             class: "font-weight-bold text-uppercase" %><br>
-          <%= t(:product_price, price: @product.half_wholesale_price) %>
+          <%= t("labels.currency", ammount: @product.half_wholesale_price) %>
         </p>
         <p class="card-text">
           <%= content_tag :span, Product.human_attribute_name(:required_units_half_wholesale),
@@ -41,7 +41,7 @@
         <p class="card-text">
           <%= content_tag :span, Product.human_attribute_name(:wholesale_price),
             class: "font-weight-bold text-uppercase" %><br>
-          <%= t(:product_price, price: @product.wholesale_price) %>
+          <%= t("labels.currency", ammount: @product.wholesale_price) %>
         </p>
         <p class="card-text">
           <%= content_tag :span, Product.human_attribute_name(:required_units_wholesale),

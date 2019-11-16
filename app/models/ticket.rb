@@ -9,6 +9,8 @@ class Ticket < ApplicationRecord
 
   validates :payment_method, length: { maximum: 20 }
 
+  scope :recent, -> { order(created_at: :desc) }
+
   def save_and_update_route_stock(route_stock)
     begin
       ActiveRecord::Base.transaction do

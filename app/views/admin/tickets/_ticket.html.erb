@@ -1,0 +1,16 @@
+<tr>
+  <td>
+    <%= link_to ticket.user, admin_user_path(ticket.user) %>
+  </td>
+  <td>
+    <%= link_to ticket.client, admin_client_path(ticket.client) %>
+  </td>
+  <%= content_tag :td, t("labels.currency", ammount: ticket.total) %>
+  <%= content_tag :td, ticket.payment_method %>
+  <%= content_tag :td, l(ticket.created_at, format: :short) %>
+  <td>
+    <%= link_to admin_ticket_path(ticket), class: "btn btn-outline-light btn-sm" do %>
+      <i class="fas fa-fw fa-eye"></i>
+    <% end if can? :read, ticket %>
+  </td>
+</tr>

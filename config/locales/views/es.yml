@@ -1,5 +1,4 @@
 es:
-  product_price: $ %{price} MXN
   labels:
     access_denied: Acceso denegado (1010)
     account: Cuenta
@@ -11,6 +10,7 @@ es:
     batch: No lote
     concept: Concepto
     city: Ciudad/Población
+    currency: $ %{ammount} MXN
     date: Fecha
     depleted: Agotado
     do_filter: Filtrar
@@ -25,6 +25,7 @@ es:
     save: Guardar
     search: Buscar
     select: Selecciona
+    sub_total: sub total
     state: Estado
     transactions: Transacciones
     units: Unidades
