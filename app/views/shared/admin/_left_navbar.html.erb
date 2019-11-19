@@ -72,7 +72,7 @@
 
           <li class="nav-item">
             <%= link_to admin_tickets_path, class: "nav-link tickets-controller" do %>
-              <i class="fas fa-fw fa-clipboard-list"></i>
+              <i class="fas fa-fw fa-file"></i>
               <%= Ticket.model_name.human(count: 2) %>
             <% end if can? :read, Ticket %>
           </li>

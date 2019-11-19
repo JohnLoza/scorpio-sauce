@@ -10,8 +10,13 @@ class Admin::TicketsController < ApplicationController
 
   private
     def load_tickets
+      w_id = filter_params(require: :warehouse_id, default_value: current_user.warehouse_id)
+      # @warehouse = Warehouse.find(w_id)
+
       @pagy, @tickets = pagy(
-        Ticket.recent.includes(:client, :user)
+        Ticket.recent.joins(:user).merge(
+          User.by_warehouse(w_id)
+        ).includes(:client, :user)
       )
     end
 

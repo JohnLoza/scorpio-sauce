@@ -1,10 +1,15 @@
 class Api::TicketsController < ApiController
   def index
-    @pagy, @tickets = pagy(@current_user.tickets)
+    @pagy, @tickets = pagy(@current_user.tickets.recent)
+
+    data = @tickets.as_json(
+      only: [:id, :total, :payment_method],
+      include: { client: { only: :name } }
+    )
 
     response = {
       status: :completed,
-      data: @tickets.as_json(),
+      data: data,
       pagy: pagy_metadata(@pagy)
     }
 
@@ -14,7 +19,20 @@ class Api::TicketsController < ApiController
   def show
     @ticket = @current_user.tickets.find(params[:id])
 
-    response = { status: :completed, data: @ticket.as_json() }
+    data = @ticket.as_json(
+      only: [:total, :payment_method],
+      include: {
+        client: { only: :name },
+        details: {
+          only: [:units, :batch, :sub_total],
+          include: {
+            product: {only: :name}
+          }
+        }
+      }
+    )
+
+    response = { status: :completed, data: data }
     render json: JSON.pretty_generate(response)
   end
 
@@ -23,7 +41,9 @@ class Api::TicketsController < ApiController
     rs = @current_user.route_stocks.current_day.last
 
     if @ticket.save_and_update_route_stock(rs)
-      response = { status: :completed, data: @ticket.as_json() }
+      data = @ticket.as_json()
+      data["user_name"] = @current_user.name
+      response = { status: :completed, data: data }
       render json: JSON.pretty_generate(response)
     else
       render_unprocessable_error(@ticket)

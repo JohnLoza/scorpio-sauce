@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <%= content_tag :h5, t("labels.filters"), class: "card-header" %>
+      <div class="card-body">
+        <%= form_for :filter, method: :get, html: {class: "form-inline"} do |f| %>
+
+          <% if current_user.admin? %>
+            <div class="form-group mx-sm-3">
+              <%= f.label :warehouse_id, Warehouse.model_name.human, class: "sr-only"  %>
+              <%= f.select :warehouse_id, Warehouse.for_select,
+                { prompt: Warehouse.model_name.human, selected: filter_params(require: :warehouse_id) },
+                { class: "form-control" } %>
+            </div>
+          <% end %>
+
+          <%= f.submit t("labels.do_filter"), class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

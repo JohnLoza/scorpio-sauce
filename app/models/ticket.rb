@@ -10,6 +10,7 @@ class Ticket < ApplicationRecord
   validates :payment_method, length: { maximum: 20 }
 
   scope :recent, -> { order(created_at: :desc) }
+  scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) if w_id.present? }
 
   def save_and_update_route_stock(route_stock)
     begin
