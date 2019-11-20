@@ -1,3 +1,11 @@
+<p><%= content_tag :strong, @stock.product %></p>
+
+<p><%= content_tag :strong, t("labels.batch") %></p>
+<%= content_tag :p, @stock.batch %>
+
+<p><%= content_tag :strong, t("labels.expires_at") %></p>
+<%= content_tag :p, l(@stock.expires_at, format: :long) %>
+
 <%= raw @qr.as_html %>
 
 <style>

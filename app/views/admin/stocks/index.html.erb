@@ -20,8 +20,13 @@
               <i class="fas fa-fw fa-clipboard-list"></i> <%= t("labels.transactions") %>
             <% end if current_user.admin? %>
 
-            <%= link_to "#", class: "dropdown-item icon" do %>
-              <i class="fas fa-fw fa-cogs"></i> Work in progress
+            <%= link_to "#", class: "dropdown-item icon",
+              "data-toggle" => "modal", "data-target" => "#qrmodal" do %>
+              <i class="fas fa-fw fa-code"></i> <%= t("labels.print_qr") %>
+            <% end if can? :print_qr, Stock %>
+
+            <%= link_to batch_search_admin_stocks_path(), class: "dropdown-item icon" do %>
+              <i class="fas fa-fw fa-map-marker-alt"></i> <%= t("labels.batch_search") %>
             <% end %>
           </div>
         </div>
@@ -50,3 +55,47 @@
     </div>
   </div>
 </div>
+
+<div id="qrmodal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Imprimir código QR</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_for :qr, method: :get, url: print_qr_admin_stock_path(0) do |f| %>
+          <div class="form-group">
+            <%= f.label :product_id, Product.model_name.human(count: 1)  %>
+            <%= f.select :product_id, Product.for_select,
+              { prompt: Product.model_name.human },
+              { class: "form-control", required: true } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :batch, t("labels.batch")  %>
+            <%= f.text_field :batch, class: "form-control", required: true %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :expires_at, t("labels.expires_at")  %>
+            <%= f.text_field :expires_at, class: "form-control", required: true %>
+          </div>
+
+          <%= f.submit t("labels.print_qr"), class: "btn btn-primary" %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).on("turbolinks:load", function(){
+  $("#qr_expires_at").datepicker({ format: "dd-mm-yyyy" });
+})
+</script>

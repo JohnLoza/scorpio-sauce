@@ -1,5 +1,8 @@
 class Admin::StocksController < ApplicationController
+  skip_authorization_check only: :batch_search
+
   before_action :load_stocks, only: :index
+  before_action :load_stock_for_qr, only: :print_qr
   load_and_authorize_resource
 
   def index
@@ -25,6 +28,20 @@ class Admin::StocksController < ApplicationController
     render :print_qr, layout: false
   end
 
+  def batch_search
+    return unless params[:batch_search].present?
+    @product_id = params[:batch_search][:product_id]
+    @batch = params[:batch_search][:batch]
+
+    @stock = Stock.where(product_id: @product_id, batch: @batch).includes(:warehouse)
+
+    @pagy, @tickets = pagy(
+      Ticket.joins(:details).merge(
+        TicketDetail.where(product_id: @product_id, batch: @batch)
+      ).distinct.includes(:client, :details)
+    )
+  end
+
   private
     def warehouse_id
       params[:filters] = params[:filters] || {}
@@ -41,6 +58,14 @@ class Admin::StocksController < ApplicationController
           .by_product(filter_params(require: :product_id))
           .order(:product_id).includes(:product)
       )
+    end
+
+    def load_stock_for_qr
+      if params[:id] == "0" and params[:qr].present?
+        @stock = Stock.new(params[:qr].permit(:product_id, :batch, :expires_at))
+      else
+        @stock = Stock.find(params[:id])
+      end
     end
 
 end

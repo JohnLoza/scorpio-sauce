@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :stocks, only: :index do
       get 'transactions', on: :collection
       get 'print_qr', on: :member
+      get 'batch_search', on: :collection
     end
 
     resources :warehouse_shipments, except: [:edit, :update] do

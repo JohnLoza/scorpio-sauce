@@ -8,6 +8,7 @@ es:
     available: Disponible
     balance: Balance
     batch: No lote
+    batch_search: Búsqueda de Lote
     canceled: Cancelado
     concept: Concepto
     city: Ciudad/Población

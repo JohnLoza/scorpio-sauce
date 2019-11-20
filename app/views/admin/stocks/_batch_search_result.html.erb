@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <%= content_tag :h5, t("labels.batch_search"), class: "card-header" %>
+      <div class="card-body">
+        <%= content_tag :h5, Stock.model_name.human, class: "card-title" %>
+        <% @stock.each do |s| %>
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <%= content_tag :span, Warehouse.model_name.human, class: "font-weight-bold" %>
+              <%= content_tag :p, s.warehouse %>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <%= content_tag :span, t("labels.units"), class: "font-weight-bold" %>
+              <%= content_tag :p, s.units %>
+            </div>
+          </div>
+          <hr>
+        <% end %>
+
+        <%= content_tag :h5, Ticket.model_name.human(count: 2), class: "card-title" %>
+        <div class="row">
+          <table class="table table-bordered">
+            <thead>
+              <%= content_tag :th, Ticket.human_attribute_name(:id) %>
+              <%= content_tag :th, t("labels.date") %>
+              <%= content_tag :th, Ticket.human_attribute_name(:client_id) %>
+              <%= content_tag :th, t("labels.units") %>
+            </thead>
+            <tbody>
+              <% @tickets.each do |t| %>
+                <tr>
+                  <%= content_tag :td, t.id %>
+                  <%= content_tag :td, l(t.created_at, format: :short) %>
+                  <%= content_tag :td, (link_to t.client, admin_client_path(t.client)) %>
+                  <% t.details.each do |d| %>
+                    <% next unless d.product_id.to_s == @product_id and d.batch == @batch %>
+                    <%= content_tag :td, d.units %>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+
+        <%== pagy_bootstrap_nav(@pagy) %>
+      </div>
+    </div>
+  </div>
+</div>
