@@ -40,6 +40,17 @@ get the details of a given ticket
 }
 ```
 
+## api/tickets/:id **DELETE Request**
+cancel the ticket
+
+### **response**
+```json
+{
+  "status": "completed",
+  "data": ticket_object
+}
+```
+
 ## ticket params
 ```json
 {

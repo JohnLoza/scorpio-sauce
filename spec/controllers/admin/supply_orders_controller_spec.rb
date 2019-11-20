@@ -114,7 +114,7 @@ RSpec.describe Admin::SupplyOrdersController, type: :controller do
 
     it 'should destroy product' do
       delete :destroy, params: { id: supply_order }
-      expect(assigns(:supply_order)).to be_destroyed
+      expect(assigns(:supply_order).status).to eq(SupplyOrder::STATUS[:canceled])
     end
   end
 

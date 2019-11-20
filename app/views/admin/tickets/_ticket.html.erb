@@ -1,4 +1,5 @@
 <tr>
+  <%= content_tag :td, ticket.id %>
   <td>
     <%= link_to ticket.user, admin_user_path(ticket.user) %>
   </td>
@@ -9,6 +10,7 @@
   <%= content_tag :td, ticket.payment_method %>
   <%= content_tag :td, l(ticket.created_at, format: :short) %>
   <td>
+    <%= content_tag :span, t("labels.canceled"), class: "label label-danger" if ticket.canceled? %>
     <%= link_to admin_ticket_path(ticket), class: "btn btn-outline-light btn-sm" do %>
       <i class="fas fa-fw fa-eye"></i>
     <% end if can? :read, ticket %>

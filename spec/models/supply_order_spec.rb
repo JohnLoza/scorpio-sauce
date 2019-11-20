@@ -7,7 +7,7 @@ RSpec.describe SupplyOrder, type: :model do
 
     @product = FactoryBot.create(:product)
     @supply_order = SupplyOrder.new(user_id: @user.id, target_user_id: @user.id, warehouse_id: @warehouse.id,
-      to_supply: [{product_id: @product.id, units: 50}])
+      to_supply: [{product_id: @product.id, units: 50}], status: "new")
   end
 
   subject { @supply_order }
@@ -19,9 +19,9 @@ RSpec.describe SupplyOrder, type: :model do
   it { should respond_to(:route_stock) }
 
   it { should respond_to(:to_supply) }
-  it { should respond_to(:processed) }
+  it { should respond_to(:status) }
 
-  it { should respond_to(:deletable?) }
+  it { should respond_to(:cancelable?) }
   it { should respond_to(:processable?) }
   it { should respond_to(:supply) }
 

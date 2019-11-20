@@ -51,7 +51,16 @@ class Api::TicketsController < ApiController
   end
 
   def destroy
-    render_404
+    @ticket = @current_user.tickets.find(params[:id])
+    render_404 and return if @ticket.canceled?
+
+    rs = @current_user.route_stocks.current_day.last
+    if @ticket.cancel!(rs)
+      response = { status: :completed, data: @ticket.as_json() }
+      render json: JSON.pretty_generate(response)
+    else
+      render_unprocessable_error(@ticket)
+    end
   end
 
   private

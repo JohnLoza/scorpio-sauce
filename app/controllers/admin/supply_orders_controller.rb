@@ -22,7 +22,7 @@ class Admin::SupplyOrdersController < ApplicationController
   end
 
   def destroy
-    if @supply_order.destroy
+    if @supply_order.update_attributes(status: SupplyOrder::STATUS[:canceled])
       flash[:success] = t(".success")
     else
       flash[:info] = t(".failure")

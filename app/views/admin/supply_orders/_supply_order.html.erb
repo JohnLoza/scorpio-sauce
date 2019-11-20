@@ -1,4 +1,5 @@
 <tr>
+  <%= content_tag :td, supply_order.id %>
   <td>
     <%= link_to supply_order.user, admin_user_path(supply_order.user) %>
   </td>
@@ -8,7 +9,7 @@
   <td>
     <%= link_to supply_order.supplier, admin_user_path(supply_order.supplier) if supply_order.supplier.present? %>
   </td>
-  <%= content_tag :td, t("labels.processed.#{supply_order.processed}").html_safe %>
+  <%= content_tag :td, t("status.#{supply_order.status}").html_safe %>
   <%= content_tag :td, l(supply_order.created_at, format: :short) %>
   <td>
     <%= link_to admin_supply_order_path(supply_order),
@@ -20,6 +21,6 @@
       method: :delete, class: "btn btn-danger btn-sm",
       data: { confirm: t(".you_sure") } do %>
       <i class="fas fa-fw fa-trash"></i>
-    <% end if supply_order.deletable? and can? :destroy, supply_order %>
+    <% end if supply_order.cancelable? and can? :destroy, supply_order %>
   </td>
 </tr>

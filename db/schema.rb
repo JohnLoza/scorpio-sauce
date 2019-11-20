@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2019_10_29_112321) do
     t.bigint "supplier_user_id"
     t.bigint "warehouse_id"
     t.json "to_supply"
-    t.boolean "processed", default: false
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_supply_orders_on_user_id"

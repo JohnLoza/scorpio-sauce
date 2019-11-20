@@ -8,6 +8,12 @@
       <div class="card-body">
         <h3 class="card-title"><%= yield :title %></h3>
 
+        <p class="card-text">
+          <%= content_tag :span, SupplyOrder.human_attribute_name(:id),
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @supply_order.id %>
+        </p>
+
         <div class="row">
           <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
             <p class="card-text">
@@ -35,9 +41,9 @@
 
           <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
             <p class="card-text">
-              <%= content_tag :span, SupplyOrder.human_attribute_name(:processed),
+              <%= content_tag :span, SupplyOrder.human_attribute_name(:status),
                 class: "font-weight-bold text-uppercase" %><br>
-              <%= t("labels.processed.#{@supply_order.processed}").html_safe %>
+              <%= t("status.#{@supply_order.status}").html_safe %>
             </p>
           </div>
         </div>

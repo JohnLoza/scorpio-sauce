@@ -1,23 +1,31 @@
 class SupplyOrder < ApplicationRecord
+  STATUS = {
+    new: "new".freeze,
+    processed: "processed".freeze,
+    canceled: "canceled".freeze
+  }
+
   belongs_to :user
   belongs_to :target_user, class_name: :User, foreign_key: :target_user_id
   belongs_to :supplier, class_name: :User, foreign_key: :supplier_user_id, optional: true
   belongs_to :warehouse
   has_one :route_stock
 
+  before_create { self.status = STATUS[:new] }
+
   validates :to_supply, presence: true
   validate :to_supply_hash_keys
 
   scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) }
-  scope :processed, -> (processed = true) { where(processed: processed) }
+  scope :by_status, -> (status) { where(status: status) }
   scope :recent, -> { order(created_at: :desc) }
 
-  def deletable?
-    processed == false
+  def cancelable?
+    self.status == STATUS[:new]
   end
 
   def processable?
-    !processed
+    self.status == STATUS[:new]
   end
 
   def supply(options = {})
@@ -31,11 +39,11 @@ class SupplyOrder < ApplicationRecord
     begin
       ActiveRecord::Base.transaction do
         self.build_route_stock(user_id: self.target_user_id, products: options[:supplies])
-        self.update_attributes!(supplier_user_id: options[:supplier], processed: true)
+        self.update_attributes!(supplier_user_id: options[:supplier], processed: STATUS[:processed])
         Stock.withdraw_supplies!(options[:supplies], self.warehouse_id, options[:supplier])
       end
     rescue => exception
-      self.processed = false
+      self.status = STATUS[:new]
       self.errors.add(:supplies, exception.message)
       return false
     end

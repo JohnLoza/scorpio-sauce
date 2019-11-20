@@ -5,6 +5,7 @@ class CreateTickets < ActiveRecord::Migration[5.2]
       t.belongs_to :client
       t.decimal :total, precision: 10, scale: 2
       t.string :payment_method
+      t.boolean :canceled, default: false
 
       t.timestamps
     end

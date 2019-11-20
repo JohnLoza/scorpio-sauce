@@ -25,6 +25,19 @@ class RouteStock < ApplicationRecord
     self.save!
   end
 
+  def add!(ticket)
+    ticket.details.each do |ticket_detail|
+      indx = self.products.index {|e| e["product_id"].to_i == ticket_detail.product_id and e["batch"] == ticket_detail.batch }
+      unless indx.present?
+        raise StandardError, I18n.t("errors.route_stock_product_not_found", batch: ticket_detail.batch)
+      end
+
+      self.products[indx]["units_left"] += ticket_detail.units
+    end
+
+    self.save!
+  end
+
   private
     def set_products_units_left
       self.products.each_with_index do |product, indx|
