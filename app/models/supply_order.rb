@@ -39,7 +39,7 @@ class SupplyOrder < ApplicationRecord
     begin
       ActiveRecord::Base.transaction do
         self.build_route_stock(user_id: self.target_user_id, products: options[:supplies])
-        self.update_attributes!(supplier_user_id: options[:supplier], processed: STATUS[:processed])
+        self.update_attributes!(supplier_user_id: options[:supplier], status: STATUS[:processed])
         Stock.withdraw_supplies!(options[:supplies], self.warehouse_id, options[:supplier])
       end
     rescue => exception

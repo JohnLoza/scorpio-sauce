@@ -94,13 +94,15 @@ class WarehouseShipment < ApplicationRecord
     end
 
     def transaction_params(stock, product)
+      concept = self.devolution? ? "devolution" : "incoming"
+
       {
         stock_id: stock.id,
         user_id: self.receiver_user_id,
         units: product["real_units"] || product["units"],
         units_post_transaction: stock.units,
         incoming: true,
-        concept: "incoming"
+        concept: concept
       }
     end
 

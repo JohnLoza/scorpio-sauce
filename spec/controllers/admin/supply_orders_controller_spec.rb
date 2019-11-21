@@ -137,10 +137,11 @@ RSpec.describe Admin::SupplyOrdersController, type: :controller do
       expect(response.status).to eq(200)
     end
 
-    xit 'saves record' do
+    it 'saves record' do
       post :supply, params: { id: supply_order,
         products: { random_hash: {product_id: @product.id, units: 150, batch: "ABC1234"}} }
 
+      expect(assigns(:supply_order).status).to eq(SupplyOrder::STATUS[:processed])
       expect(response.status).to eq(302)
     end
   end
