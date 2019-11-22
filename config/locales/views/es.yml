@@ -1,4 +1,5 @@
 es:
+  brand: Salsa Scorpio
   labels:
     access_denied: Acceso denegado (1010)
     account: Cuenta
@@ -18,12 +19,14 @@ es:
     do_filter: Filtrar
     expires_at: Fecha de Expiración
     filters: Filtros
+    forgot_password: Olvidé mi contraseña
     form_has_errors: El formulario contiene algunos errores.
     home: Inicio
     name: Nombre
     optional: Opcional
     print_qr: Imprimir código QR
     product: Producto
+    remember_me: Recuérdame
     save: Guardar
     search: Buscar
     select: Selecciona
