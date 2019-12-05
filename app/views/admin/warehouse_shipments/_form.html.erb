@@ -13,9 +13,16 @@
       <div class="form-group">
         <%= f.label :status, t("status.devolution").html_safe %>
         <div class="switch-button switch-button-yesno">
-          <%= f.check_box :status, {}, WarehouseShipment::STATUS[:devolution], nil %>
+          <%= f.check_box :status, {onchange: "toggle_expires_at()"},
+            WarehouseShipment::STATUS[:devolution], nil %>
           <span><label for="warehouse_shipment_status"></label></span>
         </div>
+      </div>
+
+      <div class="form-group delivery_man" style="display: none;">
+        <%= f.label :user, t("roles.delivery_man") %>
+         <%= f.select :devolution_user, User.for_select(warehouse_id: current_user.warehouse_id, role: :delivery_man),
+          { prompt: t("labels.select") }, { class: "form-control" } %>
       </div>
 
       <section class="products-container">
@@ -40,6 +47,12 @@ function addProductFields(){
     format: "dd-mm-yyyy",
     startDate: "<%= Time.now.strftime("%d-%m-%Y") %>"
   });
+}
+
+function toggle_expires_at() {
+  $(".expires_at").val("null");
+  $(".expires_at_group").toggle();
+  $(".delivery_man").toggle();
 }
 
 $(document).on("turbolinks:load", function(){

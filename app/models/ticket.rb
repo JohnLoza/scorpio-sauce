@@ -11,6 +11,7 @@ class Ticket < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
   scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) if w_id.present? }
+  scope :current_day, -> { where("created_at > ?", Date.today) }
 
   def canceled?
     self.canceled

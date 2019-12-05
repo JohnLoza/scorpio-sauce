@@ -29,17 +29,19 @@
     <p class="card-text">
       <%= content_tag :span, t("labels.expires_at"),
         class: "font-weight-bold text-uppercase" %><br>
-      <% date = Date.strptime(product["expires_at"], "%d-%m-%Y") %>
-      <%= l(date, format: :long) %>
+      <% date = Date.strptime(product["expires_at"], "%d-%m-%Y") if product["expires_at"] != "null" %>
+      <%= l(date, format: :long) if product["expires_at"] != "null" %>
     </p>
   </div>
 
-  <div class="col-sm-12">
-    <div class="form-group">
-      <%= number_field_tag "real_units[]", product["units"],
-        class: "form-control", min: 1, step: 1, max: product["units"], required: true,
-        onkeydown: "toggleForm(this)" if @warehouse_shipment.reportable? and can? :report, @warehouse_shipment %>
+  <% if @warehouse_shipment.reportable? and can? :report, @warehouse_shipment %>
+    <div class="col-sm-12">
+      <div class="form-group">
+        <%= number_field_tag "real_units[]", product["units"],
+          class: "form-control", min: 1, step: 1, max: product["units"], required: true,
+          onchange: "toggleForm(this)", onkeydown: "toggleForm(this)" %>
+      </div>
     </div>
-  </div>
+  <% end %>
 
 </div>

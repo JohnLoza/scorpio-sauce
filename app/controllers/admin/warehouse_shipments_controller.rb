@@ -14,6 +14,15 @@ class Admin::WarehouseShipmentsController < ApplicationController
 
   def create
     if @warehouse_shipment.save
+      if params[:warehouse_shipment][:devolution_user].present?
+        delivery_man = User.find(params[:warehouse_shipment][:devolution_user])
+        rs = delivery_man.route_stocks.current_day.last
+        rs.products.each.with_index do |product, indx|
+          rs.products[indx]["units_left"] = 0
+        end
+        rs.save
+      end
+
       flash[:success] = t(".success")
       redirect_to [:admin, @warehouse_shipment]
     else

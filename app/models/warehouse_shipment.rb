@@ -1,4 +1,5 @@
 class WarehouseShipment < ApplicationRecord
+  attr_accessor :devolution_user
   before_create :set_new_status
 
   STATUS = {

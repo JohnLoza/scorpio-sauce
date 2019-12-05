@@ -1,9 +1,9 @@
 class Api::TicketsController < ApiController
   def index
-    @pagy, @tickets = pagy(@current_user.tickets.recent)
+    @pagy, @tickets = pagy(@current_user.tickets.current_day.recent)
 
     data = @tickets.as_json(
-      only: [:id, :total, :payment_method],
+      only: [:id, :total, :payment_method, :canceled],
       include: { client: { only: :name } }
     )
 
@@ -51,7 +51,7 @@ class Api::TicketsController < ApiController
   end
 
   def destroy
-    @ticket = @current_user.tickets.find(params[:id])
+    @ticket = @current_user.tickets.current_day.where(params[:id]).take
     render_404 and return if @ticket.canceled?
 
     rs = @current_user.route_stocks.current_day.last
