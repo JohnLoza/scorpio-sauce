@@ -14,7 +14,7 @@ class RouteStock < ApplicationRecord
     rs = RouteStock.where(user_id: user_id).current_day.last
 
     unless rs
-      raise ActiveRecord::RecordNotSaved, "No se encontró el inventario en ruta para cancelar"
+      raise ActiveRecord::RecordInvalid, "No se encontró el inventario en ruta para cancelar"
     end
 
     rs.products.each.with_index do |product, indx|
@@ -28,10 +28,10 @@ class RouteStock < ApplicationRecord
       indx = self.products.index {|e| e["product_id"].to_i == ticket_detail.product_id and e["batch"] == ticket_detail.batch }
 
       unless indx.present?
-        raise StandardError, I18n.t("errors.route_stock_product_not_found", batch: ticket_detail.batch)
+        raise ActiveRecord::RecordInvalid, I18n.t("errors.route_stock_product_not_found", batch: ticket_detail.batch)
       end
       unless self.products[indx]["units_left"] >= ticket_detail.units
-        raise StandardError, I18n.t("errors.not_enough_stock", batch: ticket_detail.batch)
+        raise ActiveRecord::RecordInvalid, I18n.t("errors.not_enough_stock", batch: ticket_detail.batch)
       end
 
       self.products[indx]["units_left"] -= ticket_detail.units
@@ -44,7 +44,7 @@ class RouteStock < ApplicationRecord
     ticket.details.each do |ticket_detail|
       indx = self.products.index {|e| e["product_id"].to_i == ticket_detail.product_id and e["batch"] == ticket_detail.batch }
       unless indx.present?
-        raise StandardError, I18n.t("errors.route_stock_product_not_found", batch: ticket_detail.batch)
+        raise ActiveRecord::RecordInvalid, I18n.t("errors.route_stock_product_not_found", batch: ticket_detail.batch)
       end
 
       self.products[indx]["units_left"] += ticket_detail.units
