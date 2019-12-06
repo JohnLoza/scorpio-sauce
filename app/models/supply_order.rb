@@ -29,8 +29,8 @@ class SupplyOrder < ApplicationRecord
   end
 
   def supply(options = {})
-    raise ArgumentError, "supplier option required" unless options[:supplier].present?
-    raise ArgumentError, "supplies option required" unless options[:supplies].present?
+    raise ActiveRecord::RecordInvalid, "supplier option required" unless options[:supplier].present?
+    raise ActiveRecord::RecordInvalid, "supplies option required" unless options[:supplies].present?
 
     unless valid_supplies?(options[:supplies])
       return false

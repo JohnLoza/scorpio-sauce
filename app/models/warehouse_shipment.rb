@@ -70,7 +70,7 @@ class WarehouseShipment < ApplicationRecord
           Transaction.create!(transaction_params(s, product))
         end
       end # transaction end
-    rescue => exception
+    rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved => exception
       self.errors.add(:products, exception.message)
     end
   end

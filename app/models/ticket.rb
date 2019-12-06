@@ -26,7 +26,7 @@ class Ticket < ApplicationRecord
       ActiveRecord::Base.transaction do
         self.save!
         unless route_stock
-          raise StandardError, t("errors.route_stock_not_available")
+          raise ActiveRecord::RecordInvalid, t("errors.route_stock_not_available")
         end
         route_stock.withdraw!(self)
       end

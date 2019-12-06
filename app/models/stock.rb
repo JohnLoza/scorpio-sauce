@@ -30,7 +30,7 @@ class Stock < ApplicationRecord
         product_id: s_i["product_id"], batch: s_i["batch"])
 
       unless stock
-        raise StandardError, I18n.t("errors.product_not_found", batch: s_i["batch"])
+        raise ActiveRecord::RecordInvalid, I18n.t("errors.product_not_found", batch: s_i["batch"])
       end
 
       stock.withdraw!(s_i["units"].to_i)
@@ -47,7 +47,7 @@ class Stock < ApplicationRecord
 
   def withdraw!(quantity)
     unless self.has_minimum_stock?(quantity)
-      raise StandardError, I18n.t("errors.not_enough_stock", batch: self.batch)
+      raise ActiveRecord::RecordInvalid, I18n.t("errors.not_enough_stock", batch: self.batch)
     end
 
     self.update_attributes!(units: self.units - quantity)
