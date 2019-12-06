@@ -17,6 +17,10 @@ class Ticket < ApplicationRecord
     self.canceled
   end
 
+  def invoice_required?
+    self.invoice_required
+  end
+
   def save_and_update_route_stock(route_stock)
     begin
       ActiveRecord::Base.transaction do

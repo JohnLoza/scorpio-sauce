@@ -21,6 +21,7 @@ es:
     filters: Filtros
     forgot_password: Olvidé mi contraseña
     form_has_errors: El formulario contiene algunos errores.
+    invoice_required: Factura requerida
     home: Inicio
     name: Nombre
     optional: Opcional
