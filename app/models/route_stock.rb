@@ -8,6 +8,21 @@ class RouteStock < ApplicationRecord
 
   scope :current_day, -> { where("created_at > ?", Date.today) }
 
+  def self.finish_current_by_user_id!(user_id)
+    return unless user_id.present?
+
+    rs = RouteStock.where(user_id: user_id).current_day.last
+
+    unless rs
+      raise ActiveRecord::RecordNotSaved, "No se encontró el inventario en ruta para cancelar"
+    end
+
+    rs.products.each.with_index do |product, indx|
+      rs.products[indx]["units_left"] = 0
+    end
+    rs.save!
+  end
+
   def withdraw!(ticket)
     ticket.details.each do |ticket_detail|
       indx = self.products.index {|e| e["product_id"].to_i == ticket_detail.product_id and e["batch"] == ticket_detail.batch }

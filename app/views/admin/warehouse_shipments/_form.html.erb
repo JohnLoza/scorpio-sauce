@@ -41,12 +41,20 @@ function addProductFields(){
   let to_append = "<%= j render "product_fields" %>";
   let token = Math.random().toString(36).substr(2); // remove `0.`
   to_append = to_append.replace(/replace_me/g, token);
+
+  let devolution = document.getElementById("warehouse_shipment_status");
+  if (devolution.checked)
+    toggle_expires_at();
+
   $(".products-container").append(to_append);
 
   $(`#products_${token}_expires_at`).datepicker({
     format: "dd-mm-yyyy",
     startDate: "<%= Time.now.strftime("%d-%m-%Y") %>"
   });
+
+  if (devolution.checked)
+    toggle_expires_at();
 }
 
 function toggle_expires_at() {

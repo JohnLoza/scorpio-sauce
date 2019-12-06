@@ -16,7 +16,7 @@ class Admin::ProductsController < ApplicationController
       flash[:success] = t(".success", product: @product)
       redirect_to [:admin, @product]
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -28,7 +28,7 @@ class Admin::ProductsController < ApplicationController
       flash[:success] = t(".success", product: @product)
       redirect_to [:admin, @product]
     else
-      render 'edit'
+      render :edit
     end
   end
 
