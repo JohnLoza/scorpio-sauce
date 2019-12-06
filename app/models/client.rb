@@ -18,6 +18,8 @@ class Client < ApplicationRecord
 
   validates :zc, length: { is: 5 }
 
+  scope :order_by_name, -> (way = :asc) { order(name: way) }
+
   def to_s
     name
   end

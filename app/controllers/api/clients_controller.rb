@@ -1,7 +1,7 @@
 class Api::ClientsController < ApiController
   def index
     @pagy, @clients = pagy(
-      @current_user.clients.active.includes(city: :state)
+      @current_user.clients.active.order_by_name.includes(city: :state)
     )
 
     response = {

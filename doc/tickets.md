@@ -40,6 +40,28 @@ get the details of a given ticket
 }
 ```
 
+## api/tickets/:id **PUT Request**
+update ticket
+
+### **required params**
+```json
+{
+  "ticket": {
+    "invoice_required": "0 or 1",
+    "cfdi": "cfdi",
+    "payment_method": "payment method"
+  }
+}
+```
+
+### **response**
+```json
+{
+  "status": "completed",
+  "data": ticket_object
+}
+```
+
 ## api/tickets/:id **DELETE Request**
 cancel the ticket
 
@@ -57,7 +79,9 @@ cancel the ticket
   "ticket":{
     "client_id": "1",
     "total": "805.00",
+    "invoice_required": "optional for creation DEFAULT is false",
     "payment_method": "payment_method",
+    "cfdi": "optional DEFAULT is null",
     "details": [
       {
         "product_id": "2",

@@ -48,7 +48,7 @@ Rails.application.routes.draw do
       get 'locations', on: :collection
     end
 
-    resources :tickets, except: [:new, :edit, :update]
+    resources :tickets, except: [:new, :edit]
     resources :products, only: [:index, :show]
     resources :route_stocks, only: :show
   end

@@ -50,6 +50,22 @@ class Api::TicketsController < ApiController
     end
   end
 
+  def update
+    @ticket = @current_user.tickets.current_day.where(params[:id]).take
+    render_404 and return if @ticket.canceled?
+
+    @ticket.invoice_required = params[:ticket][:invoice_required]
+    @ticket.payment_method = params[:ticket][:payment_method]
+    @ticket.cfdi = params[:ticket][:cfdi]
+
+    if @ticket.save_and_update_route_stock
+      response = { status: :completed, data: @ticket.as_json() }
+      render json: JSON.pretty_generate(response)
+    else
+      render_unprocessable_error(@ticket)
+    end
+  end
+
   def destroy
     @ticket = @current_user.tickets.current_day.where(params[:id]).take
     render_404 and return if @ticket.canceled?
@@ -65,7 +81,7 @@ class Api::TicketsController < ApiController
 
   private
     def ticket_params
-      params.require(:ticket).permit(:client_id, :total, :payment_method)
+      params.require(:ticket).permit(:client_id, :total, :invoice_required, :payment_method, :cfdi)
     end
 
     def build_ticket_and_details
