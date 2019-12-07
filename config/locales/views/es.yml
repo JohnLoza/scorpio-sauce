@@ -61,3 +61,4 @@ es:
     product_not_found: No se encontró el producto con lote '%{batch}'
     route_stock_product_not_found: No se encontró el producto en ruta con lote '%{batch}'
     route_stock_not_available: No tenemos inventario en ruta activo
+    route_stock_not_found: No se encontró el inventario en ruta para cancelar

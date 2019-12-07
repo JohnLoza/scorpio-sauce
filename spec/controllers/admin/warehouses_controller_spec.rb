@@ -13,7 +13,8 @@ RSpec.describe Admin::WarehousesController, type: :controller do
       another_warehouse = FactoryBot.create(:warehouse)
 
       get :index
-      expect(assigns(:warehouses)).to eq([@warehouse, another_warehouse])
+      expect(assigns(:warehouses)).to include(@warehouse)
+      expect(assigns(:warehouses)).to include(another_warehouse)
     end
 
     it 'renders the index template' do

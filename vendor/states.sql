@@ -1,39 +1,40 @@
 /*
- * $ cat file.sql | heroku pg:psql --app app_name
- * $ echo "select * from table;" | heroku pg:psql --app app_name
- * $ heroku pg:psql --app app_name < file.sql
+ * $ cat file.sql | heroku pg:psql --app app_`name`
+ * $ echo "select * from table," | heroku pg:psql --app app_`name`
+ * $ heroku pg:psql --app app_`name` < file.sql
  */
 
 /* states */
-insert into states (id, name) values('2526','Aguascalientes');
-insert into states (id, name) values('2527','Baja California');
-insert into states (id, name) values('2528','Baja California Sur');
-insert into states (id, name) values('2529','Campeche');
-insert into states (id, name) values('2530','Chihuahua');
-insert into states (id, name) values('2531','Chiapas');
-insert into states (id, name) values('2532','Coahuila');
-insert into states (id, name) values('2533','Colima');
-insert into states (id, name) values('2534','Ciudad de México');
-insert into states (id, name) values('2535','Durango');
-insert into states (id, name) values('2536','Guerrero');
-insert into states (id, name) values('2537','Guanajuato');
-insert into states (id, name) values('2538','Hidalgo');
-insert into states (id, name) values('2539','Jalisco');
-insert into states (id, name) values('2540','Edo. México');
-insert into states (id, name) values('2541','Michoacán');
-insert into states (id, name) values('2542','Morelos');
-insert into states (id, name) values('2543','Nayarit');
-insert into states (id, name) values('2544','Nuevo León');
-insert into states (id, name) values('2545','Oaxaca');
-insert into states (id, name) values('2546','Puebla');
-insert into states (id, name) values('2547','Querétaro');
-insert into states (id, name) values('2548','Quintana Roo');
-insert into states (id, name) values('2549','Sinaloa');
-insert into states (id, name) values('2550','San Luis Potosí');
-insert into states (id, name) values('2551','Sonora');
-insert into states (id, name) values('2552','Tabasco');
-insert into states (id, name) values('2553','Tamaulipas');
-insert into states (id, name) values('2554','Tlaxcala');
-insert into states (id, name) values('2555','Veracruz');
-insert into states (id, name) values('2556','Yucatán');
-insert into states (id, name) values('2557','Zacatecas');
+INSERT INTO states (id, `name`) VALUES
+('2526','Aguascalientes'),
+('2528','Baja California Sur'),
+('2527','Baja California'),
+('2529','Campeche'),
+('2530','Chihuahua'),
+('2531','Chiapas'),
+('2532','Coahuila'),
+('2533','Colima'),
+('2534','Ciudad de México'),
+('2535','Durango'),
+('2536','Guerrero'),
+('2537','Guanajuato'),
+('2538','Hidalgo'),
+('2539','Jalisco'),
+('2540','Edo. México'),
+('2541','Michoacán'),
+('2542','Morelos'),
+('2543','Nayarit'),
+('2544','Nuevo León'),
+('2545','Oaxaca'),
+('2546','Puebla'),
+('2547','Querétaro'),
+('2548','Quintana Roo'),
+('2549','Sinaloa'),
+('2550','San Luis Potosí'),
+('2551','Sonora'),
+('2552','Tabasco'),
+('2553','Tamaulipas'),
+('2554','Tlaxcala'),
+('2555','Veracruz'),
+('2556','Yucatán'),
+('2557','Zacatecas');

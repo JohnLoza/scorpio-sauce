@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_29_112321) do
+ActiveRecord::Schema.define(version: 2019_10_28_184650) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -135,7 +135,11 @@ ActiveRecord::Schema.define(version: 2019_10_29_112321) do
     t.bigint "user_id"
     t.bigint "client_id"
     t.decimal "total", precision: 10, scale: 2
+    t.boolean "invoice_required", default: false
     t.string "payment_method"
+    t.string "cfdi"
+    t.string "invoice_folio"
+    t.boolean "canceled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_tickets_on_client_id"

@@ -12,10 +12,7 @@ class RouteStock < ApplicationRecord
     return unless user_id.present?
 
     rs = RouteStock.where(user_id: user_id).current_day.last
-
-    unless rs
-      raise ActiveRecord::RecordInvalid, "No se encontró el inventario en ruta para cancelar"
-    end
+    raise ActiveRecord::RecordInvalid, I18n.t("errors.route_stock_not_found") unless rs
 
     rs.products.each.with_index do |product, indx|
       rs.products[indx]["units_left"] = 0
