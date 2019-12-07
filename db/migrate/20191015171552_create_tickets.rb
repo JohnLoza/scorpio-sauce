@@ -7,6 +7,7 @@ class CreateTickets < ActiveRecord::Migration[5.2]
       t.boolean :invoice_required, default: false
       t.string :payment_method
       t.string :cfdi
+      t.string :invoice_folio
       t.boolean :canceled, default: false
 
       t.timestamps

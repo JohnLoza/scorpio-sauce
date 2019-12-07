@@ -35,6 +35,9 @@ class Ability
       can [:read, :create], SupplyOrder
       can :destroy, SupplyOrder, user_id: user.id, supplier_user_id: nil
 
+      can :read, Ticket
+      can :save_invoice_folio, Ticket, invoice_folio: nil
+
     when User::ROLES[:warehouse]
       can [:read, :print_qr], Stock
 

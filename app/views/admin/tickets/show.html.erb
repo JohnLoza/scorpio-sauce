@@ -56,7 +56,10 @@
 
             <div class="col-xl-3 col-lg-3 col-md-3 col-md-6 col-sm-6">
               <p class="card-text">
-                <%= content_tag :span, t("labels.invoice_required"), class: "label label-success" %>
+                <%= content_tag :span, t("labels.invoice_required"),
+                  class: "label label-success" %><br>
+                <%= content_tag :span, @ticket.invoice_folio,
+                  class: "label label-primary" if @ticket.invoice_folio %>
               </p>
             </div>
           <% end %>
@@ -77,6 +80,17 @@
         <% @ticket.details.includes(:product).each do |detail| %>
           <%= render partial: "detail", locals: { detail: detail} %>
         <% end %>
+
+        <div class="row">
+          <%= form_for :ticket, url: save_invoice_folio_admin_ticket_path(@ticket), method: :put do |f| %>
+            <div class="form-group">
+              <%= f.label :invoice_folio, Ticket.human_attribute_name(:invoice_folio) %>
+              <%= f.text_field :invoice_folio, class: "form-control", required: true %>
+            </div>
+
+            <%= f.submit t("labels.save"), class: "btn btn-primary btn-lg" %>
+          <% end if can? :save_invoice_folio, @ticket %>
+        </div>
       </div>
     </div>
   </div>

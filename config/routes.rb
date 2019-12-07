@@ -39,7 +39,9 @@ Rails.application.routes.draw do
       post 'supply', on: :member
     end
 
-    resources :tickets, only: [:index, :show]
+    resources :tickets, only: [:index, :show] do
+      put 'save_invoice_folio', on: :member
+    end
   end
 
   namespace :api do

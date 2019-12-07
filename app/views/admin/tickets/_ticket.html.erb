@@ -12,8 +12,12 @@
   <td>
     <%= content_tag :span, t("labels.canceled"),
       class: "label label-danger" if ticket.canceled? %>
+
     <%= content_tag :span, t("labels.invoice_required"),
       class: "label label-success" if ticket.invoice_required? %>
+
+    <%= content_tag :span, ticket.invoice_folio,
+      class: "label label-primary" if ticket.invoice_folio.present? %>
 
     <%= link_to admin_ticket_path(ticket), class: "btn btn-outline-light btn-sm" do %>
       <i class="fas fa-fw fa-eye"></i>

@@ -11,3 +11,6 @@ es:
         client_id: Cliente
         total: Total
         payment_method: Método de pago
+        invoice_required: Factura requerida
+        cfdi: CFDI
+        invoice_folio: Folio de factura
