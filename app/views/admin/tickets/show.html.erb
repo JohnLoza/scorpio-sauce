@@ -20,7 +20,7 @@
             <p class="card-text">
               <%= content_tag :span, Ticket.human_attribute_name(:client_id),
                 class: "font-weight-bold text-uppercase" %><br>
-              <%= link_to @ticket.client, admin_client_path(@ticket.client) %>
+              <%= link_to @ticket.client, admin_client_path(@ticket.client), target: "_blank" %>
             </p>
           </div>
 

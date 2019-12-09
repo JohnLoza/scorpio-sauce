@@ -9,12 +9,10 @@ class Admin::TicketsController < ApplicationController
   end
 
   def save_invoice_folio
-    deny_access! and return unless @ticket.invoice_folio == nil
-
     if @ticket.update_attributes(invoice_folio: params[:ticket][:invoice_folio])
-      flash[:success] = t(".success")
+      flash[:success] = "invoice folio saved"
     else
-      flash[:info] = t(".failure")
+      flash[:info] = "oops failed"
     end
 
     redirect_to admin_tickets_path
