@@ -67,7 +67,7 @@ class Api::TicketsController < ApiController
   end
 
   def destroy
-    @ticket = @current_user.tickets.current_day.where(params[:id]).take
+    @ticket = @current_user.tickets.current_day.where(id: params[:id]).take
     render_404 and return if @ticket.canceled?
 
     rs = @current_user.route_stocks.current_day.last
