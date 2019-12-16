@@ -28,10 +28,7 @@ class Stock < ApplicationRecord
     supplies.each do |s_i|
       stock = Stock.find_by(warehouse_id: warehouse_id,
         product_id: s_i["product_id"], batch: s_i["batch"])
-
-      unless stock
-        raise ActiveRecord::RecordInvalid, I18n.t("errors.product_not_found", batch: s_i["batch"])
-      end
+      raise StandardError, I18n.t("errors.product_not_found", batch: s_i["batch"]) unless stock
 
       stock.withdraw!(s_i["units"].to_i)
       Transaction.create!({
@@ -47,7 +44,7 @@ class Stock < ApplicationRecord
 
   def withdraw!(quantity)
     unless self.has_minimum_stock?(quantity)
-      raise ActiveRecord::RecordInvalid, I18n.t("errors.not_enough_stock", batch: self.batch)
+      raise StandardError, I18n.t("errors.not_enough_stock", batch: self.batch)
     end
 
     self.update_attributes!(units: self.units - quantity)

@@ -20,7 +20,7 @@ class Api::TicketsController < ApiController
     @ticket = @current_user.tickets.find(params[:id])
 
     data = @ticket.as_json(
-      only: [:total, :payment_method],
+      only: [:total, :payment_method, :invoice_required, :cfdi],
       include: {
         client: { only: :name },
         details: {
@@ -58,7 +58,7 @@ class Api::TicketsController < ApiController
     @ticket.payment_method = params[:ticket][:payment_method]
     @ticket.cfdi = params[:ticket][:cfdi]
 
-    if @ticket.save_and_update_route_stock
+    if @ticket.save
       response = { status: :completed, data: @ticket.as_json() }
       render json: JSON.pretty_generate(response)
     else
