@@ -10,8 +10,10 @@ class Admin::ClientsController < ApplicationController
 
   private
     def load_clients
+      name = filter_params(require: :name)
+      u_id = filter_params(require: :user_id)
       @pagy, @clients = pagy(
-        Client.active.includes(:user, city: :state)
+        Client.active.by_name(name).by_user(u_id).includes(:user, city: :state)
       )
     end
 

@@ -1,0 +1,40 @@
+<div class="card">
+  <h5 class="card-header"><%= yield :page_header %></h5>
+  <div class="card-body">
+    <%= form_for [:admin, @bank_account] do |f| %>
+      <%= render partial: "/shared/form_errors.html.erb", locals: {obj: @bank_account} %>
+
+      <div class="form-group">
+        <%= f.label :bank_name %>
+        <%= f.text_field :bank_name, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :owner %>
+        <%= f.text_field :owner, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :number %>
+        <%= f.number_field :number, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :interbank_clabe %>
+        <%= f.number_field :interbank_clabe, class: "form-control", required: true %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :rfc %>
+        <%= f.text_field :rfc, class: "form-control", required: true, style: "text-transform: uppercase" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: "form-control", required: true %>
+      </div>
+
+      <%= f.submit t("labels.save"), class: "btn btn-primary btn-lg" %>
+    <% end %>
+  </div>
+</div>

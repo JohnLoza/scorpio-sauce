@@ -1,0 +1,25 @@
+es:
+  admin:
+    bank_accounts:
+      index:
+        card_title: Lista de Cuentas Bancarias
+
+      new:
+        title: Nueva Cuenta
+
+      create:
+        success: La cuenta %{account} se guardo correctamente
+
+      edit:
+        title: Editar cuenta %{account}
+
+      update:
+        success: La cuenta %{account} se actualizó correctamente
+
+      destroy:
+        success: La cuenta %{account} ha sido eliminada permanentemente
+        failure: Ocurrió un error al eliminar la cuenta %{account}
+
+      # partials
+      bank_account:
+        you_sure: ¿Estás seguro(a) de eliminar la cuenta %{account}?

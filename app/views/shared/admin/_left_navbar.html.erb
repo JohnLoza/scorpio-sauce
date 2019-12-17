@@ -76,6 +76,13 @@
               <%= Ticket.model_name.human(count: 2) %>
             <% end if can? :read, Ticket %>
           </li>
+
+          <li class="nav-item">
+            <%= link_to admin_bank_accounts_path, class: "nav-link bank_accounts-controller" do %>
+              <i class="fas fa-fw fa-building"></i>
+              <%= BankAccount.model_name.human(count: 2) %>
+            <% end if can? :read, BankAccount %>
+          </li>
         </ul>
       </div>
     </nav>

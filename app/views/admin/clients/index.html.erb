@@ -1,6 +1,8 @@
 <%= provide :title, Client.model_name.human(count: 2) %>
 <%= provide :page_header, Client.model_name.human(count: 2) %>
 
+<%= render "filters.html.erb" %>
+
 <div class="row">
   <div class="col-md-12">
     <div class="card">

@@ -1,4 +1,4 @@
-<%= provide :title, @product %>
-<%= provide :page_header, @product %>
+<%= provide :title, t(".title", product: @product) %>
+<%= provide :page_header, t(".title", product: @product) %>
 
 <%= render "form" %>

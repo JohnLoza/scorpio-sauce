@@ -1,0 +1,20 @@
+<tr>
+  <%= content_tag :td, bank_account.bank_name %>
+  <%= content_tag :td, bank_account.owner %>
+  <%= content_tag :td, bank_account.number %>
+  <%= content_tag :td, bank_account.interbank_clabe %>
+  <%= content_tag :td, bank_account.rfc %>
+  <%= content_tag :td, bank_account.email %>
+  <td>
+    <%= link_to edit_admin_bank_account_path(bank_account),
+      class: "btn btn-outline-light btn-sm" do %>
+      <i class="fas fa-fw fa-pencil-alt"></i>
+    <% end if can? :update, bank_account %>
+
+    <%= link_to admin_bank_account_path(bank_account),
+      method: :delete, class: "btn btn-danger btn-sm",
+      data: { confirm: t(".you_sure", account: bank_account) } do %>
+      <i class="fas fa-fw fa-trash"></i>
+    <% end if can? :destroy, bank_account %>
+  </td>
+</tr>

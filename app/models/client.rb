@@ -19,6 +19,8 @@ class Client < ApplicationRecord
   validates :zc, length: { is: 5 }
 
   scope :order_by_name, -> (way = :asc) { order(name: way) }
+  scope :by_name, -> (name) { where("name like ?", "%#{name}%") if name.present? }
+  scope :by_user, -> (u_id) { where(user_id: u_id) if u_id.present? }
 
   def to_s
     name

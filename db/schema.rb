@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_184650) do
+ActiveRecord::Schema.define(version: 2019_12_17_172236) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "bank_accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "bank_name"
+    t.string "owner"
+    t.string "number"
+    t.string "interbank_clabe"
+    t.string "rfc"
+    t.string "email"
+  end
+
   create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "state_id"
     t.string "name"
@@ -47,9 +56,9 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
     t.string "address"
     t.string "colony"
     t.string "zc"
+    t.json "billing_data"
     t.decimal "lat", precision: 8, scale: 6
     t.decimal "lng", precision: 9, scale: 6
-    t.json "billing_data"
     t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -88,7 +97,6 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
     t.json "products"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["supply_order_id"], name: "index_route_stocks_on_supply_order_id"
     t.index ["user_id"], name: "index_route_stocks_on_user_id"
   end
 
@@ -135,9 +143,9 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
     t.bigint "user_id"
     t.bigint "client_id"
     t.decimal "total", precision: 10, scale: 2
-    t.boolean "invoice_required", default: false
     t.string "payment_method"
     t.string "cfdi"
+    t.boolean "invoice_required", default: false
     t.string "invoice_folio"
     t.boolean "canceled", default: false
     t.datetime "created_at", null: false
@@ -149,7 +157,7 @@ ActiveRecord::Schema.define(version: 2019_10_28_184650) do
   create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "stock_id"
     t.bigint "user_id"
-    t.boolean "incoming"
+    t.integer "incoming", limit: 1
     t.string "concept"
     t.integer "units"
     t.integer "units_post_transaction"

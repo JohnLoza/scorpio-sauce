@@ -42,6 +42,8 @@ Rails.application.routes.draw do
     resources :tickets, only: [:index, :show] do
       put 'save_invoice_folio', on: :member
     end
+
+    resources :bank_accounts
   end
 
   namespace :api do
@@ -53,6 +55,7 @@ Rails.application.routes.draw do
     resources :tickets, except: [:new, :edit]
     resources :products, only: [:index, :show]
     resources :route_stocks, only: :show
+    resources :bank_accounts, only: :index
   end
 
   match '*path', via: :all, to: 'application#render_404'

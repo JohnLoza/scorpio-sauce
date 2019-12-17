@@ -1,0 +1,15 @@
+es:
+  activerecord:
+    models:
+      bank_account:
+        one: Cuenta Bancaria
+        other: Cuentas Bancarias
+    attributes:
+      bank_account:
+        id: Clave
+        bank_name: Banco
+        owner: A nombre de
+        number: Número Cuenta
+        interbank_clabe: Clabe interbancaria
+        rfc: RFC
+        email: Email

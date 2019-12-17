@@ -18,7 +18,7 @@ class WarehouseShipment < ApplicationRecord
   validates :products, presence: true
   validate :products_hash_keys
 
-  scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) if w_id }
+  scope :by_warehouse, -> (w_id) { where(warehouse_id: w_id) if w_id.present? }
   scope :recent, -> { order(created_at: :desc) }
 
   def product_names

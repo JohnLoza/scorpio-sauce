@@ -37,6 +37,7 @@ class Ability
 
       can :read, Ticket
       can :save_invoice_folio, Ticket, invoice_folio: nil
+      cannot :save_invoice_folio, Ticket, canceled: true
 
     when User::ROLES[:warehouse]
       can [:read, :print_qr], Stock

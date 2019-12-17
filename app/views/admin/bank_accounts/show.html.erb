@@ -1,0 +1,47 @@
+<%= provide :title, @bank_account %>
+<%= provide :page_header, @bank_account %>
+
+<div class="row">
+  <div class="col-xl-6 col-lg-8 col-md-6 col-sm-12 col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title"><%= yield :title %></h3>
+        <p class="card-text">
+          <%= content_tag :span, BankAccount.human_attribute_name(:bank_name),
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @bank_account.bank_name %>
+        </p>
+
+        <p class="card-text">
+          <%= content_tag :span, BankAccount.human_attribute_name(:owner),
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @bank_account.owner %>
+        </p>
+
+        <p class="card-text">
+          <%= content_tag :span, BankAccount.human_attribute_name(:number),
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @bank_account.number %>
+        </p>
+
+        <p class="card-text">
+          <%= content_tag :span, BankAccount.human_attribute_name(:interbank_clabe),
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @bank_account.interbank_clabe %>
+        </p>
+
+        <p class="card-text">
+          <%= content_tag :span, BankAccount.human_attribute_name(:rfc),
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @bank_account.rfc %>
+        </p>
+
+        <p class="card-text">
+          <%= content_tag :span, BankAccount.human_attribute_name(:email),
+            class: "font-weight-bold text-uppercase" %><br>
+          <%= @bank_account.email %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
