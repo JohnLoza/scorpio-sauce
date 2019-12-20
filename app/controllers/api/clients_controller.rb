@@ -16,6 +16,14 @@ class Api::ClientsController < ApiController
   def show
     @client = @current_user.clients.active.find(params[:id])
 
+    if @client.billing_data.present?
+      city = City.find(@client.billing_data["city_id"])
+      state = city.state
+      @client.billing_data["city_name"] = city
+      @client.billing_data["state_name"] = state
+      @client.billing_data["state_id"] = state.id
+    end
+
     response = { status: :completed, data: @client.as_json()}
     render json: JSON.pretty_generate(response)
   end
