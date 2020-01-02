@@ -1,14 +1,18 @@
-<p><%= content_tag :strong, @stock.product %></p>
+<div style="padding-right: 1em;">
+  <p><%= content_tag :strong, @stock.product %></p>
 
-<p><%= content_tag :strong, t("labels.batch") %></p>
-<%= content_tag :p, @stock.batch %>
+  <p><%= content_tag :strong, t("labels.batch") %></p>
+  <%= content_tag :p, @stock.batch %>
+</div>
 
-<p><%= content_tag :strong, t("labels.expires_at") %></p>
-<%= content_tag :p, l(@stock.expires_at, format: :long) %>
-
-<%= raw @qr.as_html %>
+<div>
+  <%= image_tag @qrcode.as_png.to_data_url %>
+</div>
+<%#= raw @qrcode.as_html %>
 
 <style>
+  div { display: inline-block; }
+
   table {
     border-width: 0;
     border-style: none;
@@ -17,11 +21,11 @@
   }
 
   td {
-    border-left: solid 5px #000;
+    border-left: solid 4px #000;
     padding: 0;
     margin: 0;
     width: 0px;
-    height: 5px;
+    height: 4px;
   }
 
   td.black { border-color: #000; }

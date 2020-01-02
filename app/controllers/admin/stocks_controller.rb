@@ -24,7 +24,8 @@ class Admin::StocksController < ApplicationController
 
   def print_qr
     require 'rqrcode'
-    @qr = RQRCode::QRCode.new(@stock.data_for_qr)
+    @qrcode = RQRCode::QRCode.new(@stock.data_for_qr)
+
     render :print_qr, layout: false
   end
 
