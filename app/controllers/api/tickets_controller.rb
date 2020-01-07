@@ -51,7 +51,7 @@ class Api::TicketsController < ApiController
   end
 
   def update
-    @ticket = @current_user.tickets.current_day.where(params[:id]).take
+    @ticket = @current_user.tickets.current_day.where(id: params[:id]).take
     render_404 and return if @ticket.canceled?
 
     @ticket.invoice_required = params[:ticket][:invoice_required]
