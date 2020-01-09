@@ -33,3 +33,4 @@
 # Ignore enviroment related files
 /.rspec
 /.ruby-version
+/vendor/bundle
