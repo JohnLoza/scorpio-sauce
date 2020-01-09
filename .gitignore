@@ -29,3 +29,7 @@
 /config/database.yml
 
 /.vscode
+
+# Ignore enviroment related files
+/.rspec
+/.ruby-version
