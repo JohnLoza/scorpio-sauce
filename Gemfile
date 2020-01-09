@@ -61,7 +61,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg' # Use pg as the database
+  gem 'mysql2', '>= 0.4.4', '< 0.6.0' # Use mysql2 as the database
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
