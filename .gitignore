@@ -27,11 +27,13 @@
 /config/master.key
 /config/credentials.yml.enc
 
+# Ignore enviroment related files
 /config/database.yml
 
 /.vscode
 
-# Ignore enviroment related files
 /.rspec
 /.ruby-version
+
+/yarn.lock
 /vendor/bundle
