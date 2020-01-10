@@ -27,6 +27,9 @@ Postgres gem ´pg´ may require to install this library as a dependency
     $ bundle install --deployment --without development test
 
 ## 5. Setup database
+### Generate secret_base
+    $ EDITOR="vim" bin/rails credentials:edit
+
 ### For a development machine
     $ rails db:create
     $ rails db:migrate
