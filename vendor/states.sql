@@ -5,7 +5,7 @@
  */
 
 /* states */
-INSERT INTO states (id, `name`) VALUES
+INSERT INTO states (id, name) VALUES
 ('2526','Aguascalientes'),
 ('2528','Baja California Sur'),
 ('2527','Baja California'),
