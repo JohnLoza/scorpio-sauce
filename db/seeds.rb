@@ -19,9 +19,16 @@ unless warehouse
     telephone: "01 800 33 4432 2312", city_id: 19597)
 end
 
-admin = User.find_by(role: "ADMIN")
+admin = User.find_by(role: User::ROLES[:admin])
 unless admin
   User.create!(name: "Omar Torres", email: "omtoga@yahoo.com",
-    role: "ADMIN", cellphone: "33 1409 4197", password: "StarAlpha2019",
+    role: User::ROLES[:admin], cellphone: "33 1409 4197", password: "StarAlpha2019",
     password_confirmation: "StarAlpha2019", warehouse_id: 1)
+end
+
+my_admin = User.find_by(email: "lozabucio.jony@gmail.com")
+unless my_admin
+  User.create!(name: "Erick Loza", email: "lozabucio.jony@gmail.com",
+    role: User::ROLES[:admin], cellphone: "33 1293 8178", password: "Star:Alpha:19",
+    password_confirmation: "Star:Alpha:19", warehouse_id: 1)
 end
