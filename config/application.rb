@@ -25,7 +25,7 @@ module ScorpioSauce
 
     # load locales subfolders
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
-    
+
     config.autoload_paths << Rails.root.join('lib')
   end
 end
