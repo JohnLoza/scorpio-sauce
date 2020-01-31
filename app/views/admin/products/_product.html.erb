@@ -4,10 +4,14 @@
       <%= link_to admin_product_path(product) do %>
         <%= image_tag product.main_image.variant(small_variant).processed,
           class: "rounded table-img" %>
-      <% end %>
+      <% end if product.main_image.attached? %>
     </div>
   </td>
-  <%= content_tag :td, product.name %>
+  <td>
+    <%= link_to admin_product_path(product) do %>
+      <%= product.name %>
+    <% end %>
+  </td>
   <%= content_tag :td, product.retail_price %>
   <%= content_tag :td, product.half_wholesale_price %>
   <%= content_tag :td, product.wholesale_price %>

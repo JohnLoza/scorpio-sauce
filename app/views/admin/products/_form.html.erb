@@ -53,7 +53,7 @@
 
       <div class="custom-file mb-3">
         <%= f.label :main_image, class: "custom-file-label" %>
-        <%= f.file_field :main_image, required: true,
+        <%= f.file_field :main_image, required: true, accept: "image/*",
           class: "custom-file-input not-required-edit" %>
       </div>
 
